@@ -78,7 +78,7 @@ namespace FourConnectCore
             var board = new CellType[Width, Height];
             for (var i = 0; i < Width; i++)
             {
-                var column = Board[i].ToArray();
+                var column = Board[i].Reverse().ToArray();
                 for (var j = 0; j < Height; j++)
                 {
                     board[j, i] = Height - 1 - j < column.Length ? column[Height - 1 - j] : CellType.Empty;
