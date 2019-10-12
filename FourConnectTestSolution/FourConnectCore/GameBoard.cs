@@ -12,12 +12,14 @@ namespace FourConnectCore
         private int Width { get; }
         private Stack<CellType>[] Board;
         public int SelectedColumn { get; set; }
-        
+        public Func<CellType[,], GameState> GetGameState;
+        private readonly string PreviousMenuCommand = "M";
 
-        public GameBoard(int height, int width)
+        public GameBoard(int height, int width, Func<CellType[,], GameState> getGameState)
         {
             Height = height;
             Width = width;
+            GetGameState = getGameState;
             if (height < 4 || width < 4)
             {
                 throw new ArgumentException($"Invalid size for board: " +
@@ -44,7 +46,7 @@ namespace FourConnectCore
             }
             else
             {
-                Console.WriteLine($"Celltype {celltype} not added to stack.");
+                Console.WriteLine($"Cell type {celltype} not added to stack.");
             }
         }
 
@@ -67,17 +69,17 @@ namespace FourConnectCore
 
             return null;
         }
-
+        
         public string PutX ()
         {
             Add(SelectedColumn, CellType.X);
-            return null;
+            return GetGameState(this.ToArray()) != GameState.InProgress ? PreviousMenuCommand : "";
         }
         
         public string PutO ()
         {
             Add(SelectedColumn, CellType.O);
-            return null;
+            return GetGameState(this.ToArray()) != GameState.InProgress ? PreviousMenuCommand : "";
         }
         
         public CellType[,] ToArray()
@@ -100,6 +102,7 @@ namespace FourConnectCore
             var board = this.ToArray();
             var rowSeparator = new string('-', (Width+1)*4) + "\n";
             var colSeparator = " | ";
+            var selectedSeparator = " |>";
             var stringBuilder = new StringBuilder();
 
             for (var i = 0; i < Width; i++)
@@ -107,7 +110,14 @@ namespace FourConnectCore
                 stringBuilder.Append(rowSeparator);
                 for (var j = 0; j < Height; j++)
                 {
-                    stringBuilder.Append(colSeparator);
+                    if (SelectedColumn == j)
+                    {
+                        stringBuilder.Append(selectedSeparator);
+                    }
+                    else
+                    {
+                        stringBuilder.Append(colSeparator);
+                    }
                     var cell = board[i,j];
                     if (cell == CellType.Empty)
                     {

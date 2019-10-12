@@ -9,7 +9,7 @@ namespace FourConnectCore
         static void Main(string[] args)
         {
 
-            TestGame();
+            RunMenu();
 
         }
 
@@ -96,8 +96,8 @@ namespace FourConnectCore
 
         private static string TestGame()
         {
-            var board = new GameBoard(5, 5);
-            var gameMenu = new Menu(0)
+            var board = new GameBoard(4, 4, EndGameIfBoardIsFull);
+            var gameMenu = new Menu(2)
             {
                 GetGraphic = board.ToString,
                 MenuItemsDictionary = new Dictionary<string, MenuItem>()
@@ -135,6 +135,21 @@ namespace FourConnectCore
                 
             };
             return gameMenu.Run();
+        }
+
+        public static GameState EndGameIfBoardIsFull(CellType[,] board)
+        {
+            for (int i = 0; i <= board.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= board.GetUpperBound(1); j++)
+                {
+                    if (board[i,j] == CellType.Empty)
+                    {
+                        return GameState.InProgress;
+                    }
+                }
+            }
+            return GameState.Tie;
         }
     }
 }
