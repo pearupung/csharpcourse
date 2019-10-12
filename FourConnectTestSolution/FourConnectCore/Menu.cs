@@ -48,7 +48,7 @@ namespace FourConnectCore
             var command = "";
             do
             {
-                Console.Clear();
+                //Console.Clear();
                 if (GetGraphic != null)
                 {
                     Console.WriteLine(GetGraphic());

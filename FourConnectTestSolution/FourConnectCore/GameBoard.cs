@@ -38,7 +38,14 @@ namespace FourConnectCore
 
         public void Add(int column, CellType celltype)
         {
-            Board[column].Push(celltype);
+            if (Board[column].Count < Height)
+            {
+                Board[column].Push(celltype);
+            }
+            else
+            {
+                Console.WriteLine($"Celltype {celltype} not added to stack.");
+            }
         }
 
         public string MoveLeft()
