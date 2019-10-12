@@ -12,7 +12,7 @@ namespace FourConnectCore
 
         private Settings()
         {
-            settings = new[] {5, 5};
+            settings = new[] {8, 5};
         }
 
         public static Settings GetSettings()

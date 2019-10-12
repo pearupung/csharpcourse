@@ -30,7 +30,7 @@ namespace FourConnectCore
             Height = height;
             Width = width;
 
-            Board = new Stack<CellType>[Height];
+            Board = new Stack<CellType>[Width];
             for (var i = 0; i < width; i++)
             {
                 Board[i] = new Stack<CellType>(Height);
@@ -84,7 +84,7 @@ namespace FourConnectCore
         
         public CellType[,] ToArray()
         {
-            var board = new CellType[Width, Height];
+            var board = new CellType[Height, Width];
             for (var i = 0; i < Width; i++)
             {
                 var column = Board[i].Reverse().ToArray();
@@ -105,10 +105,10 @@ namespace FourConnectCore
             var selectedSeparator = " |>";
             var stringBuilder = new StringBuilder();
 
-            for (var i = 0; i < Width; i++)
+            for (var i = 0; i < Height; i++)
             {
                 stringBuilder.Append(rowSeparator);
-                for (var j = 0; j < Height; j++)
+                for (var j = 0; j < Width; j++)
                 {
                     if (SelectedColumn == j)
                     {
