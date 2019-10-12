@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FourConnectCore
@@ -27,10 +28,10 @@ namespace FourConnectCore
             Height = height;
             Width = width;
 
-            Board = new Stack<CellType>[width];
+            Board = new Stack<CellType>[Height];
             for (var i = 0; i < width; i++)
             {
-                Board[i] = new Stack<CellType>(height);
+                Board[i] = new Stack<CellType>(Height);
             }
         }
 
@@ -80,7 +81,7 @@ namespace FourConnectCore
                 var column = Board[i].ToArray();
                 for (var j = 0; j < Height; j++)
                 {
-                    board[Height - j - 1, i] = j < column.Length ? column[j] : CellType.Empty;
+                    board[j, i] = Height - 1 - j < column.Length ? column[Height - 1 - j] : CellType.Empty;
                 }
             }
 
