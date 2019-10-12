@@ -7,7 +7,8 @@ namespace FourConnectCore
     {
         private int _menuLevel;
 
-        private const string MenuCommandExit = "X";
+        public Func<string> GetGraphic { get; set; }
+        private const string MenuCommandExit = "E";
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
 
@@ -48,6 +49,10 @@ namespace FourConnectCore
             do
             {
                 Console.Clear();
+                if (GetGraphic != null)
+                {
+                    Console.WriteLine(GetGraphic());
+                }
                 Console.WriteLine(Title);
                 Console.WriteLine("=======================");
 

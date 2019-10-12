@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Transactions;
 
 namespace FourConnectCore
 {
@@ -7,7 +8,13 @@ namespace FourConnectCore
     {
         static void Main(string[] args)
         {
-            
+
+            TestGame();
+
+        }
+
+        private static string RunMenu()
+        {
             Console.Clear();
             
             Console.WriteLine($"Hello to FourConnect!");
@@ -35,7 +42,7 @@ namespace FourConnectCore
                         "1", new MenuItem()
                         {
                             Title = "Computer starts",
-                            CommandToExecute = null
+                            CommandToExecute = TestGame
                         }
                     },
                     {
@@ -84,8 +91,50 @@ namespace FourConnectCore
                 }
             };
 
-            menu0.Run();
+            return menu0.Run();
+        }
 
+        private static string TestGame()
+        {
+            var board = new GameBoard(5, 5);
+            var gameMenu = new Menu(0)
+            {
+                GetGraphic = board.ToString,
+                MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                {
+                    {
+                        "A", new MenuItem()
+                        {
+                            Title = "Move left",
+                            CommandToExecute = board.MoveLeft,
+                        }
+                    },
+                    {
+                        "D", new MenuItem()
+                        {
+                            Title = "Move right",
+                            CommandToExecute = board.MoveRight,
+                        }
+                    },
+                    {
+                        "X", new MenuItem()
+                        {
+                            Title = "Put X to selected column",
+                            CommandToExecute = board.PutX
+                        }
+                    },
+                    {
+                        "O", new MenuItem()
+                        {
+                            Title = "Put O to selected column",
+                            CommandToExecute = board.PutO
+                        }
+                    }
+
+                }
+                
+            };
+            return gameMenu.Run();
         }
     }
 }

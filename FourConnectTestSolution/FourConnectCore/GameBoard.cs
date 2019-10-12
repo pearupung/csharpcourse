@@ -10,6 +10,7 @@ namespace FourConnectCore
         private int Height { get; }
         private int Width { get; }
         private Stack<CellType>[] Board;
+        public int SelectedColumn { get; set; }
         
 
         public GameBoard(int height, int width)
@@ -34,11 +35,43 @@ namespace FourConnectCore
         }
 
 
-        public void add(int column, CellType celltype)
+        public void Add(int column, CellType celltype)
         {
             Board[column].Push(celltype);
         }
 
+        public string MoveLeft()
+        {
+            if (SelectedColumn > 0)
+            {
+                SelectedColumn--;
+            }
+
+            return null;
+        }
+
+        public string MoveRight()
+        {
+            if (SelectedColumn < Width - 1)
+            {
+                SelectedColumn++;
+            }
+
+            return null;
+        }
+
+        public string PutX ()
+        {
+            Add(SelectedColumn, CellType.X);
+            return null;
+        }
+        
+        public string PutO ()
+        {
+            Add(SelectedColumn, CellType.O);
+            return null;
+        }
+        
         public CellType[,] ToArray()
         {
             var board = new CellType[Width, Height];
@@ -47,7 +80,7 @@ namespace FourConnectCore
                 var column = Board[i].ToArray();
                 for (var j = 0; j < Height; j++)
                 {
-                    board[3 - j, i] = j < column.Length ? column[j] : CellType.Empty;
+                    board[Height - j - 1, i] = j < column.Length ? column[j] : CellType.Empty;
                 }
             }
 
@@ -57,8 +90,8 @@ namespace FourConnectCore
         public override string ToString()
         {
             var board = this.ToArray();
-            var rowSeparator = new string('-', Width*2 + 1) + "\n";
-            var colSeparator = "|";
+            var rowSeparator = new string('-', (Width+1)*4) + "\n";
+            var colSeparator = " | ";
             var stringBuilder = new StringBuilder();
 
             for (var i = 0; i < Width; i++)

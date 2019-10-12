@@ -14,7 +14,7 @@ namespace FourConnectCore
         }
 
         public Func<string> CommandToExecute { get; set; }
-
+        
         private static string Validate(string item, int minLength, int maxLength, bool toUpper)
         {
             item = item.Trim();
