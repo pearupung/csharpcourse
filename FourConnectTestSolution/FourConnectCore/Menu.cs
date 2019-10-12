@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FourConnectCore
@@ -39,6 +40,58 @@ namespace FourConnectCore
                     new MenuItem(){Title = "Exit"});
                 
             }
+        }
+
+        public string Run()
+        {
+            var command = "";
+            do
+            {
+                Console.WriteLine(Title);
+                Console.WriteLine("=======================");
+
+                foreach (var menuItem in MenuItemsDictionary)
+                {
+                    Console.Write(menuItem.Key);
+                    Console.Write(" ");
+                    Console.WriteLine(menuItem.Value);
+                }
+                
+                Console.WriteLine("--------------");
+                Console.Write(">");
+
+                command = Console.ReadLine()?.Trim().ToUpper() ?? "";
+
+                var returnCommand = "";
+
+                if (MenuItemsDictionary.ContainsKey(command))
+                {
+                    var menuItem = MenuItemsDictionary[command];
+                    if (menuItem.CommandToExecute != null)
+                    {
+                        returnCommand = menuItem.CommandToExecute();
+                    }
+                    
+                }
+
+                if (returnCommand == MenuCommandExit)
+                {
+                    command = MenuCommandExit;
+                }
+
+                if (returnCommand == MenuCommandReturnToMain)
+                {
+                    if (_menuLevel != 0)
+                    {
+                        command = MenuCommandReturnToMain;
+                    }
+                }
+
+            } while (command != MenuCommandExit && 
+                     command != MenuCommandReturnToMain &&     
+                     command != MenuCommandReturnToPrevious);
+
+            return command;
         }
     }
 }
