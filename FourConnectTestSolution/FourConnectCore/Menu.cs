@@ -18,5 +18,27 @@ namespace FourConnectCore
         }
         
         public string Title { get; set; }
+
+        public Dictionary<string, MenuItem> MenuItemsDictionary
+        {
+            get => _menuItemsDictionary;
+            set
+            {
+                _menuItemsDictionary = value;
+                if (_menuLevel >= 2)
+                {
+                    _menuItemsDictionary.Add(MenuCommandReturnToPrevious,
+                        new MenuItem(){Title = "Return to Previous Menu"});
+                }
+                if (_menuLevel >= 1)
+                {
+                    _menuItemsDictionary.Add(MenuCommandReturnToMain,
+                        new MenuItem(){Title = "Return to Main Menu"});
+                }
+                _menuItemsDictionary.Add(MenuCommandExit,
+                    new MenuItem(){Title = "Exit"});
+                
+            }
+        }
     }
 }
