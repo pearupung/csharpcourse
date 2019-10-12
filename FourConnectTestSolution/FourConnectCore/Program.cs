@@ -97,8 +97,33 @@ namespace FourConnectCore
         private static string TestGame()
         {
             var board = new GameBoard(4, 4, EndGameIfBoardIsFull);
+            var putXMenuItem = new MenuItem()
+            {
+                Title = "Put X to selected column",
+                CommandToExecute = board.PutX
+            };
+            var putOMenuItem = new MenuItem()
+            {
+                Title = "Put O to selected column",
+                CommandToExecute = board.PutO
+            };
             var gameMenu = new Menu(2)
             {
+                TogglableMenuItems = new Dictionary<MenuItem, List<MenuItem>>()
+                {
+                    {
+                        putXMenuItem, new List<MenuItem>()
+                        {
+                            putOMenuItem
+                        }
+                    },
+                    {
+                        putOMenuItem, new List<MenuItem>()
+                        {
+                            putXMenuItem
+                        }
+                    }
+                },
                 GetGraphic = board.ToString,
                 MenuItemsDictionary = new Dictionary<string, MenuItem>()
                 {
@@ -117,21 +142,14 @@ namespace FourConnectCore
                         }
                     },
                     {
-                        "X", new MenuItem()
-                        {
-                            Title = "Put X to selected column",
-                            CommandToExecute = board.PutX
-                        }
+                        "X", putXMenuItem
                     },
                     {
-                        "O", new MenuItem()
-                        {
-                            Title = "Put O to selected column",
-                            CommandToExecute = board.PutO
-                        }
-                    }
+                        "O", putOMenuItem
+                    },
 
                 }
+                
                 
             };
             return gameMenu.Run();

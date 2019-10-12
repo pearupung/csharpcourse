@@ -11,8 +11,11 @@ namespace FourConnectCore
         private const string MenuCommandExit = "E";
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
+        
 
         private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>();
+        public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } = 
+            new Dictionary<MenuItem, List<MenuItem>>();
 
         public Menu(int menuLevel = 0)
         {
@@ -48,7 +51,7 @@ namespace FourConnectCore
             var command = "";
             do
             {
-                //Console.Clear();
+                Console.Clear();
                 if (GetGraphic != null)
                 {
                     Console.WriteLine(GetGraphic());
@@ -58,9 +61,13 @@ namespace FourConnectCore
 
                 foreach (var menuItem in MenuItemsDictionary)
                 {
-                    Console.Write(menuItem.Key);
-                    Console.Write(" ");
-                    Console.WriteLine(menuItem.Value);
+
+                    if (!menuItem.Value.IsHidden)
+                    {
+                        Console.Write(menuItem.Key);
+                        Console.Write(" ");
+                        Console.WriteLine(menuItem.Value);
+                    }
                 }
                 
                 Console.WriteLine("--------------");
@@ -73,9 +80,19 @@ namespace FourConnectCore
                 if (MenuItemsDictionary.ContainsKey(command))
                 {
                     var menuItem = MenuItemsDictionary[command];
-                    if (menuItem.CommandToExecute != null)
+                    if (menuItem.CommandToExecute != null && !menuItem.IsHidden)
                     {
                         returnCommand = menuItem.CommandToExecute();
+                    }
+
+                    if (TogglableMenuItems.ContainsKey(menuItem))
+                    {
+                        foreach (var item in TogglableMenuItems[menuItem])
+                        {
+                            item.IsHidden = false;
+                        }
+
+                        menuItem.IsHidden = true;
                     }
                     
                 }
