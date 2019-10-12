@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Transactions;
 
 namespace FourConnectCore
@@ -9,29 +10,17 @@ namespace FourConnectCore
         static void Main(string[] args)
         {
 
+            
             RunMenu();
 
         }
 
         private static string RunMenu()
         {
-            Console.Clear();
             
+            Console.Clear();
+            var settings = Settings.GetSettings();
             Console.WriteLine($"Hello to FourConnect!");
-
-            var menuLevel2 = new Menu(2)
-            {
-                Title = "Level2 menu",
-                MenuItemsDictionary = new Dictionary<string, MenuItem>()
-                {
-                    {"1", new MenuItem() 
-                        {
-                            Title = "Nothing here",
-                            CommandToExecute = null
-                        }
-                    }
-                }
-            };
 
             var gameMenu = new Menu(1)
             {
@@ -45,27 +34,35 @@ namespace FourConnectCore
                             CommandToExecute = TestGame
                         }
                     },
+                }
+            };
+            var settingsMenu = new Menu(1)
+            {
+                GetGraphic = settings.ToString,
+                MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                {
                     {
-                        "A", new MenuItem()
+                        "T", 
+                        new MenuItem()
+                    {
+                        Title = "Toggle value to be set",
+                        CommandToExecute = settings.ToggleValueSelected,
+                    }},
+                    {
+                        "+", new MenuItem()
                         {
-                            Title = "Alien starts",
-                            CommandToExecute = null
+                            Title = "Increase value",
+                            CommandToExecute = settings.IncreaseValue
                         }
                     },
                     {
-                        "2", new MenuItem()
+                        "-", new MenuItem()
                         {
-                            Title = "Human starts",
-                            CommandToExecute = null
-                        }
-                    },
-                    {
-                        "4", new MenuItem()
-                        {
-                            Title = "level2 menu",
-                            CommandToExecute = menuLevel2.Run
+                            Title = "Decrease value",
+                            CommandToExecute = settings.DecreaseValue
                         }
                     }
+                    
                 }
             };
             
@@ -84,8 +81,9 @@ namespace FourConnectCore
                     {
                         "J", new MenuItem()
                         {
-                            Title =  "Set defaults for game",
-                            CommandToExecute = null
+                            Title =  "Change board size",
+                            CommandToExecute = settingsMenu.Run
+                            
                         }
                     }
                 }
@@ -96,7 +94,8 @@ namespace FourConnectCore
 
         private static string TestGame()
         {
-            var board = new GameBoard(4, 4, EndGameIfBoardIsFull);
+            var settings = Settings.GetSettings();
+            var board = new GameBoard(settings.GetBoardHeight(), settings.GetBoardWidth(), EndGameIfBoardIsFull);
             var putXMenuItem = new MenuItem()
             {
                 Title = "Put X to selected column",
@@ -169,5 +168,7 @@ namespace FourConnectCore
             }
             return GameState.Tie;
         }
+        
+        
     }
 }
