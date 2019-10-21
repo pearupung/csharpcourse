@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourConnectCore", "FourConnectCore\FourConnectCore.csproj", "{078D12CD-D8CF-47BC-AA7F-F18FEA67F0B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{078D12CD-D8CF-47BC-AA7F-F18FEA67F0B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{3F70059C-DFBA-41CF-A102-676B5D3E8B1C}"
 EndProject
