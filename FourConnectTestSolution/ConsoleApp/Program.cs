@@ -68,7 +68,7 @@ namespace FourConnectCore
             
             var menu0 = new Menu(0)
             {
-                Title = $"Game main menu",
+                Title = $"GameEngine main menu",
                 MenuItemsDictionary = new Dictionary<string, MenuItem>()
                 {
                     {
