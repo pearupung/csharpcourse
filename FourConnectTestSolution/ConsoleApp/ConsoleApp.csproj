@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GameEngine\GameEngine.csproj" />
+      <ProjectReference Include="..\MenuSystem\MenuSystem.csproj" />
     </ItemGroup>
 
 </Project>
