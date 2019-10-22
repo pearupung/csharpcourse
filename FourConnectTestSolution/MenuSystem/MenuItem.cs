@@ -7,6 +7,27 @@ namespace FourConnectCore
     {
         private string _title;
         public bool IsHidden { get; set; } = false;
+        public int VisibleFromLevel { get; set; }
+
+        public MenuItem()
+        {
+            
+        }
+        
+        public MenuItem(int visibleFromLevel)
+        {
+            VisibleFromLevel = visibleFromLevel;
+        }
+
+        public bool IsVisible(int menuLevel)
+        {
+            return !IsHidden && VisibleFromLevel <= menuLevel;
+        }
+        
+        public bool IsExecutable(int menuLevel)
+        {
+            return !IsHidden && VisibleFromLevel <= menuLevel && CommandToExecute != null;
+        }
 
         public string Title
         {
