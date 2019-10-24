@@ -11,40 +11,34 @@ namespace FourConnectCore
         private const string MenuCommandExit = "E";
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
+        
 
-
-        private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>()
-        {
-            {
-                MenuCommandReturnToPrevious,
-                new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
-            },
-            {
-                MenuCommandReturnToMain,
-                new MenuItem() {Title = "Return to Main Menu", VisibleFromLevel = 1}
-            },
-
-            {
-                MenuCommandExit,
-                new MenuItem() {Title = "Exit", VisibleFromLevel = 0}
-            }
-        };
-
-        public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } =
+        private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>();
+        public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } = 
             new Dictionary<MenuItem, List<MenuItem>>();
-
+            
 
         public Menu(int menuLevel = 0)
         {
             _menuLevel = menuLevel;
         }
-
+        
         public string Title { get; set; }
 
         public Dictionary<string, MenuItem> MenuItemsDictionary
         {
             get => _menuItemsDictionary;
-            set { _menuItemsDictionary = value; }
+            set
+            {
+                _menuItemsDictionary = value;
+                _menuItemsDictionary.Add(MenuCommandReturnToPrevious,
+                        new MenuItem(){Title = "Return to Previous Menu", VisibleFromLevel = 2});
+                _menuItemsDictionary.Add(MenuCommandReturnToMain,
+                        new MenuItem(){Title = "Return to Main Menu", VisibleFromLevel = 1});
+                _menuItemsDictionary.Add(MenuCommandExit,
+                        new MenuItem(){Title = "Exit", VisibleFromLevel = 0});
+                
+            }
         }
 
         public string Run()
@@ -57,12 +51,12 @@ namespace FourConnectCore
                 {
                     Console.WriteLine(GetGraphic());
                 }
-
                 Console.WriteLine(Title);
                 Console.WriteLine("=======================");
 
                 foreach (var menuItem in MenuItemsDictionary)
                 {
+
                     if (menuItem.Value.IsVisible(_menuLevel))
                     {
                         Console.Write(menuItem.Key);
@@ -70,7 +64,7 @@ namespace FourConnectCore
                         Console.WriteLine(menuItem.Value);
                     }
                 }
-
+                
                 Console.WriteLine("--------------");
                 Console.Write(">");
 
