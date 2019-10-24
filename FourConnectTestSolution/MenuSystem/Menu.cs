@@ -47,6 +47,11 @@ namespace FourConnectCore
             set { _menuItemsDictionary = value; }
         }
 
+        private Dictionary<string, MenuItem> GetAvailableMenuItems()
+        {
+            return new Dictionary<string, MenuItem>();
+        }
+
         public string Run()
         {
             var command = "";
