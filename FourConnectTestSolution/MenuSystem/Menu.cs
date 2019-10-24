@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FourConnectCore
 {
@@ -11,10 +12,25 @@ namespace FourConnectCore
         private const string MenuCommandExit = "E";
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
-        
+
+        private Dictionary<string, MenuItem> _defaultMenuItemsDictionary = new Dictionary<string, MenuItem>(){
+        {
+            MenuCommandReturnToPrevious,
+            new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
+        },
+        {
+            MenuCommandReturnToMain,
+            new MenuItem() {Title = "Return to Main Menu", VisibleFromLevel = 1}
+        },
+        {
+            MenuCommandExit,
+            new MenuItem() {Title = "Exit", VisibleFromLevel = 0}
+        }};
+
 
         private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>();
-        public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } = 
+
+        public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } =
             new Dictionary<MenuItem, List<MenuItem>>();
             
 
@@ -27,18 +43,9 @@ namespace FourConnectCore
 
         public Dictionary<string, MenuItem> MenuItemsDictionary
         {
-            get => _menuItemsDictionary;
-            set
-            {
-                _menuItemsDictionary = value;
-                _menuItemsDictionary.Add(MenuCommandReturnToPrevious,
-                        new MenuItem(){Title = "Return to Previous Menu", VisibleFromLevel = 2});
-                _menuItemsDictionary.Add(MenuCommandReturnToMain,
-                        new MenuItem(){Title = "Return to Main Menu", VisibleFromLevel = 1});
-                _menuItemsDictionary.Add(MenuCommandExit,
-                        new MenuItem(){Title = "Exit", VisibleFromLevel = 0});
-                
-            }
+            get => _menuItemsDictionary.Concat(_defaultMenuItemsDictionary)
+                .ToDictionary(p => p.Key, p => p.Value);
+            set { _menuItemsDictionary = value; }
         }
 
         public string Run()
@@ -91,7 +98,7 @@ namespace FourConnectCore
                     }
                 }
 
-                if (returnCommand == MenuCommandReturnToPrevious ||
+                if (returnCommand == MenuCommandExit ||
                     returnCommand == MenuCommandReturnToMain && _menuLevel != 0) return returnCommand;
             } while (command != MenuCommandExit &&
                      command != MenuCommandReturnToMain &&
