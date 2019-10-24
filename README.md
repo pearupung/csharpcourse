@@ -63,4 +63,7 @@ Implement game settings loading and saving from json file.
         I would like to have a loop in the main program - yes, that seems simple, the same loop that simply runs the
         same UI print function. But in that function I'd like to have the systems state to change - that should drive 
         the UI. Well, let's see.
-        
+	
+	We do not need to have UI in the Menu itself, right? Maybe use signals or enums instead of strings to communicate
+	with the menu. The menu still has the right to have some logic in it. MVC might be the solution, let's think 
+	about this, let's not rule that out. gn sleep tight atm.  
