@@ -13,32 +13,34 @@ namespace FourConnectCore
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
 
-        private readonly Dictionary<string, MenuItem> _defaultMenuItemsDictionary = new Dictionary<string, MenuItem>(){
+        private readonly Dictionary<string, MenuItem> _defaultMenuItemsDictionary = new Dictionary<string, MenuItem>()
         {
-            MenuCommandReturnToPrevious,
-            new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
-        },
-        {
-            MenuCommandReturnToMain,
-            new MenuItem() {Title = "Return to Main Menu", VisibleFromLevel = 1}
-        },
-        {
-            MenuCommandExit,
-            new MenuItem() {Title = "Exit", VisibleFromLevel = 0}
-        }};
+            {
+                MenuCommandReturnToPrevious,
+                new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
+            },
+            {
+                MenuCommandReturnToMain,
+                new MenuItem() {Title = "Return to Main Menu", VisibleFromLevel = 1}
+            },
+            {
+                MenuCommandExit,
+                new MenuItem() {Title = "Exit", VisibleFromLevel = 0}
+            }
+        };
 
 
         private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>();
 
         public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } =
             new Dictionary<MenuItem, List<MenuItem>>();
-            
+
 
         public Menu(int menuLevel = 0)
         {
             _menuLevel = menuLevel;
         }
-        
+
         public string Title { get; set; }
 
         public Dictionary<string, MenuItem> MenuItemsDictionary
@@ -53,17 +55,21 @@ namespace FourConnectCore
         public Func<string> PickMenuItem(string str)
         {
             var menuItem = MenuItemsDictionary[str];
-            
+
             if (!menuItem.IsExecutable(_menuLevel)) return null;
-            
+
             var commandToExecute = MenuItemsDictionary[str].CommandToExecute;
-            
+
             if (!TogglableMenuItems.ContainsKey(menuItem)) return commandToExecute;
-            
+
             ToggleMenuItems(menuItem);
-            
+
             return commandToExecute;
         }
+
+        public Func<string, bool> ExitMenu = command => command != MenuCommandExit &&
+                                                        command != MenuCommandReturnToMain &&
+                                                        command != MenuCommandReturnToPrevious;
 
         private void ToggleMenuItems(MenuItem menuItem)
         {
@@ -104,16 +110,18 @@ namespace FourConnectCore
                 if (MenuItemsDictionary.ContainsKey(command))
                 {
                     var menuItem = MenuItemsDictionary[command];
-                    PickMenuItem(command);
+                    if (menuItem.IsExecutable(_menuLevel))
+                    {
+                        returnCommand = PickMenuItem(command)();
+                        
+                    }
                 }
 
                 if (returnCommand == MenuCommandExit ||
                     returnCommand == MenuCommandReturnToMain && _menuLevel != 0) return returnCommand;
-            } while (command != MenuCommandExit &&
-                     command != MenuCommandReturnToMain &&
-                     command != MenuCommandReturnToPrevious);
+            } while (ExitMenu(command));
 
-            return command;
+            return "";
         }
     }
 }
