@@ -6,14 +6,14 @@ namespace FourConnectCore
 {
     public class Menu
     {
-        private int _menuLevel;
+        private readonly int _menuLevel;
 
         public Func<string> GetGraphic { get; set; }
         private const string MenuCommandExit = "E";
         private const string MenuCommandReturnToPrevious = "P";
         private const string MenuCommandReturnToMain = "M";
 
-        private Dictionary<string, MenuItem> _defaultMenuItemsDictionary = new Dictionary<string, MenuItem>(){
+        private readonly Dictionary<string, MenuItem> _defaultMenuItemsDictionary = new Dictionary<string, MenuItem>(){
         {
             MenuCommandReturnToPrevious,
             new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
@@ -44,8 +44,34 @@ namespace FourConnectCore
         public Dictionary<string, MenuItem> MenuItemsDictionary
         {
             get => _menuItemsDictionary.Concat(_defaultMenuItemsDictionary)
-                .ToDictionary(p => p.Key, p => p.Value);
-            set { _menuItemsDictionary = value; }
+                .ToDictionary(p => p.Key, p => p.Value)
+                .Where(pair => pair.Value.IsVisible(_menuLevel))
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+            set => _menuItemsDictionary = value;
+        }
+
+        public Func<string> PickMenuItem(string str)
+        {
+            var menuItem = MenuItemsDictionary[str];
+            
+            if (!menuItem.IsExecutable(_menuLevel)) return null;
+            
+            var commandToExecute = MenuItemsDictionary[str].CommandToExecute;
+            
+            if (!TogglableMenuItems.ContainsKey(menuItem)) return commandToExecute;
+            
+            ToggleMenuItems(menuItem);
+            
+            return commandToExecute;
+        }
+
+        private void ToggleMenuItems(MenuItem menuItem)
+        {
+            foreach (var item in TogglableMenuItems[menuItem])
+            {
+                item.IsHidden = false;
+            }
+            menuItem.IsHidden = true;
         }
 
         public string Run()
@@ -61,15 +87,11 @@ namespace FourConnectCore
                 Console.WriteLine(Title);
                 Console.WriteLine("=======================");
 
-                foreach (var menuItem in MenuItemsDictionary)
+                foreach (var (comm, menuItem) in MenuItemsDictionary)
                 {
-
-                    if (menuItem.Value.IsVisible(_menuLevel))
-                    {
-                        Console.Write(menuItem.Key);
+                    Console.Write(comm);
                         Console.Write(" ");
-                        Console.WriteLine(menuItem.Value);
-                    }
+                        Console.WriteLine(menuItem);
                 }
                 
                 Console.WriteLine("--------------");
@@ -82,20 +104,7 @@ namespace FourConnectCore
                 if (MenuItemsDictionary.ContainsKey(command))
                 {
                     var menuItem = MenuItemsDictionary[command];
-                    if (menuItem.IsExecutable(_menuLevel))
-                    {
-                        returnCommand = menuItem.CommandToExecute();
-                    }
-
-                    if (TogglableMenuItems.ContainsKey(menuItem))
-                    {
-                        foreach (var item in TogglableMenuItems[menuItem])
-                        {
-                            item.IsHidden = false;
-                        }
-
-                        menuItem.IsHidden = true;
-                    }
+                    PickMenuItem(command);
                 }
 
                 if (returnCommand == MenuCommandExit ||
