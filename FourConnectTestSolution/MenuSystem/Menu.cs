@@ -89,28 +89,15 @@ namespace FourConnectCore
 
                         menuItem.IsHidden = true;
                     }
-                    
                 }
 
-                if (returnCommand == MenuCommandExit)
-                {
-                    command = MenuCommandExit;
-                }
-
-                if (returnCommand == MenuCommandReturnToMain)
-                {
-                    if (_menuLevel != 0)
-                    {
-                        command = MenuCommandReturnToMain;
-                    }
-                }
-
-            } while (command != MenuCommandExit && 
-                     command != MenuCommandReturnToMain &&     
+                if (returnCommand == MenuCommandReturnToPrevious ||
+                    returnCommand == MenuCommandReturnToMain && _menuLevel != 0) return returnCommand;
+            } while (command != MenuCommandExit &&
+                     command != MenuCommandReturnToMain &&
                      command != MenuCommandReturnToPrevious);
 
             return command;
         }
-        
     }
 }
