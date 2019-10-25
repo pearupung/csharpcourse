@@ -75,3 +75,5 @@ Implement game settings loading and saving from json file.
 - The menu stack is an interesting idea. When the user wishes to quit, the only logical condition would be that
 	the stack is empty. I'm wary of that option - it seems ingenious but I'm afraid it will bite me in the 
 	hand someday or sometime in the future I won't like it. Let's implement it anyhow.
+- Absolutely astonishing is the fear of thinking how to store the menus. Is recursive the best or is there a better
+	way that is more flat and useful? Let's use the current solution for now, the fear seems baseless.
