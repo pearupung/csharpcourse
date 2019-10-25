@@ -4,6 +4,7 @@ Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
 ## In progress
+- **CON4-009** Implement 2-player gameplay with the new menusystem
 
 ## Done
 **CON4-001** Move the menu system to a stack based structure
