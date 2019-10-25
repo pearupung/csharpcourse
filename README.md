@@ -3,6 +3,10 @@
 Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
+## In progress
+
+- **CON4-001** Move the menu system to a stack based structure
+
 ## Leg1 
 ### Deadline 2019-10-13 23:59:59
 
