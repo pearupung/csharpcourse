@@ -87,3 +87,14 @@ Implement game settings loading and saving from json file.
 	right now. I know it is maybe better to have a dictionary instead of a list, but I'd rather have the 
 	dictionary somewhere else along with the arbitrary command keys we use. It is a hell to refactor this, but
 	I guess this is a good exercise for thought.
+- Right at the moment we have a situation where the goto left, goto right options are both existing even if the 
+	gameboard should not allow to go over the edge. This is some hefty UX as well as is the fact that the 
+	turn-based logic functions purely on the menu level, but come to think of it, this logic should be dictated
+	by the game only. This is a thinking point how to toggle menu item visibility through the game instance
+	and at the same time keep them at such a distance that the codebase does not degrade into spaghetti from the
+	get go. I would not like to refactor anything again because the menusystem refactor was somewhat gruesome.
+	My brains still hurt from that functional programming recursion thingy refactoring. Am superglad I did it,
+	though, this makes the menu configurable AF. It kind of already was configurable, as in we could specify the 
+	commands run by the menu items, but that gave away a bit of control that I would have liked. Most probably
+	I am going to regret it and return to that functional programming mess, but somebody has to make a really 
+	good case for it if they count on me using it.
