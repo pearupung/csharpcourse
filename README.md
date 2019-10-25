@@ -1,38 +1,30 @@
-C# 2019 Fall
-
-Homework
+# C# 2019 Fall Homework
 
 Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
-Leg1
-Deadline 2019-10-13 23:59:59
+## Leg1 
+### Deadline 2019-10-13 23:59:59
 
 Menu system, board drawing, user input validation.
-
 Board size is not fixed! Give user an option to do custom size game.
 
-Connect 4
+### Connect 4
 Allow only make legal moves, implement 2 player simple gameflow (just check for full board).
 
-
-MineSweeper
+### MineSweeper
 Initialize board with random mines (look up for classical board sizes/mine counts).
 User should be able just open up any square, and discover is there a mine or not (you can always implement more!).
 
-
-
-Leg2
-Deadline 2019-10-27 23:59:59
+## Leg2
+### Deadline 2019-10-27 23:59:59
 
 Implement game settings loading and saving from json file.
-
 Implement game save and load system to/from json (either save after every move, or have a command to save current game state).
 Allow multiple save games (ask filename from the user, check for overwriting).
 Allow continuing previously saved games (list all possible saved games).
 
-
-Implement "(non-) nullable reference types" in all your projects!
+### Implement "(non-) nullable reference types" in all your projects!
 
 All your project files should have this;
     <PropertyGroup>
@@ -43,13 +35,13 @@ Solution must rebuild without any warnings!
 Implement game settings loading and saving from json file.
 
 # Backlog
-    - think about separating the menusystem and menu UI
-    - think about separating the gameboard and the game UI
-    - think about having a win/lose window
-    - think about generalising the menu/menuitem components and behaviour 
-        - having a property on menu items that specify on which levels they appear (strategy pattern?)
-        - handling the toggle functionality more elegantly
-        - pulling the menu structure from JSON or DB
+- think about separating the menusystem and menu UI
+- think about separating the gameboard and the game UI
+- think about having a win/lose window
+- think about generalising the menu/menuitem components and behaviour 
+    - having a property on menu items that specify on which levels they appear (strategy pattern?)
+    - handling the toggle functionality more elegantly
+    - pulling the menu structure from JSON or DB
 
 # Thought catalog
     - maybe let's just not touch what ain't broken?
