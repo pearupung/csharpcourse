@@ -62,4 +62,10 @@ Implement game settings loading and saving from json file.
     the UI. Well, let's see.
     We do not need to have UI in the Menu itself, right? Maybe use signals or enums instead of strings to communicate
     with the menu. The menu still has the right to have some logic in it. MVC might be the solution, let's think 
-    about this, let's not rule that out. gn sleep tight atm.  
+    about this, let's not rule that out. gn sleep tight atm. 
+- Ideally we want to split the menu, the menuview (that keeps track which menu are we on) and the way we want
+	to pick the menuItem from that menu. MenuView should not know how the menuItem is chosen, it simply 
+	has a function to choose one.
+- The menu stack is an interesting idea. When the user wishes to quit, the only logical condition would be that
+	the stack is empty. I'm wary of that option - it seems ingenious but I'm afraid it will bite me in the 
+	hand someday or sometime in the future I won't like it. Let's implement it anyhow.
