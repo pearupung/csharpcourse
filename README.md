@@ -5,11 +5,10 @@ MineSweeper - student code ending 5-9
 
 ## In progress
 
-**CON4-003** Copy all useful structure from already made menusystem
-
 ## Done
 **CON4-001** Move the menu system to a stack based structure
 **CON4-002** Make a modifiable menu UI MVP implementation
+**CON4-003** Copy all useful structure from already made menusystem
 
 ## Leg1 
 ### Deadline 2019-10-13 23:59:59
