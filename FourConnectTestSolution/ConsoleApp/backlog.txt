@@ -1,6 +1,7 @@
 Implement game settings loading and saving from json file.
 
-Implement game save and load system to/from json (either save after every move, or have a command to save current game state).
+Implement game save and load system to/from json (either save after every move, 
+or have a command to save current game state).
 Allow multiple save games (ask filename from the user, check for overwriting).
 Allow continuing previously saved games (list all possible saved games).
 
@@ -20,3 +21,12 @@ Implement "(non-) nullable reference types" in all your projects!
     - maybe let's just not touch what ain't broken?
     - let's prioritize leg2 ATM?
     - let's go to bed and get some sleep?
+    - there is a bug in the level <2 menus: while pressing p or m the menu still exits. This is apparent
+        in Käver's repository as well, I believe, we need another way to handle the menu. Let's continue refactoring
+        at the moment, let's see where this will take us. Could be fixed by simply modifying the exit condition.
+        
+        This is maybe solved by having a stack of menus. A solution could also include a string independent solution.
+        I would like to have a loop in the main program - yes, that seems simple, the same loop that simply runs the
+        same UI print function. But in that function I'd like to have the systems state to change - that should drive 
+        the UI. Well, let's see.
+        
