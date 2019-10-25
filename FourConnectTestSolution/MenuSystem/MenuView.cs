@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Text;
 
 namespace FourConnectCore
 {
@@ -7,97 +9,42 @@ namespace FourConnectCore
     {
         private Stack<Menu> _menuStack = new Stack<Menu>();
         private Menu _startMenu;
-        public List<MenuItem> MenuItems =>
-            _menuStack.Peek()
-                .MenuItemsDictionary.Values.ToList();
+        public int MenuStackSize => _menuStack.Count;
+        public Menu Menu => _menuStack.Peek();
 
-        public virtual void ConstructMenuView()
+        public Dictionary<string, MenuItem> MenuItems =>
+            _menuStack.Peek().MenuItemsDictionary;
+
+        public void SetStartMenu(Menu menu)
         {
-            var gameMenu = new Menu(1)
-            {
-                Title = $"Start a new game of FourConnect!",
-                MenuItemsDictionary = new Dictionary<string, MenuItem>()
-                {
-                    {
-                        "1", new MenuItem()
-                        {
-                            Title = "Computer starts",
-                            CommandToExecute = TestGame
-                        }
-                    },
-                }
-            };
-            var settingsMenu = new Menu(1)
-            {
-                GetGraphic = settings.ToString,
-                MenuItemsDictionary = new Dictionary<string, MenuItem>()
-                {
-                    {
-                        "T", 
-                        new MenuItem()
-                    {
-                        Title = "Toggle value to be set",
-                        CommandToExecute = settings.ToggleValueSelected,
-                    }},
-                    {
-                        "+", new MenuItem()
-                        {
-                            Title = "Increase value",
-                            CommandToExecute = settings.IncreaseValue
-                        }
-                    },
-                    {
-                        "-", new MenuItem()
-                        {
-                            Title = "Decrease value",
-                            CommandToExecute = settings.DecreaseValue
-                        }
-                    }
-                    
-                }
-            };
-            
-            var menu0 = new Menu(0)
-            {
-                Title = "GameEngine main menu",
-                MenuItemsDictionary = new Dictionary<string, MenuItem>()
-                {
-                    {
-                        "S", new MenuItem()
-                        {
-                            Title = "Start game",
-                            CommandToExecute = gameMenu.Run
-                        }
-                    },
-                    {
-                        "J", new MenuItem()
-                        {
-                            Title =  "Change board size",
-                            CommandToExecute = settingsMenu.Run
-                            
-                        }
-                    }
-                }
-            };
+            _startMenu = menu;
+            _menuStack.Push(_startMenu);
 
-            _startMenu = menu0;
         }
-
+        
         public MenuView()
         {
-            _menuStack.Push(_startMenu);
         }
 
-        public virtual void PickMenuItem()
+        public virtual void PickMenuItem(MenuItem menuItem)
         {
+            if (MenuItems.ContainsValue(menuItem))
+            {
+                menuItem.CommandToExecute();
+            }
         }
 
-        public virtual void ReturnToPrevious()
+        public virtual void GoToMenu(Menu menu)
+        {
+            _menuStack.Push(menu);
+        }
+
+        public virtual void LeaveMenu()
         {
             _menuStack.Pop();
         }
 
-        public virtual void ReturnToMain()
+        public virtual void GoToMainMenu()
         {
             _menuStack.Clear();
             _menuStack.Push(_startMenu);
@@ -107,7 +54,27 @@ namespace FourConnectCore
         {
             _menuStack.Clear();
         }
-        
-        
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append(Menu.Title);
+            builder.AppendLine();
+            builder.Append("==================");
+            builder.AppendLine();
+
+            foreach (var (comm, menuItem) in MenuItems)
+            {
+                builder.Append(comm);
+                builder.Append(" ");
+                builder.Append(menuItem);
+                builder.AppendLine();
+
+            }
+                
+            builder.Append("--------------");
+            builder.AppendLine();
+            return builder.ToString();
+        }
     }
 }

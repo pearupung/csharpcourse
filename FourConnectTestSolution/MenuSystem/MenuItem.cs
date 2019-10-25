@@ -11,7 +11,6 @@ namespace FourConnectCore
 
         public MenuItem()
         {
-            
         }
         
         public MenuItem(int visibleFromLevel)

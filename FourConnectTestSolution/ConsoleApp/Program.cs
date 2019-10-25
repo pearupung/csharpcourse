@@ -7,12 +7,107 @@ namespace FourConnectCore
 {
     class Program
     {
+        private static Menu _menu;
         static void Main(string[] args)
         {
+            var menuView = new MenuView();
+            RunMenu(menuView);
+            menuView.SetStartMenu(_menu);
 
-            
-            RunMenu();
+            do
+            {
+                Console.WriteLine(menuView);
+                
+                var command = Console.ReadLine()?.Trim().ToUpper() ?? "";
+                if (menuView.MenuItems.ContainsKey(command))
+                {
+                    var menuItem = menuView.MenuItems[command];
+                    menuItem.CommandToExecute();
+                }
+                
 
+            } while (menuView.MenuStackSize > 0);
+        }
+
+        private static void RunMenu(MenuView menuView)
+        {
+
+            Console.Clear();
+            var settings = Settings.GetSettings();
+            Console.WriteLine($"Hello to FourConnect!");
+
+            var gameMenu = new Menu(1)
+            {
+                Title = $"Start a new game of FourConnect!",
+                MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                {
+                    {
+                        "1", new MenuItem()
+                        {
+                            Title = "Computer starts",
+                            CommandToExecute = TestGame
+                        }
+                    },
+                }
+            };
+            var settingsMenu = new Menu(1)
+            {
+                GetGraphic = settings.ToString,
+                MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                {
+                    {
+                        "T",
+                        new MenuItem()
+                        {
+                            Title = "Toggle value to be set",
+                            CommandToExecute = settings.ToggleValueSelected,
+                        }
+                    },
+                    {
+                        "+", new MenuItem()
+                        {
+                            Title = "Increase value",
+                            CommandToExecute = settings.IncreaseValue
+                        }
+                    },
+                    {
+                        "-", new MenuItem()
+                        {
+                            Title = "Decrease value",
+                            CommandToExecute = settings.DecreaseValue
+                        }
+                    }
+
+                }
+            };
+
+            var menu0 = new Menu(0)
+            {
+                Title = $"GameEngine main menu",
+                MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                {
+                    {
+                        "S", new MenuItem()
+                        {
+                            Title = "Start game",
+                            CommandToExecute = () =>
+                            {
+                                menuView.GoToMenu(gameMenu);
+                                return "";
+                            }
+                        }
+                    },
+                    {
+                        "J", new MenuItem()
+                        {
+                            Title = "Change board size",
+                            CommandToExecute = settingsMenu.Run
+
+                        }
+                    }
+                }
+            };
+            _menu = menu0;
         }
 
         private static string RunMenu()
@@ -88,8 +183,9 @@ namespace FourConnectCore
                     }
                 }
             };
-
-            return menu0.Run();
+            _menu = menu0;
+            
+            return "";
         }
 
         private static string TestGame()
