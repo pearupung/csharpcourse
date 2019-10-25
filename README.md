@@ -34,6 +34,11 @@ All your project files should have this;
 Solution must rebuild without any warnings!
 Implement game settings loading and saving from json file.
 
+# Priorities
+
+- CON4-001 Move the menu system to a stack based structure
+- CON4-002 Make a modifiable menu UI MVP implementation
+
 # Backlog
 - think about separating the menusystem and menu UI
 - think about separating the gameboard and the game UI
