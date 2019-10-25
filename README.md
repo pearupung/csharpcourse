@@ -4,14 +4,15 @@ Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
 ## In progress
-- **CON4-009** Implement 2-player gameplay with the new menusystem
+**CON4-009** Implement 2-player gameplay with the new menusystem
 
 ## Done
 **CON4-001** Move the menu system to a stack based structure
 **CON4-002** Make a modifiable menu UI MVP implementation
 **CON4-003** Copy all useful structure from already made menusystem
+**CON4-008** Implement gameplay/gameflow using the new menusystem, keep UI separate
 
-## Leg1 
+## Leg 1
 ### Deadline 2019-10-13 23:59:59
 
 Menu system, board drawing, user input validation.
@@ -51,9 +52,8 @@ Implement game settings loading and saving from json file.
 - **CON4-005** Complete the menu structure as much as you can w/o gameplay in mind
 - **CON4-006** Clean up and reorganise the menusystem of unnecessary fields
 - **CON4-007** Move menusystem UI outside of the menu system
-- **CON4-008** Implement gameplay/gameflow using the new menusystem, keep UI separate
-- think about separating the menusystem and menu UI
 - think about separating the gameboard and the game UI
+- think about separating the menusystem and menu UI 
 - think about having a win/lose window
 - think about generalising the menu/menuitem components and behaviour 
     - having a property on menu items that specify on which levels they appear (strategy pattern?)
