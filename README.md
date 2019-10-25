@@ -77,3 +77,7 @@ Implement game settings loading and saving from json file.
 	hand someday or sometime in the future I won't like it. Let's implement it anyhow.
 - Absolutely astonishing is the fear of thinking how to store the menus. Is recursive the best or is there a better
 	way that is more flat and useful? Let's use the current solution for now, the fear seems baseless.
+- Would want to make the menu so that the menu command strings are not tied to the menuItems themselves, at least
+	right now. I know it is maybe better to have a dictionary instead of a list, but I'd rather have the 
+	dictionary somewhere else along with the arbitrary command keys we use. It is a hell to refactor this, but
+	I guess this is a good exercise for thought.
