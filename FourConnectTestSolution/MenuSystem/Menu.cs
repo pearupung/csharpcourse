@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FourConnectCore.MenuItems;
 
 namespace FourConnectCore
 {
     public class Menu
     {
-        private readonly int _menuLevel;
+        public int MenuLevel { get; set;}
 
         public Func<string> GetGraphic { get; set; }
         private const string MenuCommandExit = "E";
@@ -17,15 +18,15 @@ namespace FourConnectCore
         {
             {
                 MenuCommandReturnToPrevious,
-                new MenuItem() {Title = "Return to Previous Menu", VisibleFromLevel = 2}
+                new LeaveMenu()
             },
             {
                 MenuCommandReturnToMain,
-                new MenuItem() {Title = "Return to Main Menu", VisibleFromLevel = 1}
+                new GoToMainMenu()
             },
             {
                 MenuCommandExit,
-                new MenuItem() {Title = "Exit", VisibleFromLevel = 0}
+                new Exit()
             }
         };
 
@@ -38,16 +39,15 @@ namespace FourConnectCore
 
         public Menu(int menuLevel = 0)
         {
-            _menuLevel = menuLevel;
+            MenuLevel = menuLevel;
         }
-
         public string Title { get; set; }
 
         public Dictionary<string, MenuItem> MenuItemsDictionary
         {
             get => _menuItemsDictionary.Concat(_defaultMenuItemsDictionary)
                 .ToDictionary(p => p.Key, p => p.Value)
-                .Where(pair => pair.Value.IsVisible(_menuLevel))
+                .Where(pair => pair.Value.IsVisible(MenuLevel))
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
             set => _menuItemsDictionary = value;
         }
@@ -56,7 +56,7 @@ namespace FourConnectCore
         {
             var menuItem = MenuItemsDictionary[str];
 
-            if (!menuItem.IsExecutable(_menuLevel)) return null;
+            if (!menuItem.IsExecutable(MenuLevel)) return null;
 
             var commandToExecute = MenuItemsDictionary[str].CommandToExecute;
 
@@ -110,7 +110,7 @@ namespace FourConnectCore
                 if (MenuItemsDictionary.ContainsKey(command))
                 {
                     var menuItem = MenuItemsDictionary[command];
-                    if (menuItem.IsExecutable(_menuLevel))
+                    if (menuItem.IsExecutable(MenuLevel))
                     {
                         returnCommand = PickMenuItem(command)();
                         
@@ -118,7 +118,7 @@ namespace FourConnectCore
                 }
 
                 if (returnCommand == MenuCommandExit ||
-                    returnCommand == MenuCommandReturnToMain && _menuLevel != 0) return returnCommand;
+                    returnCommand == MenuCommandReturnToMain && MenuLevel != 0) return returnCommand;
             } while (ExitMenu(command));
 
             return "";

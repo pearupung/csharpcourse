@@ -8,6 +8,7 @@ namespace FourConnectCore
         private string _title;
         public bool IsHidden { get; set; } = false;
         public int VisibleFromLevel { get; set; }
+        public MenuAction ActionToTake { get; set; }
 
         public MenuItem()
         {
