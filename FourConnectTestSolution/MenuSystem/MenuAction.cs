@@ -19,6 +19,9 @@ namespace FourConnectCore
         SaveTheGame,
         Confirm,
         Cancel,
-        GoToGamePrepMenu
+        GoToGamePrepMenu,
+        NextSetting,
+        Increment,
+        Decrement
     }
 }
