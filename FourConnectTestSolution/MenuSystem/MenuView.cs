@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -5,9 +6,9 @@ using System.Text;
 
 namespace FourConnectCore
 {
-    public class MenuView
+    public sealed class MenuView
     {
-        private Stack<Menu> _menuStack = new Stack<Menu>();
+        private readonly Stack<Menu> _menuStack = new Stack<Menu>();
         private Menu _startMenu;
         public int MenuStackSize => _menuStack.Count;
         public Menu Menu => _menuStack.Peek();
@@ -19,38 +20,39 @@ namespace FourConnectCore
         {
             _startMenu = menu;
             _menuStack.Push(_startMenu);
-
         }
         
         public MenuView()
         {
         }
 
-        public virtual void PickMenuItem(MenuItem menuItem)
+        public MenuAction PickMenuItem(MenuItem menuItem)
         {
             if (MenuItems.ContainsValue(menuItem))
             {
-                menuItem.CommandToExecute();
+                return menuItem.ActionToTake;
             }
+            return MenuAction.Chill;
         }
 
-        public virtual void GoToMenu(Menu menu)
+        public void GoToMenu(Menu menu)
         {
             _menuStack.Push(menu);
+            menu.MenuLevel = MenuStackSize - 1;
         }
 
-        public virtual void LeaveMenu()
+        public void LeaveMenu()
         {
             _menuStack.Pop();
         }
 
-        public virtual void GoToMainMenu()
+        public void GoToMainMenu()
         {
             _menuStack.Clear();
             _menuStack.Push(_startMenu);
         }
 
-        public virtual void Exit()
+        public void Exit()
         {
             _menuStack.Clear();
         }
@@ -69,9 +71,7 @@ namespace FourConnectCore
                 builder.Append(" ");
                 builder.Append(menuItem);
                 builder.AppendLine();
-
             }
-                
             builder.Append("--------------");
             builder.AppendLine();
             return builder.ToString();
