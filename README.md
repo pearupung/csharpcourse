@@ -4,13 +4,13 @@ Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
 ## In progress
-**CON4-009** Implement 2-player gameplay with the new menusystem
 
 ## Done
 **CON4-001** Move the menu system to a stack based structure
 **CON4-002** Make a modifiable menu UI MVP implementation
 **CON4-003** Copy all useful structure from already made menusystem
 **CON4-008** Implement gameplay/gameflow using the new menusystem, keep UI separate
+**CON4-009** Implement 2-player gameplay with the new menusystem
 
 ## Leg 1
 ### Deadline 2019-10-13 23:59:59

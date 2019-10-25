@@ -32,11 +32,9 @@ namespace FourConnectCore
             set => _menuItemsDictionary = value;}
         public Dictionary<MenuItem, List<MenuItem>> TogglableMenuItems { get; set; } =
             new Dictionary<MenuItem, List<MenuItem>>();
-
-
         public Menu(int menuLevel = 0){MenuLevel = menuLevel;}
 
-        private void ToggleMenuItems(MenuItem menuItem)
+        public void ToggleMenuItems(MenuItem menuItem)
         {
             foreach (var item in TogglableMenuItems[menuItem])
             {

@@ -30,6 +30,10 @@ namespace FourConnectCore
         {
             if (MenuItems.ContainsValue(menuItem))
             {
+                if (Menu.TogglableMenuItems.ContainsKey(menuItem))
+                {
+                    Menu.ToggleMenuItems(menuItem);
+                }
                 return menuItem.ActionToTake;
             }
             return MenuAction.Chill;
