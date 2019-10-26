@@ -6,7 +6,6 @@ namespace FourConnectCore
         LeaveMenu,
         GoToMainMenu,
         Exit,
-        StartGame,
         GoToGameMenu,
         GoToLoadGameMenu,
         GoToSettingsMenu,

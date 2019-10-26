@@ -4,6 +4,9 @@ Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
 ## In progress
+- **CON4-004** Delete the old menusystem
+- **CON4-005** Complete the menu structure as much as you can w/o gameplay in mind
+- **CON4-006** Clean up and reorganise the menusystem of unnecessary fields
 
 ## Done
 **CON4-001** Move the menu system to a stack based structure
@@ -48,9 +51,6 @@ Implement game settings loading and saving from json file.
 - CON4-001 Move the menu system to a stack based structure
 
 # Backlogi
-- **CON4-004** Delete the old menusystem
-- **CON4-005** Complete the menu structure as much as you can w/o gameplay in mind
-- **CON4-006** Clean up and reorganise the menusystem of unnecessary fields
 - **CON4-007** Move menusystem UI outside of the menu system
 - think about separating the gameboard and the game UI
 - think about separating the menusystem and menu UI 
