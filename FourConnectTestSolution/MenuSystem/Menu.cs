@@ -23,7 +23,8 @@ namespace FourConnectCore
             {MenuCommandExit, new Exit()}
         };
 
-        private Dictionary<string, MenuItem> _menuItemsDictionary = new Dictionary<string, MenuItem>();
+        private Dictionary<string, MenuItem> _menuItemsDictionary = 
+            new Dictionary<string, MenuItem>();
         public Dictionary<string, MenuItem> MenuItemsDictionary
         {get => _menuItemsDictionary.Concat(_defaultMenuItemsDictionary)
                 .ToDictionary(p => p.Key, p => p.Value)
