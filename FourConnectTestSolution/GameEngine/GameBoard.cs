@@ -8,18 +8,19 @@ namespace FourConnectCore
 {
     public class GameBoard
     {
-        private int Height { get; }
-        private int Width { get; }
-        private Stack<CellType>[] Board;
+        public int Height { get; set; }
+        public int Width { get; set; }
+        public Stack<CellType>[] Board { get; set; } = default!;
+        
         public int SelectedColumn { get; set; }
-        public Func<CellType[,], GameState> GetGameState;
-        private readonly string PreviousMenuCommand = "M";
 
-        public GameBoard(int height, int width, Func<CellType[,], GameState> getGameState)
+        public GameBoard()
+        {}
+        
+        public GameBoard(int height, int width)
         {
             Height = height;
             Width = width;
-            GetGameState = getGameState;
             if (height < 4 || width < 4)
             {
                 throw new ArgumentException($"Invalid size for board: " +
@@ -27,14 +28,22 @@ namespace FourConnectCore
                                             $"must be more than 3.");
             }
 
-            Height = height;
-            Width = width;
-
             Board = new Stack<CellType>[Width];
             for (var i = 0; i < width; i++)
             {
                 Board[i] = new Stack<CellType>(Height);
             }
+
+            SelectedColumn = 0;
+        }
+
+        public GameBoard(GameBoard board)
+        {
+            Height = board.Height;
+            Width = board.Width;
+            Board = board.Board;
+            SelectedColumn = board.SelectedColumn;
+
         }
 
 
@@ -50,36 +59,38 @@ namespace FourConnectCore
             }
         }
 
-        public string MoveLeft()
+        public bool MoveLeft()
         {
             if (SelectedColumn > 0)
             {
                 SelectedColumn--;
+                return true;
             }
 
-            return null;
+            return false;
         }
 
-        public string MoveRight()
+        public bool MoveRight()
         {
             if (SelectedColumn < Width - 1)
             {
                 SelectedColumn++;
+                return true;
             }
 
-            return null;
+            return false;
         }
         
         public string PutX ()
         {
             Add(SelectedColumn, CellType.X);
-            return GetGameState(this.ToArray()) != GameState.InProgress ? PreviousMenuCommand : "";
+            return "";
         }
         
         public string PutO ()
         {
             Add(SelectedColumn, CellType.O);
-            return GetGameState(this.ToArray()) != GameState.InProgress ? PreviousMenuCommand : "";
+            return "";
         }
         
         public CellType[,] ToArray()

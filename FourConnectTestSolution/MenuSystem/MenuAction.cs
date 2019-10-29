@@ -21,6 +21,8 @@ namespace FourConnectCore
         GoToGamePrepMenu,
         NextSetting,
         Increment,
-        Decrement
+        Decrement,
+        Input,
+        NextLoadGame
     }
 }

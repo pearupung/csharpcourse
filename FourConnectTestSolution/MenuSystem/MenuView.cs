@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Text;
 
 namespace FourConnectCore
@@ -9,31 +7,26 @@ namespace FourConnectCore
     public sealed class MenuView
     {
         private readonly Stack<Menu> _menuStack = new Stack<Menu>();
-        private Menu _startMenu;
+        private readonly Menu _startMenu;
+        private MenuFactory _menuFactory = new MenuFactory();
+        private MenuItemFactory _menuItemFactory = new MenuItemFactory();
+
+        public MenuView(Menu startMenu)
+        {
+            _startMenu = startMenu;
+            GoToMenu(_startMenu);
+        }
+
         public int MenuStackSize => _menuStack.Count;
         public Menu Menu => _menuStack.Peek();
 
         public Dictionary<string, MenuItem> MenuItems =>
             _menuStack.Peek().MenuItemsDictionary;
-
-        public void SetStartMenu(Menu menu)
-        {
-            _startMenu = menu;
-            _menuStack.Push(_startMenu);
-        }
         
-        public MenuView()
-        {
-        }
-
         public MenuAction PickMenuItem(MenuItem menuItem)
         {
             if (MenuItems.ContainsValue(menuItem))
             {
-                if (Menu.TogglableMenuItems.ContainsKey(menuItem))
-                {
-                    Menu.ToggleMenuItems(menuItem);
-                }
                 return menuItem.ActionToTake;
             }
             return MenuAction.Chill;
@@ -41,8 +34,49 @@ namespace FourConnectCore
 
         public void GoToMenu(Menu menu)
         {
+            if (_menuStack.Contains(menu))
+            {
+                throw new Exception("This menu has already been added.");
+            }
+            
+            
             _menuStack.Push(menu);
-            menu.MenuLevel = MenuStackSize - 1;
+            
+            if(MenuStackSize > 0)
+            {
+                menu.MenuItemsDictionary.Add("E", _menuItemFactory.GetMenuItem("ExitProgram"));
+            }
+            if (MenuStackSize > 1)
+            {
+                menu.MenuItemsDictionary.Add("M", _menuItemFactory.GetMenuItem("GoToMainMenu"));
+            }
+            if(MenuStackSize > 2)
+            {
+                menu.MenuItemsDictionary.Add("P", _menuItemFactory.GetMenuItem("LeaveMenu"));
+            }
+        }
+        
+        public void GoToMenu(string menuName)
+        {
+            var menu = _menuFactory.GetMenu(menuName);
+            if (_menuStack.Contains(menu))
+            {
+                throw new Exception("This menu has already been added.");
+            }
+            _menuStack.Push(menu);
+            
+            if(MenuStackSize > 0)
+            {
+                menu.MenuItemsDictionary.Add("E", _menuItemFactory.GetMenuItem("ExitProgram"));
+            }
+            if (MenuStackSize > 1)
+            {
+                menu.MenuItemsDictionary.Add("M", _menuItemFactory.GetMenuItem("GoToMainMenu"));
+            }
+            if(MenuStackSize > 2)
+            {
+                menu.MenuItemsDictionary.Add("P", _menuItemFactory.GetMenuItem("LeaveMenu"));
+            }
         }
 
         public void LeaveMenu()
@@ -63,8 +97,13 @@ namespace FourConnectCore
 
         public override string ToString()
         {
+            var longTitleBuilder = new StringBuilder();
+            foreach (var menu in _menuStack.ToArray())
+            {
+                longTitleBuilder.Insert(0, $"> {menu.Name}");
+            }
             var builder = new StringBuilder();
-            builder.Append(Menu.Title);
+            builder.Append(longTitleBuilder);
             builder.AppendLine();
             builder.Append("==================");
             builder.AppendLine();

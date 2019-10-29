@@ -5,24 +5,10 @@ namespace FourConnectCore
 {
     public class MenuItem
     {
-        private string _title;
-        public bool IsHidden { get; set; } = false;
-        public int VisibleFromLevel { get; set; }
+        public string Name { get; set; } = default!;
+        private string _title = default!;
+
         public MenuAction ActionToTake { get; set; }
-
-        public MenuItem()
-        {
-        }
-        
-        public MenuItem(int visibleFromLevel)
-        {
-            VisibleFromLevel = visibleFromLevel;
-        }
-
-        public bool IsVisible(int menuLevel)
-        {
-            return !IsHidden && VisibleFromLevel <= menuLevel;
-        }
 
         public string Title
         {
