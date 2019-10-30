@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
-using System.Resources;
-using System.Text.Json;
-using System.Transactions;
 using static FourConnectCore.GameState;
 
 namespace FourConnectCore
@@ -15,16 +10,16 @@ namespace FourConnectCore
         static List<GameState> _states = new List<GameState>();
         private static GameState _firstTurn = XTurn;
         private static GameState _secondTurn = OTurn;
-        private static LoadGameView _loadView = new LoadGameView();
+        private static readonly LoadGameView LoadView = new LoadGameView();
 
         
         static void Main(string[] args)
         {
             
-            newMenuThing();
+            NewMenuThing();
         }
 
-        public static void newMenuThing()
+        public static void NewMenuThing()
         {
             var menuFactory = new MenuFactory();
             Func<string, Menu> getMenu = menuFactory.GetMenu;
@@ -56,7 +51,7 @@ namespace FourConnectCore
                         graphic = $"Save the game under the name: {input}";
                         break;
                     case "GameLoadMenu":
-                        graphic = _loadView.ToString();
+                        graphic = LoadView.ToString();
                         break;
                     default:
                         graphic = "";
@@ -131,7 +126,7 @@ namespace FourConnectCore
                             settings.ToggleValueSelected();
                             break;
                         case MenuAction.NextLoadGame:
-                            _loadView.NextGame();
+                            LoadView.NextGame();
                             break;
                         case MenuAction.Decrement:
                             settings.DecreaseValue();
@@ -145,12 +140,12 @@ namespace FourConnectCore
                             menuView.GoToMenu("GameSaveMenu");
                             break;
                         case MenuAction.Confirm when menuView.Menu.Name.Equals("GameSaveMenu"):
-                            _loadView.GameSave(game, input);
+                            LoadView.GameSave(game, input);
                             menuView.LeaveMenu();
                             paused = false;
                             break;
                         case MenuAction.Confirm when menuView.Menu.Name.Equals("GameLoadMenu"):
-                            game = _loadView.GetSelectedGameBoard();
+                            game = LoadView.GetSelectedGameBoard();
                             paused = false;
                             break;
                         default:
@@ -205,56 +200,6 @@ namespace FourConnectCore
             
         }
 
-        public static void testJson()
-        {
-            var jsonTestMenu = new Menu()
-            {
-                Title = "Hello World! MenuTitle",
-                MenuItemsDictionary = new Dictionary<string, MenuItem>()
-                {
-                    {"S", new MenuItem()
-                        {
-                            Title = "MenuItemTitle1",
-                            ActionToTake = MenuAction.Chill,
-                        }
-                    },
-                    {
-                        "B", new MenuItem()
-                        {
-                            Title = "MenuItemTitle2",
-                            ActionToTake = MenuAction.Confirm
-                        }
-                    }
-                }
-            };
-
-            var menuList = new List<Menu>()
-            {
-                jsonTestMenu, new Menu()
-            };
-
-            var options = new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                AllowTrailingCommas = true,
-            };
-
-            var json = JsonSerializer.Serialize(menuList, options);
-            Console.WriteLine(json);
-            var postMenuList = JsonSerializer.Deserialize<List<Menu>>(json, options);
-            Console.WriteLine(postMenuList);
-        }
-
-        public static void SaveToJson<T>(string fileName)
-        {
-            var options = new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                AllowTrailingCommas = true,
-            };
-            
-        }
-
         private static bool All(params GameState[] statesToCheck)
         {
             return statesToCheck.All(_states.Contains);
@@ -283,7 +228,6 @@ namespace FourConnectCore
                     }
                 }
             }
-
             if (xCount == 0 && oCount == 0)
             {
                 stateList.Add(FirstMove);

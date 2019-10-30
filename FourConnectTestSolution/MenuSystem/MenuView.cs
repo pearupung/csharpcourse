@@ -8,8 +8,8 @@ namespace FourConnectCore
     {
         private readonly Stack<Menu> _menuStack = new Stack<Menu>();
         private readonly Menu _startMenu;
-        private MenuFactory _menuFactory = new MenuFactory();
-        private MenuItemFactory _menuItemFactory = new MenuItemFactory();
+        private readonly MenuFactory _menuFactory = new MenuFactory();
+        private readonly MenuItemFactory _menuItemFactory = new MenuItemFactory();
 
         public MenuView(Menu startMenu)
         {

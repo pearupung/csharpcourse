@@ -6,8 +6,8 @@ namespace FourConnectCore
 {
     public class MenuFactory
     {
-        private MenuItemFactory _itemFactory = new MenuItemFactory();
-        private List<Menu> _menus;
+        private readonly MenuItemFactory _itemFactory = new MenuItemFactory();
+        private readonly List<Menu> _menus;
 
         public Menu GetMenu(string name)
         {

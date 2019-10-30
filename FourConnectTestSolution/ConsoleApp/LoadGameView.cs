@@ -25,7 +25,7 @@ namespace FourConnectCore
             };
             _savedGames.Add(save);
 
-            var json = JsonSerializer.Serialize<List<SavedGame>>(_savedGames, new JsonSerializerOptions()
+            var json = JsonSerializer.Serialize(_savedGames, new JsonSerializerOptions()
             {
                 AllowTrailingCommas = true,
                 WriteIndented = true
@@ -45,7 +45,7 @@ namespace FourConnectCore
         {
             _savedGames.Clear();
             string json;
-            using (StreamReader reader = System.IO.File.OpenText("/home/pearu/Desktop/games.db"))
+            using (StreamReader reader = File.OpenText("/home/pearu/Desktop/games.db"))
             {
                 json = reader.ReadToEnd();
             }
@@ -56,7 +56,7 @@ namespace FourConnectCore
         public override string ToString()
         {
             GameLoad();
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             for (int i = 0; i < _savedGames.Count; i++)
             {
                 builder.Append(i == _gameSelected ? "> " : "  ");

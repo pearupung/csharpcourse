@@ -53,44 +53,32 @@ namespace FourConnectCore
             {
                 Board[column].Push(celltype);
             }
-            else
-            {
-                Console.WriteLine($"Cell type {celltype} not added to stack.");
-            }
         }
 
-        public bool MoveLeft()
+        public void MoveLeft()
         {
             if (SelectedColumn > 0)
             {
                 SelectedColumn--;
-                return true;
             }
-
-            return false;
         }
 
-        public bool MoveRight()
+        public void MoveRight()
         {
             if (SelectedColumn < Width - 1)
             {
                 SelectedColumn++;
-                return true;
             }
-
-            return false;
         }
         
-        public string PutX ()
+        public void PutX ()
         {
             Add(SelectedColumn, CellType.X);
-            return "";
         }
         
-        public string PutO ()
+        public void PutO ()
         {
             Add(SelectedColumn, CellType.O);
-            return "";
         }
         
         public CellType[,] ToArray()

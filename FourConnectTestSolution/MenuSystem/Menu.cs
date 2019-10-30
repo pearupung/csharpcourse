@@ -9,14 +9,7 @@ namespace FourConnectCore
         public string Name { get; set; } = default!;
         public string Title { get; set; } = default!;
 
-        private Dictionary<string, MenuItem> _menuItemsDictionary = 
-            new Dictionary<string, MenuItem>();
-        public Dictionary<string, MenuItem> MenuItemsDictionary
-        {
-            get => _menuItemsDictionary; 
-            set => _menuItemsDictionary = value;
-            
-        }
+        public Dictionary<string, MenuItem> MenuItemsDictionary { get; set; } = new Dictionary<string, MenuItem>();
 
         public override string ToString()
         {

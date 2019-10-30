@@ -11,10 +11,10 @@ namespace FourConnectCore
             public string? Name { get; set; }
             public int Value { get; set; }
         }
-        private Setting[] settings;
+        private readonly Setting[] settings;
 
         private static int _selectedSetting = 0;
-        private static Settings _settings = new Settings();
+        private static readonly Settings _settings = new Settings();
 
         private Settings()
         {
