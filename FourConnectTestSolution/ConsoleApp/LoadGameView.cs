@@ -65,8 +65,6 @@ namespace FourConnectCore
                 builder.AppendLine($"\t {savedGame.TimeSaved.ToLocalTime()}");
                 builder.AppendLine();
             }
-            
-            
             return builder.ToString();
         }
 

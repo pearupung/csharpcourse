@@ -13,6 +13,7 @@ namespace FourConnectCore
         public Stack<CellType>[] Board { get; set; } = default!;
         
         public int SelectedColumn { get; set; }
+        public CellType FirstMove { get; set; } = CellType.Empty;
 
         public GameBoard()
         {}
@@ -47,12 +48,11 @@ namespace FourConnectCore
         }
 
 
-        public void Add(int column, CellType celltype)
+        private void Add(int column, CellType celltype)
         {
-            if (Board[column].Count < Height)
-            {
-                Board[column].Push(celltype);
-            }
+            if (Board[column].Count >= Height) return;
+            if (FirstMove == CellType.Empty) FirstMove = celltype;
+            Board[column].Push(celltype);
         }
 
         public void MoveLeft()

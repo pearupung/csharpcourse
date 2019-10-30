@@ -17,11 +17,19 @@ namespace FourConnectCore
             GoToMenu(_startMenu);
         }
 
+        public MenuView()
+        {
+            _startMenu = _menuFactory.GetMenu("MainMenu");
+            GoToMenu(_startMenu);
+        }
+
+        public bool IsMenu(string name) => Menu.Name.Equals(name);
+
         public int MenuStackSize => _menuStack.Count;
         public Menu Menu => _menuStack.Peek();
 
         public Dictionary<string, MenuItem> MenuItems =>
-            _menuStack.Peek().MenuItemsDictionary;
+            Menu.MenuItemsDictionary;
         
         public MenuAction PickMenuItem(MenuItem menuItem)
         {
@@ -32,16 +40,13 @@ namespace FourConnectCore
             return MenuAction.Chill;
         }
 
-        public void GoToMenu(Menu menu)
+        private void GoToMenu(Menu menu)
         {
             if (_menuStack.Contains(menu))
             {
                 throw new Exception("This menu has already been added.");
             }
-            
-            
             _menuStack.Push(menu);
-            
             if(MenuStackSize > 0)
             {
                 menu.MenuItemsDictionary.Add("E", _menuItemFactory.GetMenuItem("ExitProgram"));
@@ -59,24 +64,7 @@ namespace FourConnectCore
         public void GoToMenu(string menuName)
         {
             var menu = _menuFactory.GetMenu(menuName);
-            if (_menuStack.Contains(menu))
-            {
-                throw new Exception("This menu has already been added.");
-            }
-            _menuStack.Push(menu);
-            
-            if(MenuStackSize > 0)
-            {
-                menu.MenuItemsDictionary.Add("E", _menuItemFactory.GetMenuItem("ExitProgram"));
-            }
-            if (MenuStackSize > 1)
-            {
-                menu.MenuItemsDictionary.Add("M", _menuItemFactory.GetMenuItem("GoToMainMenu"));
-            }
-            if(MenuStackSize > 2)
-            {
-                menu.MenuItemsDictionary.Add("P", _menuItemFactory.GetMenuItem("LeaveMenu"));
-            }
+            GoToMenu(menu);
         }
 
         public void LeaveMenu()

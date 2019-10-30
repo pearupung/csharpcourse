@@ -10,6 +10,17 @@ namespace FourConnectCore
         public string Title { get; set; } = default!;
 
         public Dictionary<string, MenuItem> MenuItemsDictionary { get; set; } = new Dictionary<string, MenuItem>();
+        public MenuAction GetActionForInput(string str)
+        {
+            if (this.MenuItemsDictionary.ContainsKey(str))
+            {
+                return this.MenuItemsDictionary[str].ActionToTake;
+            }
+            else
+            {
+                return MenuAction.Chill;
+            }
+        }
 
         public override string ToString()
         {
