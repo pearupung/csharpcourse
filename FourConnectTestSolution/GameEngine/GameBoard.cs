@@ -47,6 +47,18 @@ namespace FourConnectCore
 
         }
 
+        public bool InBounds((int row, int col) coords)
+        {
+            (int row, int col) = coords;
+            return col >= 0 && col < Width && row >= 0 && row < Height;
+        }
+
+        public CellType GetCellType((int row, int col) coords)
+        {
+            (int row, int col) = coords;
+            return this.ToArray()[row, col];
+        }
+
 
         private void Add(int column, CellType celltype)
         {

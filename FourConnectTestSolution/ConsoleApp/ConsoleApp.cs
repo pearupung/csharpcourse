@@ -13,6 +13,7 @@ namespace FourConnectCore
         private MenuView _menuView;
         private LoadGameView _loadView;
         private Settings _settings;
+        private GameEndView _endView;
         private bool _isPaused = true;
         private string input;
         private string previous_input;
@@ -27,6 +28,8 @@ namespace FourConnectCore
         private readonly List<Func<GameBoard, List<GameState>>> _gameStateProviders = 
             new List<Func<GameBoard, List<GameState>>>();
 
+        private Action<GameEndView> _showGameEndView;
+
         public void RunApp()
         {
             // Set up game state providers
@@ -39,6 +42,7 @@ namespace FourConnectCore
             _loadView = new LoadGameView();
             _settings = Settings.GetSettings();
             _gameStates = new List<GameState>();
+            _endView = new GameEndView();
             
             // Set up user interaction functions
             _getInput = () =>
@@ -58,6 +62,7 @@ namespace FourConnectCore
             _showSavedGames = Console.WriteLine;
             _showSettings = Console.WriteLine;
             _showUserInput = Console.WriteLine;
+            _showGameEndView = Console.WriteLine;
             
 
             do
@@ -79,6 +84,11 @@ namespace FourConnectCore
                     case "GameLoadMenu":
                         _showSavedGames(_loadView);
                         break;
+                    case "GameEndMenu":
+                        _showGameBoard(_board);
+                        _showGameEndView(_endView);
+                        break;
+                        
                 }
                 _showMenu(_menuView);
                 
@@ -106,8 +116,71 @@ namespace FourConnectCore
 
         private List<GameState> EndStateProvider(GameBoard board)
         {
-            return new List<GameState>();
+           var list = new List<GameState>();
+           var hasOWon = HasFourConnected(board, CellType.O);
+           var hasXWon = HasFourConnected(board, CellType.X);
+           
+           if (hasOWon) list.Add(OWon);
+           if (hasXWon) list.Add(XWon);
+           return list;
         }
+        
+        private static bool HasFourConnected(GameBoard board, CellType cellType)
+        {
+            var array = board.ToArray();
+            
+            var findDirections = new (int row, int col)[]
+            {
+                (-1,-1), (-1, 0), (-1, 1),
+                (0, -1), (0, 1),
+                (1, -1), (1, 0), (1, 1)
+            };
+            
+            for (var row = 0; row < array.GetLength(0); row++)
+            for (var col = 0; col < array.GetLength(1); col++)
+            {
+                var cell = array[row, col];
+                var coords = (row, col);
+                if (cell != cellType) continue;
+                foreach (var findDirection in findDirections)
+                {
+                    
+                    var hasFour = HasFourConnected(1, board, coords, cellType, findDirection);
+                    if (hasFour) return true;
+                }
+            }
+
+            return false;
+        }
+        
+        private static bool HasFourConnected(int connectedCount, 
+            GameBoard board, 
+            (int row, int col) coords, 
+            CellType cellType, 
+            (int row, int col) searchDirection)
+        {
+            
+            if (connectedCount == 4 || connectedCount > 4)
+            {
+                return true;
+            }
+            var (row, col) = coords;
+            var (rowMask, colMask) = searchDirection;
+            var newCoords = (row + rowMask, col + colMask);
+
+            if (board.InBounds(newCoords))
+            {
+                if (board.GetCellType(newCoords) == cellType)
+                {
+                    return HasFourConnected(connectedCount+1, board, newCoords, cellType, searchDirection);
+                }
+            }
+            
+            return false;
+        } 
+
+        
+        
 
         private List<GameState> PlayerMoveProvider(GameBoard gameBoard)
         {
@@ -198,6 +271,7 @@ namespace FourConnectCore
                     _isPaused = false;
                     break;
                 case MenuAction.GoToGamePrepMenu:
+                    _menuView.GoToMainMenu();
                     _menuView.GoToMenu("GamePrepMenu");
                     break;
                 case MenuAction.GoToSettingsMenu:
@@ -260,7 +334,22 @@ namespace FourConnectCore
 
         private void ApplyNextGameMenu()
         {
-            if (All(XTurn, LeftMostSelected))
+            if (All(Tie))
+            {
+                _endView.WhoWon = Tie;
+                _isPaused = true;
+                _menuView.GoToMenu("GameEndMenu");
+            } else if (All(XWon))
+            {
+                _endView.WhoWon = XWon;
+                _isPaused = true;
+                _menuView.GoToMenu("GameEndMenu");
+            } else if (All(OWon))
+            {
+                _endView.WhoWon = OWon;
+                _isPaused = true;
+                _menuView.GoToMenu("GameEndMenu");
+            } else if (All(XTurn, LeftMostSelected))
             {
                 _menuView.GoToMenu("XRightGameMenu");
             }
@@ -291,9 +380,6 @@ namespace FourConnectCore
             else if (All(RightMostSelected))
             {
                 _menuView.GoToMenu("LeftGameMenu");
-            } else if (All(Tie))
-            {
-                //_menuView.GoToMenu("");
             }
             else
             {

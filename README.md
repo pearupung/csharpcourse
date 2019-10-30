@@ -7,6 +7,7 @@ MineSweeper - student code ending 5-9
 - **CON4-004** Delete the old menusystem
 - **CON4-005** Complete the menu structure as much as you can w/o gameplay in mind
 - **CON4-006** Clean up and reorganise the menusystem of unnecessary fields
+- **CON4-010** Make the menu and the menu item dumb
 
 ## Done
 **CON4-001** Move the menu system to a stack based structure
@@ -98,3 +99,8 @@ Implement game settings loading and saving from json file.
 	commands run by the menu items, but that gave away a bit of control that I would have liked. Most probably
 	I am going to regret it and return to that functional programming mess, but somebody has to make a really 
 	good case for it if they count on me using it.
+- Let's make the menu and the menu item dumb AF. They should not have any logic in them and they should not dictate
+	anything. I have writen out a more sophisticated rant into my notebook, but let it be right now, I have got
+	to code.
+- string interpolation has format string!! So exciting! We could improve console ui by quite a bit with that! Imagine
+	having all values and strings line up and come together as a single unified block of code! Wonderful!

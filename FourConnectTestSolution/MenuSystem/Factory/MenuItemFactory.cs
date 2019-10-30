@@ -175,6 +175,12 @@ namespace FourConnectCore
                 Name = "NextLoadGame",
                 Title = "Select the next game",
                 ActionToTake = MenuAction.NextLoadGame
+            },
+            new MenuItem()
+            {
+                Name = "NewGame",
+                Title = "New Game",
+                ActionToTake = MenuAction.GoToGamePrepMenu
             }
 
         };

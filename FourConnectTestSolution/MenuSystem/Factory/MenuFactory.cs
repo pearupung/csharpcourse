@@ -199,6 +199,15 @@ namespace FourConnectCore
                         {"1", getItem("Confirm")},
                         {"2", getItem("Cancel")}
                     }
+                },
+                new Menu()
+                {
+                    Name = "GameEndMenu",
+                    Title = "Game over!",
+                    MenuItemsDictionary = new Dictionary<string, MenuItem>()
+                    {
+                        {"1", getItem("NewGame")}
+                    }
                 }
                 
                
