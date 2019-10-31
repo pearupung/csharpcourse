@@ -1,3 +1,5 @@
+using Game;
+
 namespace FourConnectCore
 {
     public class GameEndView

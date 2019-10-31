@@ -1,8 +1,4 @@
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace FourConnectCore
+namespace Game
 {
     public enum CellType
     {

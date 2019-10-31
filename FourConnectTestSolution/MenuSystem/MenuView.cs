@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FourConnectCore;
+using FourConnectCore.Domain;
+using MenuSystem.Factory;
 
-namespace FourConnectCore
+namespace MenuSystem
 {
     public sealed class MenuView
     {
@@ -31,13 +34,13 @@ namespace FourConnectCore
         public Dictionary<string, MenuItem> MenuItems =>
             Menu.MenuItemsDictionary;
         
-        public MenuAction PickMenuItem(MenuItem menuItem)
+        public AppAction PickMenuItem(MenuItem menuItem)
         {
             if (MenuItems.ContainsValue(menuItem))
             {
                 return menuItem.ActionToTake;
             }
-            return MenuAction.Chill;
+            return AppAction.Chill;
         }
 
         private void GoToMenu(Menu menu)

@@ -1,6 +1,6 @@
 using System;
 
-namespace FourConnectCore
+namespace Game
 {
     public class SavedGame
     {

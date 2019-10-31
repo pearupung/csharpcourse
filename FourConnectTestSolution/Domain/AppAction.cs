@@ -1,6 +1,6 @@
-namespace FourConnectCore
+namespace Domain
 {
-    public enum MenuAction
+    public enum AppAction
     {
         Chill = 0,
         LeaveMenu,

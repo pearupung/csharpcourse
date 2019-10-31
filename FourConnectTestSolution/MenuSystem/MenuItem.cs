@@ -1,14 +1,15 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using FourConnectCore;
+using FourConnectCore.Domain;
 
-namespace FourConnectCore
+namespace MenuSystem
 {
     public class MenuItem
     {
         public string Name { get; set; } = default!;
         private string _title = default!;
 
-        public MenuAction ActionToTake { get; set; }
+        public AppAction ActionToTake { get; set; }
 
         public string Title
         {

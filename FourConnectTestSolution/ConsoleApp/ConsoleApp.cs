@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static FourConnectCore.GameState;
+using FourConnectCore.Domain;
+using Game;
+using MenuSystem;
+using static Game.GameState;
 
 
 namespace FourConnectCore
@@ -18,7 +21,7 @@ namespace FourConnectCore
         private string input;
         private string previous_input;
 
-        private Func<string,MenuAction> _getAction;
+        private Func<string,AppAction> _getAction;
         private Func<string> _getInput;
         private Action<MenuView> _showMenu;
         private Action<LoadGameView> _showSavedGames;
@@ -53,7 +56,7 @@ namespace FourConnectCore
             _getAction = (key) =>
             {
                 var items = _menuView.Menu.MenuItemsDictionary;
-                return items.ContainsKey(key) ? items[key].ActionToTake : MenuAction.Chill;
+                return items.ContainsKey(key) ? items[key].ActionToTake : AppAction.Chill;
             };
 
             // Set up user interface functions
@@ -96,7 +99,7 @@ namespace FourConnectCore
                 input = _getInput();
                 var action = _getAction(input);
                 Console.Clear();
-                if (action != MenuAction.Chill)
+                if (action != AppAction.Chill)
                 {
                     // Change state due to input
                     ApplyAppStateChanges(action);
@@ -178,10 +181,7 @@ namespace FourConnectCore
             
             return false;
         } 
-
         
-        
-
         private List<GameState> PlayerMoveProvider(GameBoard gameBoard)
         {
             var xCount = 0;
@@ -250,79 +250,79 @@ namespace FourConnectCore
             }
         }
 
-        private void ApplyAppStateChanges(MenuAction action)
+        private void ApplyAppStateChanges(AppAction action)
         {
             switch (action)
             {
-                case MenuAction.Exit:
+                case AppAction.Exit:
                     _isPaused = true;
                     _menuView.Exit();
                     break;
-                case MenuAction.LeaveMenu:
+                case AppAction.LeaveMenu:
                     if (_menuView.Menu.Name.Contains("GameMenu")) _isPaused = true;
                     _menuView.LeaveMenu();
                     break;
-                case MenuAction.GoToMainMenu:
+                case AppAction.GoToMainMenu:
                     _isPaused = true;
                     _menuView.GoToMainMenu();
                     break;
-                case MenuAction.GoToGameMenu:
+                case AppAction.GoToGameMenu:
                     _menuView.GoToMenu("GameMenu");
                     _isPaused = false;
                     break;
-                case MenuAction.GoToGamePrepMenu:
+                case AppAction.GoToGamePrepMenu:
                     _menuView.GoToMainMenu();
                     _menuView.GoToMenu("GamePrepMenu");
                     break;
-                case MenuAction.GoToSettingsMenu:
+                case AppAction.GoToSettingsMenu:
                     _menuView.GoToMenu("SettingsMenu");
                     break;
-                case MenuAction.GoToLoadGameMenu:
+                case AppAction.GoToLoadGameMenu:
                     _menuView.GoToMenu("GameLoadMenu");
                     break;
-                case MenuAction.PlayAgainstALocalPlayer:
+                case AppAction.PlayAgainstALocalPlayer:
                     _board = new GameBoard(_settings.GetBoardHeight(), _settings.GetBoardWidth());
                     _isPaused = false;
                     break;
-                case MenuAction.PlayX:
+                case AppAction.PlayX:
                     _board.PutX();
                     _menuView.LeaveMenu();
                     break;
-                case MenuAction.PlayO:
+                case AppAction.PlayO:
                     _board.PutO();
                     _menuView.LeaveMenu();
                     break;
-                case MenuAction.GoLeftOneColumn:
+                case AppAction.GoLeftOneColumn:
                     _board.MoveLeft();
                     _menuView.LeaveMenu();
                     break;
-                case MenuAction.GoRightOneColumn:
+                case AppAction.GoRightOneColumn:
                     _board.MoveRight();
                     _menuView.LeaveMenu();
                     break;
-                case MenuAction.NextSetting:
+                case AppAction.NextSetting:
                     _settings.ToggleValueSelected();
                     break;
-                case MenuAction.NextLoadGame:
+                case AppAction.NextLoadGame:
                     _loadView.NextGame();
                     break;
-                case MenuAction.Decrement:
+                case AppAction.Decrement:
                     _settings.DecreaseValue();
                     break;
-                case MenuAction.Increment:
+                case AppAction.Increment:
                     _settings.IncreaseValue();
                     break;
-                case MenuAction.SaveTheGame:
+                case AppAction.SaveTheGame:
                     _isPaused = true;
                     _menuView.LeaveMenu();
                     _menuView.GoToMenu("GameSaveMenu");
                     break;
-                case MenuAction.Confirm when _menuView.IsMenu("GameSaveMenu"):
+                case AppAction.Confirm when _menuView.IsMenu("GameSaveMenu"):
                     _loadView.GameSave(_board, previous_input);
                     _menuView.LeaveMenu();
                     _isPaused = false;
                     break;
-                case MenuAction.Confirm when _menuView.IsMenu("GameLoadMenu"):
+                case AppAction.Confirm when _menuView.IsMenu("GameLoadMenu"):
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
                     break;

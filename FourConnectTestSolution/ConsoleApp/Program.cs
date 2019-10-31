@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using static FourConnectCore.GameState;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using DAL;
+using Domain;
+using Game;
+using MenuSystem.Factory;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace FourConnectCore
 {
     class Program
     {
+      
         static void Main(string[] args)
         {
-           var app = new ConsoleApp();
-           app.RunApp();
+            using (var ctx = new AppDbContext())
+            {
+                var menu = ctx.Menus.Where(menu => menu.MenuId == (int) MenuType.MainMenu);
+            }
         }
+
+       
 
         private static bool HasFourConnected(GameBoard board, CellType cellType)
         {

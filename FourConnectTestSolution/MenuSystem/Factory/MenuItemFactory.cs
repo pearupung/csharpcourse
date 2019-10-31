@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using FourConnectCore;
+using FourConnectCore.Domain;
 
-namespace FourConnectCore
+namespace MenuSystem.Factory
 {
     public class MenuItemFactory
     {
@@ -22,10 +24,8 @@ namespace FourConnectCore
             
             throw new Exception($"MenuItem {name} not found in MenuItemFactory.");
         }
-
-
-
-        private List<MenuItem> _menuItems = new List<MenuItem>()
+        
+        public static List<MenuItem> _menuItems = new List<MenuItem>()
         {
             // Gameplay MenuItems
             
@@ -33,121 +33,115 @@ namespace FourConnectCore
             {
                 Name = "GoLeftOneColumn",
                 Title = "Go left one column",
-                ActionToTake = MenuAction.GoLeftOneColumn
+                ActionToTake = AppAction.GoLeftOneColumn
             },
             new MenuItem()
             {
                 Name = "GoRightOneColumn",
                 Title = "Go right one column",
-                ActionToTake = MenuAction.GoRightOneColumn
+                ActionToTake = AppAction.GoRightOneColumn
             },
             new MenuItem()
             {
                 Name = "PlayO",
                 Title = "Place O in the selected column",
-                ActionToTake = MenuAction.PlayO
+                ActionToTake = AppAction.PlayO
             },
             new MenuItem()
             {
                 Name = "PlayX",
                 Title = "Place X in the selected column",
-                ActionToTake = MenuAction.PlayX
+                ActionToTake = AppAction.PlayX
             },
             new MenuItem()
             {
-                Name = "SaveGame",
+                Name = "SaveTheGame",
                 Title = "Save",
-                ActionToTake = MenuAction.SaveTheGame
+                ActionToTake = AppAction.SaveTheGame
             },
             
             // GamePrepMenu MenuItems
             
             new MenuItem()
             {
-                Name = "AgainstComputer",
+                Name = "PlayAgainstTheMachine",
                 Title = "Play against the machine",
-                ActionToTake = MenuAction.PlayAgainstTheMachine
+                ActionToTake = AppAction.PlayAgainstTheMachine
             },
             new MenuItem()
             {
-                Name = "LocalMultiPlayer",
+                Name = "PlayAgainstALocalPlayer",
                 Title = "Initiate gameplay against a local foe",
-                ActionToTake = MenuAction.PlayAgainstALocalPlayer
+                ActionToTake = AppAction.PlayAgainstALocalPlayer
             },
             
             // MainMenu MenuItems
             
             new MenuItem()
             {
-                Name = "LoadGame",
-                Title = "Load game",
-                ActionToTake = 0
-            },
-            new MenuItem()
-            {
-                Name = "Play",
+                Name = "GoToGamePrepMenu",
                 Title = "Play",
-                ActionToTake = MenuAction.GoToGamePrepMenu
+                ActionToTake = AppAction.GoToGamePrepMenu
             },
             new MenuItem()
             {
                 Name = "GoToSettingsMenu",
                 Title = "Settings",
-                ActionToTake = MenuAction.GoToSettingsMenu
+                ActionToTake = AppAction.GoToSettingsMenu
             },
             
             // MenuChange MenuItems
             
             new MenuItem()
             {
-                Name = "ExitProgram",
+                Name = "Exit",
                 Title = "Exit",
-                ActionToTake = MenuAction.Exit
+                ActionToTake = AppAction.Exit
             },
             new MenuItem()
             {
                 Name = "GoToGamePrepMenu",
                 Title = "Play",
-                ActionToTake = MenuAction.GoToGamePrepMenu
+                ActionToTake = AppAction.GoToGamePrepMenu
             },
             new MenuItem()
             {
                 Name = "GoToMainMenu",
                 Title = "Back to main menu",
-                ActionToTake = MenuAction.GoToMainMenu
+                ActionToTake = AppAction.GoToMainMenu
             },
             new MenuItem()
             {
                 Name = "LeaveMenu",
                 Title = "Back",
-                ActionToTake = MenuAction.LeaveMenu
+                ActionToTake = AppAction.LeaveMenu
             },
             new MenuItem()
             {
                 Name = "GoToLoadGameMenu",
                 Title = "Load Game",
-                ActionToTake = MenuAction.GoToLoadGameMenu
+                ActionToTake = AppAction.GoToLoadGameMenu
             },
             
             // Settings menu
             
             new MenuItem()
             {
-                Name = "DecrementValue",
+                Name = "Decrement",
                 Title = "Decrement",
-                ActionToTake = MenuAction.Decrement
+                ActionToTake = AppAction.Decrement
             },
             new MenuItem()
             {
-                Name = "IncrementValue",
+                Name = "Increment",
                 Title = "Increment",
-                ActionToTake = MenuAction.Increment
+                ActionToTake = AppAction.Increment
             },
             new MenuItem()
             {
-                Name = "ToggleValue",
+                Name = "NextSetting",
                 Title = "Toggle value selected",
-                ActionToTake = MenuAction.NextSetting
+                ActionToTake = AppAction.NextSetting
             },
             
             // Prompt MenuItems
@@ -156,31 +150,31 @@ namespace FourConnectCore
             {
                 Name = "Cancel",
                 Title = "Cancel",
-                ActionToTake = MenuAction.Cancel
+                ActionToTake = AppAction.Cancel
             },
             new MenuItem()
             {
                 Name = "Confirm",
                 Title = "Confirm",
-                ActionToTake = MenuAction.Confirm
+                ActionToTake = AppAction.Confirm
             },
             new MenuItem()
             {
                 Name = "Input",
                 Title = "Write anything and press enter!",
-                ActionToTake = MenuAction.Input
+                ActionToTake = AppAction.Input
             },
             new MenuItem()
             {
                 Name = "NextLoadGame",
                 Title = "Select the next game",
-                ActionToTake = MenuAction.NextLoadGame
+                ActionToTake = AppAction.NextLoadGame
             },
             new MenuItem()
             {
                 Name = "NewGame",
                 Title = "New Game",
-                ActionToTake = MenuAction.GoToGamePrepMenu
+                ActionToTake = AppAction.GoToGamePrepMenu
             }
 
         };

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FourConnectCore
+namespace MenuSystem.Factory
 {
     public class MenuFactory
     {
         private readonly MenuItemFactory _itemFactory = new MenuItemFactory();
-        private readonly List<Menu> _menus;
+        public readonly List<Menu> _menus;
 
         public Menu GetMenu(string name)
         {
@@ -26,6 +26,8 @@ namespace FourConnectCore
             }
             throw new Exception($"Menu {name} not found in factory.");
         }
+        
+        
 
         public MenuFactory()
         {
@@ -49,9 +51,9 @@ namespace FourConnectCore
                     Title = "Settings",
                     MenuItemsDictionary = new Dictionary<string, MenuItem>()
                     {
-                        {"1", getItem("DecrementValue")},
-                        {"2", getItem("IncrementValue")},
-                        {"3", getItem("ToggleValue")}
+                        {"1", getItem("Decrement")},
+                        {"2", getItem("Increment")},
+                        {"3", getItem("NextSetting")}
                     }
                 },
                 new Menu()
@@ -60,8 +62,8 @@ namespace FourConnectCore
                     Title = "Choose game mode",
                     MenuItemsDictionary = new Dictionary<string, MenuItem>()
                     {
-                        {"1", getItem("AgainstComputer")},
-                        {"2", getItem("LocalMultiPlayer")}
+                        {"1", getItem("PlayAgainstTheMachine")},
+                        {"2", getItem("PlayAgainstALocalPlayer")}
                     }
                 },
                 new Menu()
@@ -84,9 +86,11 @@ namespace FourConnectCore
                         {"2", getItem("PlayO")},
                         {"3", getItem("GoLeftOneColumn")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
+                // 7
+                
                 new Menu()
                 {
                     Name = "LeftGameMenu",
@@ -96,9 +100,10 @@ namespace FourConnectCore
                         {"1", getItem("PlayX")},
                         {"2", getItem("PlayO")},
                         {"3", getItem("GoLeftOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
+                // 8
                 new Menu()
                 {
                     Name = "RightGameMenu",
@@ -108,10 +113,11 @@ namespace FourConnectCore
                         {"1", getItem("PlayX")},
                         {"2", getItem("PlayO")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
                 
+                // 9
                 new Menu()
                 {
                     Name = "XGameMenu",
@@ -121,10 +127,10 @@ namespace FourConnectCore
                         {"1", getItem("PlayX")},
                         {"3", getItem("GoLeftOneColumn")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
-                
+                // 10
                 new Menu()
                 {
                     Name = "OGameMenu",
@@ -134,10 +140,10 @@ namespace FourConnectCore
                         {"2", getItem("PlayO")},
                         {"3", getItem("GoLeftOneColumn")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
-                
+                // 11
                 new Menu()
                 {
                     Name = "XLeftGameMenu",
@@ -146,10 +152,10 @@ namespace FourConnectCore
                     {
                         {"1", getItem("PlayX")},
                         {"3", getItem("GoLeftOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
                 },
-                
+                // 12
                 new Menu()
                 {
                     Name = "XRightGameMenu",
@@ -158,11 +164,11 @@ namespace FourConnectCore
                     {
                         {"1", getItem("PlayX")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
 
                 },
-                
+                // 13
                 new Menu()
                 {
                     Name = "OLeftGameMenu",
@@ -171,11 +177,11 @@ namespace FourConnectCore
                     {
                         {"2", getItem("PlayO")},
                         {"3", getItem("GoLeftOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
 
                 },
-                
+                // 14
                 new Menu()
                 {
                     Name = "ORightGameMenu",
@@ -184,11 +190,11 @@ namespace FourConnectCore
                     {
                         {"2", getItem("PlayO")},
                         {"4", getItem("GoRightOneColumn")},
-                        {"5", getItem("SaveGame")}
+                        {"5", getItem("SaveTheGame")}
                     }
 
                 },
-                
+                // 15
                 new Menu()
                 {
                     Name = "GameSaveMenu",
@@ -200,6 +206,7 @@ namespace FourConnectCore
                         {"2", getItem("Cancel")}
                     }
                 },
+                // 16
                 new Menu()
                 {
                     Name = "GameEndMenu",

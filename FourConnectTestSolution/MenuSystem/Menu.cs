@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using FourConnectCore;
+using FourConnectCore.Domain;
 
-namespace FourConnectCore
+namespace MenuSystem
 {
     public class Menu
     {
@@ -10,7 +10,7 @@ namespace FourConnectCore
         public string Title { get; set; } = default!;
 
         public Dictionary<string, MenuItem> MenuItemsDictionary { get; set; } = new Dictionary<string, MenuItem>();
-        public MenuAction GetActionForInput(string str)
+        public AppAction GetActionForInput(string str)
         {
             if (this.MenuItemsDictionary.ContainsKey(str))
             {
@@ -18,7 +18,7 @@ namespace FourConnectCore
             }
             else
             {
-                return MenuAction.Chill;
+                return AppAction.Chill;
             }
         }
 

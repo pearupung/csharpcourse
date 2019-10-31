@@ -1,4 +1,4 @@
-namespace FourConnectCore
+namespace Game
 {
     public enum GameState
     {
