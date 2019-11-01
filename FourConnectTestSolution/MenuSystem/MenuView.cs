@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using DAL;
+using Domain;
 using FourConnectCore;
-using FourConnectCore.Domain;
 using MenuSystem.Factory;
+using Microsoft.EntityFrameworkCore;
+using AppAction = FourConnectCore.Domain.AppAction;
 
 namespace MenuSystem
 {
@@ -14,6 +18,16 @@ namespace MenuSystem
         private readonly MenuFactory _menuFactory = new MenuFactory();
         private readonly MenuItemFactory _menuItemFactory = new MenuItemFactory();
 
+        private Domain.Menu GetMenu(MenuType type)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var queryable = ctx.Menus.Include(menu => menu.MenuItemsInMenu)
+                    .ThenInclude(men => men.MenuItem)
+                    .Where(m => m.MenuType == type);
+                return queryable.ToArray()[0];
+            }
+        }
         public MenuView(Menu startMenu)
         {
             _startMenu = startMenu;

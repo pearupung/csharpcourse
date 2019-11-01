@@ -18,8 +18,15 @@ namespace FourConnectCore
         {
             using (var ctx = new AppDbContext())
             {
-                var menu = ctx.Menus.Where(menu => menu.MenuId == (int) MenuType.MainMenu);
+                var type = MenuType.MainMenu;
+                var queryable = ctx.Menus.Include(menu => menu.MenuItemsInMenu)
+                    .ThenInclude(men => men.MenuItem)
+                    .Where(m => m.MenuType == type);
+                Console.WriteLine(queryable.ToArray()[0]);
             }
+            
+            //var app = new ConsoleApp();
+            //app.RunApp();
         }
 
        
