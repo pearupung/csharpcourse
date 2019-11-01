@@ -48,6 +48,13 @@ All your project files should have this;
 Solution must rebuild without any warnings!
 Implement game settings loading and saving from json file.
 
+
+##Leg3
+###Deadline 2019-11-10 23:59:59
+
+Replace json files with EF based database. Use SQLite.
+
+
 # Priorities
 
 # Backlogi
