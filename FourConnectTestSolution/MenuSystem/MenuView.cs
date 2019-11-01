@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using DAL;
 using Domain;
-using FourConnectCore;
-using MenuSystem.Factory;
 using Microsoft.EntityFrameworkCore;
-using AppAction = FourConnectCore.Domain.AppAction;
 
 namespace MenuSystem
 {
@@ -15,10 +12,9 @@ namespace MenuSystem
     {
         private readonly Stack<Menu> _menuStack = new Stack<Menu>();
         private readonly Menu _startMenu;
-        private readonly MenuFactory _menuFactory = new MenuFactory();
-        private readonly MenuItemFactory _menuItemFactory = new MenuItemFactory();
+        private List<MenuItem> _menuItems;
 
-        private Domain.Menu GetMenu(MenuType type)
+        private Menu GetMenu(MenuType type)
         {
             using (var ctx = new AppDbContext())
             {
@@ -28,31 +24,47 @@ namespace MenuSystem
                 return queryable.ToArray()[0];
             }
         }
-        public MenuView(Menu startMenu)
+        
+        private MenuItem GetMenuItem(AppAction action)
         {
-            _startMenu = startMenu;
-            GoToMenu(_startMenu);
+            using (var ctx = new AppDbContext())
+            {
+                IQueryable<MenuItem> dbSet = ctx.MenuItems;
+                return dbSet.AsEnumerable().Where(m => m.AppActionToTake == action).ToArray()[0];
+            }
         }
 
         public MenuView()
         {
-            _startMenu = _menuFactory.GetMenu("MainMenu");
+            _startMenu = GetMenu(MenuType.MainMenu);
             GoToMenu(_startMenu);
         }
 
-        public bool IsMenu(string name) => Menu.Name.Equals(name);
+        public List<MenuItem> GetMenuItems()
+        {
+            var list = new List<MenuItem>();
+
+            foreach (var menuItemsInMenu in Menu.MenuItemsInMenu)
+            {
+                list.Add(menuItemsInMenu.MenuItem);
+            }
+
+            return list;
+        }
+
+        public bool IsMenu(MenuType type) => type == MenuType;
+        public MenuType MenuType => Menu.MenuType;
 
         public int MenuStackSize => _menuStack.Count;
         public Menu Menu => _menuStack.Peek();
 
-        public Dictionary<string, MenuItem> MenuItems =>
-            Menu.MenuItemsDictionary;
-        
+        public List<MenuItem> MenuItems => _menuItems;
+
         public AppAction PickMenuItem(MenuItem menuItem)
         {
-            if (MenuItems.ContainsValue(menuItem))
+            if (MenuItems.Contains(menuItem))
             {
-                return menuItem.ActionToTake;
+                return menuItem.AppActionToTake;
             }
             return AppAction.Chill;
         }
@@ -63,24 +75,26 @@ namespace MenuSystem
             {
                 throw new Exception("This menu has already been added.");
             }
+
             _menuStack.Push(menu);
+            _menuItems = GetMenuItems();
             if(MenuStackSize > 0)
             {
-                menu.MenuItemsDictionary.Add("E", _menuItemFactory.GetMenuItem("ExitProgram"));
+                MenuItems.Add(GetMenuItem(AppAction.Exit));
             }
             if (MenuStackSize > 1)
             {
-                menu.MenuItemsDictionary.Add("M", _menuItemFactory.GetMenuItem("GoToMainMenu"));
+                MenuItems.Add(GetMenuItem(AppAction.GoToMainMenu));
             }
             if(MenuStackSize > 2)
             {
-                menu.MenuItemsDictionary.Add("P", _menuItemFactory.GetMenuItem("LeaveMenu"));
+                MenuItems.Add(GetMenuItem(AppAction.LeaveMenu));
             }
         }
         
-        public void GoToMenu(string menuName)
+        public void GoToMenu(MenuType type)
         {
-            var menu = _menuFactory.GetMenu(menuName);
+            var menu = GetMenu(type);
             GoToMenu(menu);
         }
 
@@ -105,7 +119,7 @@ namespace MenuSystem
             var longTitleBuilder = new StringBuilder();
             foreach (var menu in _menuStack.ToArray())
             {
-                longTitleBuilder.Insert(0, $"> {menu.Name}");
+                longTitleBuilder.Insert(0, $"> {menu.MenuType}");
             }
             var builder = new StringBuilder();
             builder.Append(longTitleBuilder);
@@ -113,9 +127,9 @@ namespace MenuSystem
             builder.Append("==================");
             builder.AppendLine();
 
-            foreach (var (comm, menuItem) in MenuItems)
+            foreach (var menuItem in MenuItems)
             {
-                builder.Append(comm);
+                builder.Append(MenuItems.FindIndex(m => m.Equals(menuItem)));
                 builder.Append(" ");
                 builder.Append(menuItem);
                 builder.AppendLine();

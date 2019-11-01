@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FourConnectCore.Domain;
+using Domain;
 using Game;
 using MenuSystem;
 using static Game.GameState;
@@ -53,11 +53,17 @@ namespace FourConnectCore
                 Console.Write(">");
                 return Console.ReadLine();
             };
+
             _getAction = (key) =>
             {
-                var items = _menuView.Menu.MenuItemsDictionary;
-                return items.ContainsKey(key) ? items[key].ActionToTake : AppAction.Chill;
+                if (Int32.TryParse(key, out int result))
+                {
+                    return _menuView.MenuItems[result].AppActionToTake;
+                }
+
+                return AppAction.Chill;
             };
+
 
             // Set up user interface functions
             _showGameBoard = Console.WriteLine;
@@ -73,21 +79,21 @@ namespace FourConnectCore
                 // Show app state
                 // Maybe convert to having enum as a menu identifier?
                 
-                switch (_menuView.Menu.Name)
+                switch (_menuView.MenuType)
                 {
-                    case { } gameString when gameString.Contains("GameMenu"):
+                    case { } gameString when gameString.ToString().Contains("GameMenu"):
                         _showGameBoard(_board);
                         break;
-                    case "SettingsMenu":
+                    case MenuType.SettingsMenu:
                         _showSettings(_settings);
                         break;
-                    case "GameSaveMenu":
+                    case MenuType.GameSaveMenu:
                         _showUserInput(input);
                         break;
-                    case "GameLoadMenu":
+                    case MenuType.GameLoadMenu:
                         _showSavedGames(_loadView);
                         break;
-                    case "GameEndMenu":
+                    case MenuType.GameEndMenu:
                         _showGameBoard(_board);
                         _showGameEndView(_endView);
                         break;
@@ -259,7 +265,7 @@ namespace FourConnectCore
                     _menuView.Exit();
                     break;
                 case AppAction.LeaveMenu:
-                    if (_menuView.Menu.Name.Contains("GameMenu")) _isPaused = true;
+                    if (_menuView.MenuType.ToString().Contains("GameMenu")) _isPaused = true;
                     _menuView.LeaveMenu();
                     break;
                 case AppAction.GoToMainMenu:
@@ -267,18 +273,18 @@ namespace FourConnectCore
                     _menuView.GoToMainMenu();
                     break;
                 case AppAction.GoToGameMenu:
-                    _menuView.GoToMenu("GameMenu");
+                    _menuView.GoToMenu(MenuType.GameMenu);
                     _isPaused = false;
                     break;
                 case AppAction.GoToGamePrepMenu:
                     _menuView.GoToMainMenu();
-                    _menuView.GoToMenu("GamePrepMenu");
+                    _menuView.GoToMenu(MenuType.GamePrepMenu);
                     break;
                 case AppAction.GoToSettingsMenu:
-                    _menuView.GoToMenu("SettingsMenu");
+                    _menuView.GoToMenu(MenuType.SettingsMenu);
                     break;
                 case AppAction.GoToLoadGameMenu:
-                    _menuView.GoToMenu("GameLoadMenu");
+                    _menuView.GoToMenu(MenuType.GameLoadMenu);
                     break;
                 case AppAction.PlayAgainstALocalPlayer:
                     _board = new GameBoard(_settings.GetBoardHeight(), _settings.GetBoardWidth());
@@ -315,14 +321,14 @@ namespace FourConnectCore
                 case AppAction.SaveTheGame:
                     _isPaused = true;
                     _menuView.LeaveMenu();
-                    _menuView.GoToMenu("GameSaveMenu");
+                    _menuView.GoToMenu(MenuType.GameSaveMenu);
                     break;
-                case AppAction.Confirm when _menuView.IsMenu("GameSaveMenu"):
+                case AppAction.Confirm when _menuView.IsMenu(MenuType.GameSaveMenu):
                     _loadView.GameSave(_board, previous_input);
                     _menuView.LeaveMenu();
                     _isPaused = false;
                     break;
-                case AppAction.Confirm when _menuView.IsMenu("GameLoadMenu"):
+                case AppAction.Confirm when _menuView.IsMenu(MenuType.GameLoadMenu):
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
                     break;
@@ -338,52 +344,52 @@ namespace FourConnectCore
             {
                 _endView.WhoWon = Tie;
                 _isPaused = true;
-                _menuView.GoToMenu("GameEndMenu");
+                _menuView.GoToMenu(MenuType.GameEndMenu);
             } else if (All(XWon))
             {
                 _endView.WhoWon = XWon;
                 _isPaused = true;
-                _menuView.GoToMenu("GameEndMenu");
+                _menuView.GoToMenu(MenuType.GameEndMenu);
             } else if (All(OWon))
             {
                 _endView.WhoWon = OWon;
                 _isPaused = true;
-                _menuView.GoToMenu("GameEndMenu");
+                _menuView.GoToMenu(MenuType.GameEndMenu);
             } else if (All(XTurn, LeftMostSelected))
             {
-                _menuView.GoToMenu("XRightGameMenu");
+                _menuView.GoToMenu(MenuType.XRightGameMenu);
             }
             else if (All(XTurn, RightMostSelected))
             {
-                _menuView.GoToMenu("XLeftGameMenu");
+                _menuView.GoToMenu(MenuType.XLeftGameMenu);
             }
             else if (All(OTurn, LeftMostSelected))
             {
-                _menuView.GoToMenu("ORightGameMenu");
+                _menuView.GoToMenu(MenuType.ORightGameMenu);
             }
             else if (All(OTurn, RightMostSelected))
             {
-                _menuView.GoToMenu("OLeftGameMenu");
+                _menuView.GoToMenu(MenuType.OLeftGameMenu);
             }
             else if (All(OTurn))
             {
-                _menuView.GoToMenu("OGameMenu");
+                _menuView.GoToMenu(MenuType.OGameMenu);
             }
             else if (All(XTurn))
             {
-                _menuView.GoToMenu("XGameMenu");
+                _menuView.GoToMenu(MenuType.XGameMenu);
             }
             else if (All(LeftMostSelected))
             {
-                _menuView.GoToMenu("RightGameMenu");
+                _menuView.GoToMenu(MenuType.RightGameMenu);
             }
             else if (All(RightMostSelected))
             {
-                _menuView.GoToMenu("LeftGameMenu");
+                _menuView.GoToMenu(MenuType.LeftGameMenu);
             }
             else
             {
-                _menuView.GoToMenu("GameMenu");
+                _menuView.GoToMenu(MenuType.GameMenu);
             }
         }
 

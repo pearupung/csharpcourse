@@ -5,7 +5,6 @@ using System.Runtime.InteropServices.ComTypes;
 using DAL;
 using Domain;
 using Game;
-using MenuSystem.Factory;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
@@ -22,11 +21,17 @@ namespace FourConnectCore
                 var queryable = ctx.Menus.Include(menu => menu.MenuItemsInMenu)
                     .ThenInclude(men => men.MenuItem)
                     .Where(m => m.MenuType == type);
-                Console.WriteLine(queryable.ToArray()[0]);
+                var menu = queryable.ToArray()[0];
+                Console.WriteLine(menu);
+                foreach (var menuItemsInMenu in menu.MenuItemsInMenu)
+                {
+                    Console.WriteLine(menuItemsInMenu.MenuItem);
+                }
+                
             }
             
-            //var app = new ConsoleApp();
-            //app.RunApp();
+            var app = new ConsoleApp();
+            app.RunApp();
         }
 
        
