@@ -53,6 +53,8 @@ namespace FourConnectCore
                 Console.Write(">");
                 return Console.ReadLine();
             };
+            
+            
 
             _getAction = (key) =>
             {
