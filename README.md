@@ -5,6 +5,7 @@ MineSweeper - student code ending 5-9
 
 ## In progress
 - **CON4-007** Move menusystem UI outside of the menu system
+- **CON4-011** Tie console input command to a certain app action
 
 ## Done
 - **CON4-001** Move the menu system to a stack based structure
