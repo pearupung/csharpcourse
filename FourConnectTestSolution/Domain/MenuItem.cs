@@ -9,7 +9,9 @@ namespace Domain
         public int MenuItemId { get; set; }
         [Required]
         public string Title { get; set; } = default!;
-        [Required]
+        [Required] public int AppActionId { get => (int) this.AppActionToTake; 
+            set => AppActionToTake = (AppAction) value; }
+        [EnumDataType(typeof(AppAction))]
         public AppAction AppActionToTake { get; set; } = default!;
         public ICollection<MenuItemsInMenu>? MenuItemsInMenus { get; set; }
 
