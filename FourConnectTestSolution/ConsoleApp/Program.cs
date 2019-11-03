@@ -15,21 +15,6 @@ namespace FourConnectCore
       
         static void Main(string[] args)
         {
-            using (var ctx = new AppDbContext())
-            {
-                var type = MenuType.MainMenu;
-                var queryable = ctx.Menus.Include(menu => menu.MenuItemsInMenu)
-                    .ThenInclude(men => men.MenuItem)
-                    .Where(m => m.MenuType == type);
-                var menu = queryable.ToArray()[0];
-                Console.WriteLine(menu);
-                foreach (var menuItemsInMenu in menu.MenuItemsInMenu)
-                {
-                    Console.WriteLine(menuItemsInMenu.MenuItem);
-                }
-                
-            }
-            
             var app = new ConsoleApp();
             app.RunApp();
         }

@@ -51,16 +51,46 @@ namespace FourConnectCore
             _getInput = () =>
             {
                 Console.Write(">");
-                return Console.ReadLine();
+                var s = Console.ReadKey().KeyChar.ToString();
+                return s;
             };
             
-            
+            var keyMapping = new Dictionary<AppAction, string>()
+            {
+                // this implementation is bad, because each action must have only one key.
+                {AppAction.PlayX, "X"},
+                {AppAction.PlayO, "O"},
+                {AppAction.Cancel, "Z"},
+                {AppAction.Confirm, "K"},
+                {AppAction.Decrement, "-"},
+                {AppAction.Exit, "E"},
+                {AppAction.Increment, "+"},
+                {AppAction.Input, "?"},
+                {AppAction.LeaveMenu, "B"},
+                {AppAction.NextSetting, "N"},
+                {AppAction.NextLoadGame, "N"},
+                {AppAction.SaveTheGame, "S"},
+                {AppAction.GoLeftOneColumn, "A"},
+                {AppAction.GoRightOneColumn, "D"},
+                {AppAction.GoToGameMenu, "P"},
+                {AppAction.GoToMainMenu, "Q"},
+                {AppAction.GoToSettingsMenu, "T"},
+                {AppAction.PlayAgainstTheMachine, "M"},
+                {AppAction.GoToGamePrepMenu, "P"},
+                {AppAction.GoToLoadGameMenu, "L"},
+                {AppAction.PlayAgainstALocalPlayer, "P"}
+            };
 
             _getAction = (key) =>
             {
-                if (Int32.TryParse(key, out int result))
+
+                foreach (var menuItem in _menuView.MenuItems)
                 {
-                    return _menuView.MenuItems[result].AppActionToTake;
+                    var actionToTake = menuItem.AppActionToTake;
+                    if (key == keyMapping[actionToTake])
+                    {
+                        return actionToTake;
+                    }
                 }
 
                 return AppAction.Chill;
@@ -69,7 +99,7 @@ namespace FourConnectCore
 
             // Set up user interface functions
             _showGameBoard = Console.WriteLine;
-            _showMenu = Console.WriteLine;
+            _showMenu = (view) => ConsoleUi.ShowMenu(view, keyMapping);
             _showSavedGames = Console.WriteLine;
             _showSettings = Console.WriteLine;
             _showUserInput = Console.WriteLine;
@@ -107,6 +137,7 @@ namespace FourConnectCore
                 input = _getInput();
                 var action = _getAction(input);
                 Console.Clear();
+                Console.WriteLine(input);
                 if (action != AppAction.Chill)
                 {
                     // Change state due to input

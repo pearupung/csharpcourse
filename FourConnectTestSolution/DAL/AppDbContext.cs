@@ -13,14 +13,14 @@ namespace DAL
 
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
         {
-            builder.AddConsole();
+            //builder.AddConsole();
         });
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder
                 .UseLoggerFactory(MyLoggerFactory)
-                .UseSqlite("Data Source=/home/pearu/Desktop/mydb.db"));
+                .UseSqlite("Data Source=/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/mydb.db"));
         }
     }
 }

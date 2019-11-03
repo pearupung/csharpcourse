@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DAL;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +13,9 @@ namespace MenuSystem
         private readonly Menu _startMenu;
         private List<MenuItem> _menuItems;
 
+        public string[] MenuTypePath => _menuStack.Select(menu => menu.MenuType.ToString()).ToArray();
+        public string[] Path => _menuStack.Select(menu => menu.Title).ToArray();
+        
         private Menu GetMenu(MenuType type)
         {
             using (var ctx = new AppDbContext())
@@ -48,6 +50,19 @@ namespace MenuSystem
             {
                 list.Add(menuItemsInMenu.MenuItem);
             }
+            
+            if(MenuStackSize > 0)
+            {
+                list.Add(GetMenuItem(AppAction.Exit));
+            }
+            if (MenuStackSize > 1)
+            {
+                list.Add(GetMenuItem(AppAction.GoToMainMenu));
+            }
+            if(MenuStackSize > 2)
+            {
+                list.Add(GetMenuItem(AppAction.LeaveMenu));
+            }
 
             return list;
         }
@@ -78,18 +93,6 @@ namespace MenuSystem
 
             _menuStack.Push(menu);
             _menuItems = GetMenuItems();
-            if(MenuStackSize > 0)
-            {
-                MenuItems.Add(GetMenuItem(AppAction.Exit));
-            }
-            if (MenuStackSize > 1)
-            {
-                MenuItems.Add(GetMenuItem(AppAction.GoToMainMenu));
-            }
-            if(MenuStackSize > 2)
-            {
-                MenuItems.Add(GetMenuItem(AppAction.LeaveMenu));
-            }
         }
         
         public void GoToMenu(MenuType type)
@@ -101,42 +104,18 @@ namespace MenuSystem
         public void LeaveMenu()
         {
             _menuStack.Pop();
+            _menuItems = GetMenuItems();
         }
 
         public void GoToMainMenu()
         {
             _menuStack.Clear();
-            _menuStack.Push(_startMenu);
+            GoToMenu(_startMenu);
         }
 
         public void Exit()
         {
             _menuStack.Clear();
-        }
-
-        public override string ToString()
-        {
-            var longTitleBuilder = new StringBuilder();
-            foreach (var menu in _menuStack.ToArray())
-            {
-                longTitleBuilder.Insert(0, $"> {menu.MenuType}");
-            }
-            var builder = new StringBuilder();
-            builder.Append(longTitleBuilder);
-            builder.AppendLine();
-            builder.Append("==================");
-            builder.AppendLine();
-
-            foreach (var menuItem in MenuItems)
-            {
-                builder.Append(MenuItems.FindIndex(m => m.Equals(menuItem)));
-                builder.Append(" ");
-                builder.Append(menuItem);
-                builder.AppendLine();
-            }
-            builder.Append("--------------");
-            builder.AppendLine();
-            return builder.ToString();
         }
     }
 }
