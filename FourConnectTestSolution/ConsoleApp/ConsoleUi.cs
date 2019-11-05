@@ -10,6 +10,7 @@ namespace FourConnectCore
     {
         public static void ShowMenu(MenuView menuView, Dictionary<AppAction, string> actionToStringMapping)
         {
+            
             var longTitleBuilder = new StringBuilder();
             foreach (var menu in menuView.MenuTypePath)
             {

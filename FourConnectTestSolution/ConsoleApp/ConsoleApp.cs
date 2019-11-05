@@ -78,7 +78,8 @@ namespace FourConnectCore
                 {AppAction.PlayAgainstTheMachine, "M"},
                 {AppAction.GoToGamePrepMenu, "P"},
                 {AppAction.GoToLoadGameMenu, "L"},
-                {AppAction.PlayAgainstALocalPlayer, "P"}
+                {AppAction.PlayAgainstALocalPlayer, "P"},
+                {AppAction.Delete, "D"}
             };
 
             _getAction = (key) =>
@@ -104,7 +105,6 @@ namespace FourConnectCore
             _showSettings = Console.WriteLine;
             _showUserInput = Console.WriteLine;
             _showGameEndView = Console.WriteLine;
-            
 
             do
             {
@@ -114,6 +114,11 @@ namespace FourConnectCore
                 switch (_menuView.MenuType)
                 {
                     case { } gameString when gameString.ToString().Contains("GameMenu"):
+                        foreach (var column in _board.PlayedColumns)
+                        {
+                            Console.Write($"{column} ");
+                        }
+                        Console.WriteLine();
                         _showGameBoard(_board);
                         break;
                     case MenuType.SettingsMenu:
@@ -122,7 +127,7 @@ namespace FourConnectCore
                     case MenuType.GameSaveMenu:
                         _showUserInput(input);
                         break;
-                    case MenuType.GameLoadMenu:
+                    case { } gameString when gameString.ToString().Contains("LoadMenu"):
                         _showSavedGames(_loadView);
                         break;
                     case MenuType.GameEndMenu:
@@ -137,6 +142,7 @@ namespace FourConnectCore
                 input = _getInput();
                 var action = _getAction(input);
                 Console.Clear();
+                
                 Console.WriteLine(input);
                 if (action != AppAction.Chill)
                 {
@@ -317,7 +323,14 @@ namespace FourConnectCore
                     _menuView.GoToMenu(MenuType.SettingsMenu);
                     break;
                 case AppAction.GoToLoadGameMenu:
-                    _menuView.GoToMenu(MenuType.GameLoadMenu);
+                    if (_loadView.GameCount > 0)
+                    {
+                        _menuView.GoToMenu(MenuType.GameDeleteLoadMenu);
+                    }
+                    else
+                    {
+                        _menuView.GoToMenu(MenuType.NoGamesGameLoadMenu);
+                    }
                     break;
                 case AppAction.PlayAgainstALocalPlayer:
                     _board = new GameBoard(_settings.GetBoardHeight(), _settings.GetBoardWidth());
@@ -353,17 +366,24 @@ namespace FourConnectCore
                     break;
                 case AppAction.SaveTheGame:
                     _isPaused = true;
-                    _menuView.LeaveMenu();
                     _menuView.GoToMenu(MenuType.GameSaveMenu);
                     break;
                 case AppAction.Confirm when _menuView.IsMenu(MenuType.GameSaveMenu):
-                    _loadView.GameSave(_board, previous_input);
+                    _loadView.GameSaveToDb(_board, previous_input);
                     _menuView.LeaveMenu();
                     _isPaused = false;
                     break;
-                case AppAction.Confirm when _menuView.IsMenu(MenuType.GameLoadMenu):
+                case AppAction.Confirm when _menuView.IsMenu(MenuType.NoGamesGameLoadMenu):
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
+                    break;
+                case AppAction.Delete:
+                    _loadView.DeleteSelectedGameFromDb();
+                    if (_loadView.GameCount == 0)
+                    {
+                        _menuView.LeaveMenu();
+                        _menuView.GoToMenu(MenuType.NoGamesGameLoadMenu);
+                    }
                     break;
                 default:
                     Console.WriteLine($"Action {action} fell through!");

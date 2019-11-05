@@ -1,5 +1,6 @@
 ﻿using System;
 using Domain;
+using Game;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -10,6 +11,8 @@ namespace DAL
         public DbSet<Menu> Menus { get; set; } = default!;
         public DbSet<MenuItem> MenuItems { get; set; } = default!;
         public DbSet<MenuItemsInMenu> MenuItemsInMenus { get; set; } = default!;
+        public DbSet<Domain.Game> Games { get; set; }
+        public DbSet<Move> Moves { get; set; }
 
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
         {

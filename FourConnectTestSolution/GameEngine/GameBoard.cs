@@ -13,10 +13,13 @@ namespace Game
         
         public int SelectedColumn { get; set; }
         public CellType FirstMove { get; set; } = CellType.Empty;
+        
+        public List<int> PlayedColumns = new List<int>();
 
         public GameBoard()
         {}
-        
+
+      
         public GameBoard(int height, int width)
         {
             Height = height;
@@ -59,10 +62,11 @@ namespace Game
         }
 
 
-        private void Add(int column, CellType celltype)
+        public void Add(int column, CellType celltype)
         {
             if (Board[column].Count >= Height) return;
             if (FirstMove == CellType.Empty) FirstMove = celltype;
+            PlayedColumns.Add(column);
             Board[column].Push(celltype);
         }
 

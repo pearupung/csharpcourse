@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
+﻿using System.Linq;
 using DAL;
 using Domain;
 using Game;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace FourConnectCore
 {
@@ -15,6 +10,33 @@ namespace FourConnectCore
       
         static void Main(string[] args)
         {
+//            using (var ctx =new AppDbContext())
+//            {
+//                foreach (var menuItemsInMenu in ctx.MenuItemsInMenus.Where(m => m.MenuItem.Title.Equals("Delete")))
+//                {
+//                    ctx.MenuItemsInMenus.Remove(ctx.MenuItemsInMenus.Find(menuItemsInMenu.MenuItemsInMenuId));
+//                }
+//
+//                var menu = ctx.Menus.Add(new Menu()
+//                {
+//                    MenuType = MenuType.GameDeleteLoadMenu,
+//                    Title = "Load Game",
+//                });
+//
+//                foreach (var itemKey in new int[]{9, 22, 24})
+//                {
+//                    var rel = new MenuItemsInMenu()
+//                    {
+//                        Menu = menu.Entity,
+//                        MenuItem = ctx.MenuItems.Find(itemKey)
+//                    };
+//                    
+//                    ctx.MenuItemsInMenus.Add(rel);
+//                }
+//
+//                ctx.SaveChanges();
+
+//            }
             var app = new ConsoleApp();
             app.RunApp();
         }
