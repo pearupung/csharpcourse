@@ -9,5 +9,7 @@ namespace Domain
         public int LibraryId { get; set; }
         public Library Library { get; set; }
         public ICollection<Book> Books { get; set; }
+
+        public int Number { get; set; }
     }
 }

@@ -13,5 +13,9 @@ namespace Domain
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
         public ICollection<Review> Reviews { get; set; }
+
+        public string Title { get; set; }
+        public int ReleaseYear { get; set; }
+        
     }
 }
