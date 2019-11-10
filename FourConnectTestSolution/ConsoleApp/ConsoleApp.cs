@@ -18,11 +18,12 @@ namespace FourConnectCore
         private Settings _settings  = default!;
         private GameEndView _endView  = default!;
         private bool _isPaused = true;
-        private string input  = default!;
-        private string previous_input  = default!;
+        private string _input  = default!;
+        private string _previousInput  = default!;
 
+        private Func<bool> _getLongInput = default!;
         private Func<string,AppAction> _getAction = default!;
-        private Func<string> _getInput = default!;
+        private Func<Func<bool>, string> _getInput = default!;
         private Action<MenuView> _showMenu = default!;
         private Action<LoadGameView> _showSavedGames = default!;
         private Action<GameBoard> _showGameBoard = default!;
@@ -46,13 +47,13 @@ namespace FourConnectCore
             _settings = Settings.GetSettings();
             _gameStates = new List<GameState>();
             _endView = new GameEndView();
-            
+
             // Set up user interaction functions
-            _getInput = () =>
+            _getLongInput = () => { return _menuView.Menu.MenuType == MenuType.GameSaveMenu; };
+            _getInput = (_getLongInput) =>
             {
                 Console.Write(">");
-                var s = Console.ReadKey().KeyChar.ToString();
-                return s;
+                return _getLongInput() ? Console.ReadLine() : Console.ReadKey().KeyChar.ToString();
             };
             
             var keyMapping = new Dictionary<AppAction, string>()
@@ -125,7 +126,7 @@ namespace FourConnectCore
                         _showSettings(_settings);
                         break;
                     case MenuType.GameSaveMenu:
-                        _showUserInput(input);
+                        _showUserInput(_input);
                         break;
                     case { } gameString when gameString.ToString().Contains("LoadMenu"):
                         _showSavedGames(_loadView);
@@ -139,11 +140,11 @@ namespace FourConnectCore
                 _showMenu(_menuView);
                 
                 // Ask for input
-                input = _getInput();
-                var action = _getAction(input);
+                _input = _getInput(_getLongInput);
+                var action = _getAction(_input);
                 Console.Clear();
                 
-                Console.WriteLine(input);
+                Console.WriteLine(_input);
                 if (action != AppAction.Chill)
                 {
                     // Change state due to input
@@ -157,7 +158,7 @@ namespace FourConnectCore
                     }
                 }
 
-                previous_input = input;
+                _previousInput = _input;
 
             } while (_menuView.MenuStackSize > 0);
         }
@@ -369,7 +370,7 @@ namespace FourConnectCore
                     _menuView.GoToMenu(MenuType.GameSaveMenu);
                     break;
                 case AppAction.Confirm when _menuView.IsMenu(MenuType.GameSaveMenu):
-                    _loadView.GameSaveToDb(_board, previous_input);
+                    _loadView.GameSaveToDb(_board, _previousInput);
                     _menuView.LeaveMenu();
                     _isPaused = false;
                     break;
@@ -377,7 +378,7 @@ namespace FourConnectCore
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
                     break;
-                case AppAction.Confirm when _menuView.IsMenu(MenuType.NoGamesGameLoadMenu):
+                case AppAction.Confirm when _menuView.IsMenu(MenuType.GameDeleteLoadMenu):
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
                     break;

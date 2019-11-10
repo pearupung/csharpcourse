@@ -1,32 +1,25 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using DAL;
+using Domain;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace FourConnectCore
 {
     public class Settings
     {
-        class Setting
-        {
-            public string? Name { get; set; }
-            public int Value { get; set; }
-        }
-        private readonly Setting[] settings;
+        private readonly GameSetting[] settings;
 
         private static int _selectedSetting = 0;
         private static readonly Settings _settings = new Settings();
 
         private Settings()
         {
-            settings = new[] {new Setting()
+            using (var ctx = new AppDbContext())
             {
-                Name = "Board height",
-                Value = 4
-            }, new Setting()
-            {
-                Name = "Board width",
-                Value = 4
-            }};
+                settings = ctx.GameSettings.ToArray();
+            }
         }
 
         public static Settings GetSettings()
@@ -36,15 +29,20 @@ namespace FourConnectCore
 
         public string IncreaseValue()
         {
-            settings[_selectedSetting].Value++;
+            var gameSetting = settings[_selectedSetting];
+            if (gameSetting.Value < gameSetting.MaxValue)
+            {
+                gameSetting.Value++;
+            }
             return "";
         }
 
         public string DecreaseValue()
         {
-            if (settings[_selectedSetting].Value > 4)
+            var gameSetting = settings[_selectedSetting];
+            if (gameSetting.Value > gameSetting.MinValue)
             {
-                settings[_selectedSetting].Value--;
+                gameSetting.Value--;
             }
 
             return "";
@@ -58,12 +56,12 @@ namespace FourConnectCore
 
         public int GetBoardWidth()
         {
-            return settings[1].Value;
+            return settings.Where(s => s.Name.Equals("Board Width")).ToArray()[0].Value;
         }
 
         public int GetBoardHeight()
         {
-            return settings[0].Value;
+            return settings.Where(s => s.Name.Equals("Board Height")).ToArray()[0].Value;
         }
 
         public override string ToString()
