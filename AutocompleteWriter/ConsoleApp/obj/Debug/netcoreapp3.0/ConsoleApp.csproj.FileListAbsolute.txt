@@ -1,0 +1,11 @@
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp.deps.json
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp.runtimeconfig.json
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp.runtimeconfig.dev.json
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp.dll
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/bin/Debug/netcoreapp3.0/ConsoleApp.pdb
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/obj/Debug/netcoreapp3.0/ConsoleApp.csprojAssemblyReference.cache
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/obj/Debug/netcoreapp3.0/ConsoleApp.AssemblyInfoInputs.cache
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/obj/Debug/netcoreapp3.0/ConsoleApp.AssemblyInfo.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/obj/Debug/netcoreapp3.0/ConsoleApp.dll
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/AutocompleteWriter/ConsoleApp/obj/Debug/netcoreapp3.0/ConsoleApp.pdb
