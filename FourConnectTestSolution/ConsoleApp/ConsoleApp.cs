@@ -377,6 +377,10 @@ namespace FourConnectCore
                     _board = _loadView.GetSelectedGameBoard();
                     _isPaused = false;
                     break;
+                case AppAction.Confirm when _menuView.IsMenu(MenuType.NoGamesGameLoadMenu):
+                    _board = _loadView.GetSelectedGameBoard();
+                    _isPaused = false;
+                    break;
                 case AppAction.Delete:
                     _loadView.DeleteSelectedGameFromDb();
                     if (_loadView.GameCount == 0)
