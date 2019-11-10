@@ -11,7 +11,7 @@ namespace MenuSystem
     {
         private readonly Stack<Menu> _menuStack = new Stack<Menu>();
         private readonly Menu _startMenu;
-        private List<MenuItem> _menuItems;
+        private List<MenuItem> _menuItems = default!;
 
         public string[] MenuTypePath => _menuStack.Select(menu => menu.MenuType.ToString()).ToArray();
         public string[] Path => _menuStack.Select(menu => menu.Title).ToArray();
@@ -46,7 +46,7 @@ namespace MenuSystem
         {
             var list = new List<MenuItem>();
 
-            foreach (var menuItemsInMenu in Menu.MenuItemsInMenu)
+            foreach (var menuItemsInMenu in Menu.MenuItemsInMenu ?? new List<MenuItemsInMenu>())
             {
                 list.Add(menuItemsInMenu.MenuItem);
             }
