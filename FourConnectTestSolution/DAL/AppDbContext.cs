@@ -11,8 +11,8 @@ namespace DAL
         public DbSet<Menu> Menus { get; set; } = default!;
         public DbSet<MenuItem> MenuItems { get; set; } = default!;
         public DbSet<MenuItemsInMenu> MenuItemsInMenus { get; set; } = default!;
-        public DbSet<Domain.Game> Games { get; set; }
-        public DbSet<Move> Moves { get; set; }
+        public DbSet<Domain.Game> Games { get; set; } = default!;
+        public DbSet<Move> Moves { get; set; } = default!;
 
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
         {

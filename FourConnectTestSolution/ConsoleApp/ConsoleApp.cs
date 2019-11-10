@@ -11,27 +11,27 @@ namespace FourConnectCore
 {
     public class ConsoleApp
     {
-        private GameBoard _board;
-        private List<GameState> _gameStates;
-        private MenuView _menuView;
-        private LoadGameView _loadView;
-        private Settings _settings;
-        private GameEndView _endView;
+        private GameBoard _board = default!;
+        private List<GameState> _gameStates  = default!;
+        private MenuView _menuView  = default!;
+        private LoadGameView _loadView  = default!;
+        private Settings _settings  = default!;
+        private GameEndView _endView  = default!;
         private bool _isPaused = true;
-        private string input;
-        private string previous_input;
+        private string input  = default!;
+        private string previous_input  = default!;
 
-        private Func<string,AppAction> _getAction;
-        private Func<string> _getInput;
-        private Action<MenuView> _showMenu;
-        private Action<LoadGameView> _showSavedGames;
-        private Action<GameBoard> _showGameBoard;
-        private Action<Settings> _showSettings;
-        private Action<string> _showUserInput;
+        private Func<string,AppAction> _getAction = default!;
+        private Func<string> _getInput = default!;
+        private Action<MenuView> _showMenu = default!;
+        private Action<LoadGameView> _showSavedGames = default!;
+        private Action<GameBoard> _showGameBoard = default!;
+        private Action<Settings> _showSettings = default!;
+        private Action<string> _showUserInput = default!;
         private readonly List<Func<GameBoard, List<GameState>>> _gameStateProviders = 
             new List<Func<GameBoard, List<GameState>>>();
 
-        private Action<GameEndView> _showGameEndView;
+        private Action<GameEndView> _showGameEndView = default!;
 
         public void RunApp()
         {
