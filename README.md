@@ -66,4 +66,14 @@ Replace json files with EF based database. Use SQLite.
 - Have finally completed the menusystem overhaul somewhat - cannot say if it is better now or not, but its much
 	more customisable from the app state perspective. Still need to configure keys to certain actions - 
 	this probably means more database tables and generalization. Need to think about the structure once more
-	because I am wary of potential pitfalls. 
+	because I am wary of potential pitfalls.
+- This multiplayer mode does not satisfy me. I think it is not as modular as I'd like it to be, this means that 
+	having simply a boolean and gamestate analysis is somewhat cumbersome. I'd like to have as many players
+	as I'd like to and attach those players to the game. A player can be a real person or it can be a machine,
+	but they should have the same function: play. This would simplimfy the menusystem as well because instead
+	of having xyz menus for every possibility or having togglable menuitems or having something other, is to
+	have less menus and more play. The token given at play would be player specific, but as we have decoupled
+	the input command keys and the menuitems themselves, we can have one "Play" button in the game and get its
+	command key from the player itself. So, let's have a Func returned for the action specified? Seems too much,
+	but let's see if there is any other way to extract that info on the get go. Would be nice to have everything
+	 panned out. Should be fine.

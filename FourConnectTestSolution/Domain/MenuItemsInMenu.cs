@@ -11,6 +11,7 @@ namespace Domain
         public Menu Menu { get; set; } = default!;
         [Required]
         public int MenuItemId { get; set; }
+        
         public MenuItem MenuItem { get; set; } = default!;
     }
 }

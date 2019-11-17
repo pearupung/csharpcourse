@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Domain;
 using Game;
 using MenuSystem;
@@ -8,6 +9,7 @@ using static Game.GameState;
 
 
 namespace FourConnectCore
+
 {
     public class ConsoleApp
     {
@@ -20,7 +22,8 @@ namespace FourConnectCore
         private bool _isPaused = true;
         private string _input  = default!;
         private string _previousInput  = default!;
-
+        private bool _machinePlay = false;
+        
         private Func<bool> _getLongInput = default!;
         private Func<string,AppAction> _getAction = default!;
         private Func<Func<bool>, string> _getInput = default!;
@@ -29,6 +32,7 @@ namespace FourConnectCore
         private Action<GameBoard> _showGameBoard = default!;
         private Action<Settings> _showSettings = default!;
         private Action<string> _showUserInput = default!;
+        private Func<GameBoard, int> _getMachineMove = default!;
         private readonly List<Func<GameBoard, List<GameState>>> _gameStateProviders = 
             new List<Func<GameBoard, List<GameState>>>();
 
@@ -49,6 +53,11 @@ namespace FourConnectCore
             _endView = new GameEndView();
 
             // Set up user interaction functions
+            _getMachineMove = board =>
+            {
+                var randint = new Random();
+                return randint.Next(0, board.Width);
+            };
             _getLongInput = () => { return _menuView.Menu.MenuType == MenuType.GameSaveMenu; };
             _getInput = (_getLongInput) =>
             {
@@ -153,6 +162,11 @@ namespace FourConnectCore
                     if (!_isPaused)
                     {
                         _gameStates.Clear();
+                        if (_machinePlay)
+                        {
+                            var col = _getMachineMove(_board);
+                            _board.Add(col, All(OTurn) ? CellType.O : CellType.X);
+                        }
                         ApplyCurrentGameState();
                         ApplyNextGameMenu();
                     }
@@ -193,7 +207,6 @@ namespace FourConnectCore
                 if (cell != cellType) continue;
                 foreach (var findDirection in findDirections)
                 {
-                    
                     var hasFour = HasFourConnected(1, board, coords, cellType, findDirection);
                     if (hasFour) return true;
                 }
@@ -389,6 +402,11 @@ namespace FourConnectCore
                         _menuView.LeaveMenu();
                         _menuView.GoToMenu(MenuType.NoGamesGameLoadMenu);
                     }
+                    break;
+                case AppAction.PlayAgainstTheMachine:
+                    _board = new GameBoard(_settings.GetBoardHeight(), _settings.GetBoardWidth());
+                    _machinePlay = true;
+                    _isPaused = false;
                     break;
                 default:
                     Console.WriteLine($"Action {action} fell through!");
