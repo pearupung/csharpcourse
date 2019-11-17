@@ -173,3 +173,8 @@
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Publishers/Details.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Publishers/Edit.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Publishers/Index.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Create.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Delete.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Details.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Edit.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Index.cshtml.g.cs

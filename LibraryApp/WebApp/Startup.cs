@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace WebApp
 {
@@ -27,7 +28,9 @@ namespace WebApp
         {
             services.AddRazorPages();
             services.AddDbContext<AppDbContext>(options => 
-                options.UseSqlite("Data Source=books.db"));
+                options
+                    .UseSqlite("Data Source=books.db")
+                    .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole())));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
