@@ -41,12 +41,84 @@
       <e p="LibraryApp.sln" t="IncludeFlat" />
       <e p="WebApp" t="IncludeRecursive">
         <e p="Pages" t="Include">
+          <e p="Authors" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
+          <e p="BookAuthors" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
+          <e p="Books" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
+          <e p="Languages" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
           <e p="Privacy.cshtml" t="Include" />
           <e p="Privacy.cshtml.cs" t="Include" />
+          <e p="Publishers" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
+          <e p="Reviews" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Delete.cshtml.cs" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Details.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
@@ -63,6 +135,7 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="books.db" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">

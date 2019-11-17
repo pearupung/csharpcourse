@@ -3,6 +3,19 @@
 Connect 4  - student code ending 0-4
 MineSweeper - student code ending 5-9
 
+## Scaffolding
+\# neverforger.
+for f in ../Domain/*.cs; 
+do name=${f%.*}; 
+name=${name#*/}; 
+name=${name#*/}; 
+echo $name; 
+dotnet aspnet-codegenerator razorpage 
+	-m $name 
+	-dc AppDbContext 
+	-udl -outDir "Pages/${name}s" 
+	--referenceScriptLibraries -f; done
+
 ## In progress
 - **CON4-007** Move menusystem UI outside of the menu system
 - **CON4-011** Tie console input command to a certain app action
