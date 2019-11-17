@@ -1,0 +1,8 @@
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/bin/Debug/netcoreapp3.0/Domain.deps.json
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/bin/Debug/netcoreapp3.0/Domain.dll
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/bin/Debug/netcoreapp3.0/Domain.pdb
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/obj/Debug/netcoreapp3.0/Domain.csprojAssemblyReference.cache
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/obj/Debug/netcoreapp3.0/Domain.AssemblyInfoInputs.cache
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/obj/Debug/netcoreapp3.0/Domain.AssemblyInfo.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/obj/Debug/netcoreapp3.0/Domain.dll
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/Domain/obj/Debug/netcoreapp3.0/Domain.pdb

@@ -4,8 +4,8 @@ namespace Domain
 {
     public class Review
     {
-        public int CommentId { get; set; }
-        public string CommentText { get; set; }
+        public int ReviewId { get; set; }
+        public string ReviewText { get; set; }
         public DateTime TimePosted { get; set; }
         public string Title { get; set; }
         public int Stars { get; set; }
