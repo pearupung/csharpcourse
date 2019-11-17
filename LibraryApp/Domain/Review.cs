@@ -11,6 +11,6 @@ namespace Domain
         public int? Stars { get; set; }
 
         public int BookId { get; set; } = default!;
-        public Book Book { get; set; }  = default!;
+        public Book Book { get; set; }
     }
 }

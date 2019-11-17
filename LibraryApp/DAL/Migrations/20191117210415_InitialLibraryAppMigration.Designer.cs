@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191117194850_InitialLibraryAppMigration")]
+    [Migration("20191117210415_InitialLibraryAppMigration")]
     partial class InitialLibraryAppMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,10 @@ namespace DAL.Migrations
                     b.Property<int>("BirthYear")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeathYear")
+                    b.Property<int?>("DeathYear")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -66,7 +65,6 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Summary")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -146,10 +144,9 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ReviewText")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Stars")
+                    b.Property<int?>("Stars")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("TimePosted")

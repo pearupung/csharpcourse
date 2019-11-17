@@ -25,11 +25,10 @@ namespace DAL.Migrations
                     b.Property<int>("BirthYear")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeathYear")
+                    b.Property<int?>("DeathYear")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -64,7 +63,6 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Summary")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -144,10 +142,9 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ReviewText")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Stars")
+                    b.Property<int?>("Stars")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("TimePosted")

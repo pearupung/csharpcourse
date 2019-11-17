@@ -14,11 +14,11 @@ namespace Domain
         public string? Summary { get; set; }
 
         public ICollection<BookAuthor>? BookAuthors { get; set; }
-        public int LanguageId { get; set; } = default!;
-        public Language Language { get; set; } = default!;
+        public int LanguageId { get; set; }
+        public Language? Language { get; set; }
 
-        public int PublisherId { get; set; } = default!;
-        public Publisher Publisher { get; set; } = default!;
+        public int PublisherId { get; set; }
+        public Publisher? Publisher { get; set; }
 
         public ICollection<Review>? Reviews { get; set; }
     }

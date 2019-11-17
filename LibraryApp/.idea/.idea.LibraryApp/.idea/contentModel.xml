@@ -8,8 +8,8 @@
         <e p="AppDbContext.cs" t="Include" />
         <e p="DAL.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20191117194850_InitialLibraryAppMigration.Designer.cs" t="Include" />
-          <e p="20191117194850_InitialLibraryAppMigration.cs" t="Include" />
+          <e p="20191117210415_InitialLibraryAppMigration.Designer.cs" t="Include" />
+          <e p="20191117210415_InitialLibraryAppMigration.cs" t="Include" />
           <e p="AppDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />

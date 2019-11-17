@@ -16,8 +16,8 @@ namespace DAL.Migrations
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     BirthYear = table.Column<int>(nullable: false),
-                    DeathYear = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    DeathYear = table.Column<int>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,7 @@ namespace DAL.Migrations
                     PublishingYear = table.Column<int>(nullable: false),
                     AuthoredYear = table.Column<int>(nullable: false),
                     WordCount = table.Column<int>(nullable: false),
-                    Summary = table.Column<string>(nullable: false),
+                    Summary = table.Column<string>(nullable: true),
                     LanguageId = table.Column<int>(nullable: false),
                     PublisherId = table.Column<int>(nullable: false)
                 },
@@ -113,10 +113,10 @@ namespace DAL.Migrations
                 {
                     ReviewId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ReviewText = table.Column<string>(nullable: false),
+                    ReviewText = table.Column<string>(nullable: true),
                     TimePosted = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: false),
-                    Stars = table.Column<int>(nullable: false),
+                    Stars = table.Column<int>(nullable: true),
                     BookId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
