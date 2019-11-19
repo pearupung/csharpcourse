@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_gitcdn.github.io_bootstrap-toggle_2.2.2_js_bootstrap-toggle.js" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_LibraryApp.-1692391768.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
@@ -40,6 +41,7 @@
       </e>
       <e p="LibraryApp.sln" t="IncludeFlat" />
       <e p="WebApp" t="IncludeRecursive">
+        <e p="CheckboxAbstraction.cs" t="Include" />
         <e p="Pages" t="Include">
           <e p="Authors" t="Include">
             <e p="Create.cshtml" t="Include" />
@@ -203,6 +205,11 @@
               <e p="jquery.validate.unobtrusive.js" t="Include" />
               <e p="jquery.validate.unobtrusive.min.js" t="Include" />
             </e>
+          </e>
+          <e p="resources" t="Include">
+            <e p="773433.jpg" t="Include" />
+            <e p="Bibliothèque_de_l'Assemblée_Nationale_(Lunon).jpg" t="Include" />
+            <e p="uzbekistan-forests.jpg" t="Include" />
           </e>
         </e>
       </e>

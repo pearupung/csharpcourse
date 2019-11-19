@@ -10,7 +10,7 @@ namespace Domain
         public string Title { get; set; } = default!;
         public int? Stars { get; set; }
 
-        public int BookId { get; set; } = default!;
-        public Book Book { get; set; }
+        public int BookId { get; set; }
+        public Book? Book { get; set; }
     }
 }

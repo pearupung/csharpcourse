@@ -4,7 +4,47 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid hello rounded">
+
+    <form class="form-inline justify-content-center">
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="inlineFormInputName2" placeholder="Moby Dick">
+        </div> 
+        <button type="submit" class="btn btn-primary">Go fetch!</button>
+    </form>
+</div>
+
+<input type="checkbox" checked="checked"/>
+
+<div class="row checkbox justify-content-center">
+    @for (var i = 0; i < Model.SearchButtons.Count; i++)
+    {
+        var item = Model.SearchButtons[i];
+        <div style="width: fit-content;">
+            <input asp-for="SearchButtons[i].IsChecked" class="haioo"/>
+            <label
+                for="SearchButtons_@(i)__IsChecked"
+                class="toggle-label">
+                @item.Title
+            </label>
+        </div>
+    }
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @foreach (var item in Model.Books)
+        {
+            <div class="card col-sm m-3 p-3">
+                <img src="resources/uzbekistan-forests.jpg" class="card-img-top rounded" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Summary</p>
+                    <a href="#" class="btn btn-primary">Look at this book!</a>
+                </div>
+            </div>
+        }
+    </div>
+
 </div>

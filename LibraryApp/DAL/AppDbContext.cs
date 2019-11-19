@@ -7,7 +7,7 @@ namespace DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Author> Authors{ get; set; }
+        public DbSet<Author> Authors{ get; set; } 
         public DbSet<Book> Books { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<Language> Languages { get; set; }
