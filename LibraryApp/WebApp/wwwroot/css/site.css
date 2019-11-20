@@ -85,7 +85,11 @@ input[type=checkbox]{
   display: none;
 }
 
-.haioo:checked + input + .toggle-label {
+.toggle-label {
+  font-size: 10pt;
+}
+
+.haioo:checked + .toggle-label {
   color: #fff;
   background-color: #343a40;
   border-color: #343a40;
