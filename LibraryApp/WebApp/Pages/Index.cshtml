@@ -4,45 +4,26 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="hello rounded">
-    <div class="container justify-content-center align-content-center">
-        <div class="row d-inline-flex">
-            <div class="col-auto"></div>
-            <div class="col-lg d-inline-flex">
-                
-                @for (var i = 0; i < Model.SearchButtons.Count; i++)
-                {
-                    var item = Model.SearchButtons[i];
-                    <div class="m-2 col-auto">
-                        <input asp-for="SearchButtons[i].IsChecked" class="haioo"/>
-                        <label
-                            for="SearchButtons_@(i)__IsChecked"
-                            style="width: 8em"
-                            class="toggle-label @(item.IsChecked ? "btn btn-light" : "btn btn-dark")">
-                            @item.Title
-                        </label>
-                    </div>
-                }
-            </div>
-            <div class="col-auto"></div>
-        </div>
-    
-        <div class="row">
-                        <div class="col-auto"></div>
-<div class="col-lg">
-    <form class="form-inline">
 
-        <div class="form-group d-inline-flex">
-            <input type="text" class="form-control d-inline-flex" id="inlineFormInputName2" placeholder="Moby Dick">
-        </div>
-        <button type="submit" class="btn btn-primary d-inline-flex">Go fetch!</button>
-    </form>
-    </div>
-                        <div class="col-auto"></div>
+@for (var i = 0; i < Model.SearchButtons.Count; i++)
+{
+    var item = Model.SearchButtons[i];
+    <input asp-for="SearchButtons[i].IsChecked" class="haioo"/>
+    <label
+        for="SearchButtons_@(i)__IsChecked"
+        style="width: 8em"
+        class="toggle-label @(item.IsChecked ? "btn btn-light" : "btn btn-dark")">
+        @item.Title
+    </label>
+}
 
-        </div>
+<form class="form-inline">
+
+    <div class="form-group d-inline-flex">
+        <input type="text" class="form-control d-inline-flex" id="inlineFormInputName2" placeholder="Moby Dick">
     </div>
-</div>
+    <button type="submit" class="btn btn-primary d-inline-flex">Go fetch!</button>
+</form>
 
 
 <div class="container-fluid">
