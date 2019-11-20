@@ -74,10 +74,6 @@ body {
   height: 50vh;
   background-image: url('../resources/773433.jpg');
   background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: sans-serif;
 }
 
