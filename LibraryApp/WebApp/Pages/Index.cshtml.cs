@@ -16,6 +16,7 @@ namespace WebApp.Pages
         private readonly DAL.AppDbContext _context;
 
         public IList<Book> Books { get; set; }
+        public string SearchString { get; set; }
         
         public List<CheckboxAbstraction> SearchButtons { get; set; }
 
@@ -25,24 +26,29 @@ namespace WebApp.Pages
             _context = context;
         }
 
-        public void OnGet()
+        public void OnGet(string? searchString)
         {
-            Books = _context.Books.ToList();
-            SearchButtons = new List<CheckboxAbstraction>()
+            SearchString = searchString;
+
+            if (string.IsNullOrEmpty(SearchString))
             {
-                new CheckboxAbstraction(){Title = "All", IsChecked = true},
-                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
-                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
-                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false},
-                new CheckboxAbstraction(){Title = "All", IsChecked = true},
-                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
-                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
-                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false},
-                new CheckboxAbstraction(){Title = "All", IsChecked = true},
-                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
-                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
-                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false}
-            };
+             
+                Books = _context.Books.ToList();
+                SearchButtons = new List<CheckboxAbstraction>()
+                {
+                    new CheckboxAbstraction(){Title = "Everywhere" +
+                                                      "", IsChecked = true},
+                    new CheckboxAbstraction(){Title = "Books", IsChecked = false},
+                    new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
+                    new CheckboxAbstraction(){Title = "Publishers",IsChecked = false},
+                };
+
+            }
+            else
+            {
+                
+            }
+            
 
         }
     }
