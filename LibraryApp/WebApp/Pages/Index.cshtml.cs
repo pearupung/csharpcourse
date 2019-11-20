@@ -30,9 +30,18 @@ namespace WebApp.Pages
             Books = _context.Books.ToList();
             SearchButtons = new List<CheckboxAbstraction>()
             {
-                new CheckboxAbstraction(){Title = "Books", IsChecked = true},
-                new CheckboxAbstraction(){Title = "Authors",IsChecked = true},
-                new CheckboxAbstraction(){Title = "Publishers",IsChecked = true}
+                new CheckboxAbstraction(){Title = "All", IsChecked = true},
+                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
+                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
+                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false},
+                new CheckboxAbstraction(){Title = "All", IsChecked = true},
+                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
+                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
+                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false},
+                new CheckboxAbstraction(){Title = "All", IsChecked = true},
+                new CheckboxAbstraction(){Title = "Books", IsChecked = false},
+                new CheckboxAbstraction(){Title = "Authors",IsChecked = false},
+                new CheckboxAbstraction(){Title = "Publishers",IsChecked = false}
             };
 
         }

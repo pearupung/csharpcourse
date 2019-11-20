@@ -83,10 +83,20 @@ input[type=checkbox]{
 
 .toggle-label {
   font-size: 10pt;
+  color: #fff;
+  border-color: #68737d;
+  background-color: transparent;
 }
 
+.haioo:hover + .toggle-label {
+  color: #212529;
+  background-color: rgba(194, 195, 196, 0.71);
+  border-color: #f8f9fa;
+}
+
+
 .haioo:checked + .toggle-label {
-  color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
 }
