@@ -82,13 +82,11 @@ body {
 }
 
 input[type=checkbox]{
-  //display: none;
-}
-
-.haioo + .toggle-label {
-  background-color: #1e7e34;
+  display: none;
 }
 
 .haioo:checked + input + .toggle-label {
-  background-color: #1b6ec2;
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
 }
