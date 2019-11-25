@@ -13,22 +13,22 @@
                     <div class="row justify-content-start">
                         <div class="col-auto">
                             <label class="btn" style="font-size: 11pt; color: white">Search from:</label>
-                            @for (var i = 0; i < Model.SearchButtons.Count; i++)
+                            @*@for (var i = 0; i < Model.SearchButtons.Count; i++)
                             {
                                 var item = Model.SearchButtons[i];
-                                <input asp-for="SearchButtons[i].IsChecked" class="haioo"/>
+                                <input asp-for="SearchButtons[i].IsChecked" asp-route-search="@Model.SearchString" value="@Model.SearchString" class="haioo"/>
                                 <label
                                     class=" btn toggle-label"
                                     for="SearchButtons_@(i)__IsChecked">
                                     @item.Title
                                 </label>
-                            }
+                            }*@
                         </div>
 
                     </div>
                     <div class="row justify-content-end no-gutters">
                         <div class="col">
-                            <input asp-for="SearchString" class="form-control " id="inlineFormInputName2" placeholder="Moby Dick">
+                            <input asp-for="SearchString" class="form-control "  placeholder="Moby Dick">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-dark">Go fetch!</button>
@@ -45,7 +45,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        @foreach (var item in Model.Books)
+        @foreach (var item in Model.BookIndexDtos)
         {
             <div class="card col-sm m-3 p-3">
                 <img src="resources/uzbekistan-forests.jpg" class="card-img-top rounded" alt="...">

@@ -21,11 +21,25 @@ namespace WebApp.Pages.Books
 
         public IList<Book> Book { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string? search)
         {
-            Book = await _context.Books
-                .Include(b => b.Language)
-                .Include(b => b.Publisher).ToListAsync();
+            
+            
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                Book = await _context.Books
+                    .Include(b => b.Language)
+                    .Include(b => b.Publisher).ToListAsync();
+            }
+            else
+            {
+                search = search.ToLower().Trim();
+                Book = await _context.Books.Where(b => b.Title=="Sugar")
+                    .Include(b => b.Language)
+                    .Include(b => b.Publisher).ToListAsync()
+                    ;
+            }
+            
         }
     }
 }

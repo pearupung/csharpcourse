@@ -29,7 +29,7 @@ namespace WebApp
             services.AddRazorPages();
             services.AddDbContext<AppDbContext>(options => 
                 options
-                    .UseSqlite("Data Source=books.db")
+                    .UseMySql("server=alpha.akaver.com;database=student2018_peapun_LibraryAppDb;user=student2018;password=student2018")
                     .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole())));
         }
 

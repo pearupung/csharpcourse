@@ -23,6 +23,8 @@ namespace WebApp.Pages.Books
         [BindProperty]
         public Book Book { get; set; }
 
+        public Language Language { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)

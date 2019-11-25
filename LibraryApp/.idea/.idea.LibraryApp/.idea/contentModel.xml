@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_gitcdn.github.io_bootstrap-toggle_2.2.2_js_bootstrap-toggle.js" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_LibraryApp.-1692391768.00" t="ExcludeRecursive" />
@@ -9,8 +11,8 @@
         <e p="AppDbContext.cs" t="Include" />
         <e p="DAL.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20191117210415_InitialLibraryAppMigration.Designer.cs" t="Include" />
-          <e p="20191117210415_InitialLibraryAppMigration.cs" t="Include" />
+          <e p="20191121083759_MySqlMigration.Designer.cs" t="Include" />
+          <e p="20191121083759_MySqlMigration.cs" t="Include" />
           <e p="AppDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
@@ -41,7 +43,11 @@
       </e>
       <e p="LibraryApp.sln" t="IncludeFlat" />
       <e p="WebApp" t="IncludeRecursive">
+        <e p="BookIndexDto.cs" t="Include" />
         <e p="CheckboxAbstraction.cs" t="Include" />
+        <e p="DTO" t="Include">
+          <e p="BookDto.cs" t="Include" />
+        </e>
         <e p="Pages" t="Include">
           <e p="Authors" t="Include">
             <e p="Create.cshtml" t="Include" />

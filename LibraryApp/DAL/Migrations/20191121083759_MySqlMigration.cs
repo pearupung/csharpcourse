@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class InitialLibraryAppMigration : Migration
+    public partial class MySqlMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     AuthorId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     BirthYear = table.Column<int>(nullable: false),
@@ -29,7 +30,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     LanguageId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     LanguageName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -42,7 +43,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     PublisherId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PublisherName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -55,7 +56,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     BookId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: false),
                     PublishingYear = table.Column<int>(nullable: false),
                     AuthoredYear = table.Column<int>(nullable: false),
@@ -86,7 +87,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     BookAuthorId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     BookId = table.Column<int>(nullable: false),
                     AuthorId = table.Column<int>(nullable: false)
                 },
@@ -112,7 +113,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     ReviewId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ReviewText = table.Column<string>(nullable: true),
                     TimePosted = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: false),
