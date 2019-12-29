@@ -3,9 +3,10 @@
   <component name="ContentModelStore">
     <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_code.jquery.com_jquery-3.4.1.js" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_gitcdn.github.io_bootstrap-toggle_2.2.2_js_bootstrap-toggle.js" t="IncludeRecursive" />
-    <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_LibraryApp.-1692391768.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_LibraryApp.-1692391768.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="DAL" t="IncludeRecursive">
         <e p="AppDbContext.cs" t="Include" />
@@ -13,6 +14,10 @@
         <e p="Migrations" t="Include">
           <e p="20191121083759_MySqlMigration.Designer.cs" t="Include" />
           <e p="20191121083759_MySqlMigration.cs" t="Include" />
+          <e p="20191127143238_AddLanguageCode.Designer.cs" t="Include" />
+          <e p="20191127143238_AddLanguageCode.cs" t="Include" />
+          <e p="20191127152021_MakeSqlite2.Designer.cs" t="Include" />
+          <e p="20191127152021_MakeSqlite2.cs" t="Include" />
           <e p="AppDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
@@ -130,6 +135,9 @@
             <e p="Index.cshtml.cs" t="Include" />
           </e>
           <e p="Shared" t="Include">
+            <e p="ChooseOrCreatePublisher.cshtml" t="Include" />
+            <e p="ChooseOrCreatePublisher.cshtml.cs" t="Include" />
+            <e p="Publisher.cshtml" t="Include" />
             <e p="_Layout.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
           </e>
@@ -145,11 +153,11 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="books.db" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
               <e p="WebApp.AssemblyInfo.cs" t="Include" />
+              <e p="WebApp.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>

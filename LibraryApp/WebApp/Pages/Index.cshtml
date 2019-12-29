@@ -45,6 +45,13 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
+        @if (Model.BookIndexDtos.Count == 0)
+        {
+            <p>Did not find the book you were looking for?</p>
+            <p>
+                <a asp-page="CreateBook">Take care to add it yourself.</a>
+            </p>
+        }
         @foreach (var item in Model.BookIndexDtos)
         {
             <div class="card col-sm m-3 p-3">

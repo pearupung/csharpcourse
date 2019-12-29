@@ -1,8 +1,73 @@
 @page
-@model CreateBookModel
-@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+@using Domain
+@using WebApp.Pages.Shared
+@model WebApp.Pages.CreateBookModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr/>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Book.Title" class="control-label"></label>
+                    <input asp-for="Book.Title" class="form-control"/>
+                    <span asp-validation-for="Book.Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.PublishingYear" class="control-label">@Html.LabelFor(x => x.Book.PublishingYear)</label>
+                    <input asp-for="Book.PublishingYear" class="form-control"/>
+                    <span asp-validation-for="Book.PublishingYear" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.AuthoredYear" class="control-label"></label>
+                    <input asp-for="Book.AuthoredYear" class="form-control"/>
+                    <span asp-validation-for="Book.AuthoredYear" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.WordCount" class="control-label"></label>
+                    <input asp-for="Book.WordCount" class="form-control"/>
+                    <span asp-validation-for="Book.WordCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Summary" class="control-label"></label>
+                    <input asp-for="Book.Summary" class="form-control"/>
+                    <span asp-validation-for="Book.Summary" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.LanguageId" class="control-label">@nameof(Language)</label>
+                    <select asp-for="Book.LanguageId" class="form-control" asp-items="Model.Languages"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.PublisherId" class="control-label">@nameof(Publisher)</label>
+                    <select asp-for="Book.PublisherId" class="form-control" asp-items="Model.PublishersSelectList"></select>
+                </div>
+                
+                
+                @Html.Partial("Shared/ChooseOrCreatePublisher", Model.PublisherPartialModel);
+                
+                
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary"/>
+                </div>
+            </form>
+
+            <div>
+                <a asp-page="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -182,3 +182,5 @@
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/bin/Debug/netcoreapp3.0/MySqlConnector.dll
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/bin/Debug/netcoreapp3.0/Pomelo.EntityFrameworkCore.MySql.dll
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/bin/Debug/netcoreapp3.0/Pomelo.JsonObject.dll
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/ChooseOrCreatePublisher.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Publisher.cshtml.g.cs

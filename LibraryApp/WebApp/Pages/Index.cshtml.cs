@@ -29,8 +29,9 @@ namespace WebApp.Pages
             _context = context;
         }
 
-        public void OnGet(string? searchString)
+        public IActionResult OnGet(string? searchString)
         {
+            return RedirectToPage("CreateBook");
             SearchString = searchString;
             Console.WriteLine(SearchString);
 

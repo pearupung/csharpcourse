@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain
@@ -9,6 +10,7 @@ namespace Domain
     {
         public int BookId { get; set; }
         public string Title { get; set; } = default!;
+        [DisplayName("Publishing year")]
         public int PublishingYear { get; set; } = default!;
         public int AuthoredYear { get; set; } = default!;
         public int WordCount { get; set; } = default!;
