@@ -135,9 +135,21 @@
             <e p="Index.cshtml.cs" t="Include" />
           </e>
           <e p="Shared" t="Include">
-            <e p="ChooseOrCreatePublisher.cshtml" t="Include" />
-            <e p="ChooseOrCreatePublisher.cshtml.cs" t="Include" />
-            <e p="Publisher.cshtml" t="Include" />
+            <e p="Author" t="Include" />
+            <e p="Partials" t="Include">
+              <e p="AuthorPartial.cshtml" t="Include" />
+              <e p="AuthorPartial.cshtml.cs" t="Include" />
+              <e p="BookPartial.cshtml" t="Include" />
+              <e p="BookPartial.cshtml.cs" t="Include" />
+              <e p="LanguagePartial.cshtml" t="Include" />
+              <e p="LanguagePartial.cshtml.cs" t="Include" />
+            </e>
+            <e p="Publisher" t="Include">
+              <e p="PickPublisher.cshtml" t="Include" />
+              <e p="PickPublisher.cshtml.cs" t="Include" />
+              <e p="PublisherPartial.cshtml" t="Include" />
+              <e p="PublisherPartial.cshtml.cs" t="Include" />
+            </e>
             <e p="_Layout.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
           </e>
