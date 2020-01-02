@@ -50,8 +50,9 @@ namespace WebApp.Pages
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(string? publisherPick, string? languagePick)
+        public async Task<IActionResult> OnPostAsync(string? publisherPick, string? languagePick, BookPartialModel bookPartialModel, LanguagePartialModel languagePartialModel, PublisherPartialModel publisherPartialModel)
         {
+            BookPartialModel = bookPartialModel;
             if (!ModelState.IsValid)
             {
                 Console.WriteLine(BookPartialModel.Book);
@@ -72,9 +73,9 @@ namespace WebApp.Pages
                     Console.WriteLine("Picked Publisher" + PickPublisherModel?.Publisher);
                     BookPartialModel.Book.Publisher = await _context.Publishers.FindAsync(PickPublisherModel?.Publisher);
                     Console.WriteLine(BookPartialModel.Book.Publisher.PublisherName);
-                    PublisherPartialModel.Publisher = BookPartialModel.Book.Publisher;
                 }
-                
+                PublisherPartialModel.Publisher = BookPartialModel.Book.Publisher;
+
                 // LANGUAGE
                 var newLanguage = PickLanguageModel?.NewLanguage;
                 if (!string.IsNullOrEmpty(newLanguage) && "add".Equals(languagePick))
@@ -94,15 +95,16 @@ namespace WebApp.Pages
                     Console.WriteLine(BookPartialModel.Book.Language.LanguageName);
                     LanguagePartialModel.Language = BookPartialModel.Book.Language;
                 }
-                
+                LanguagePartialModel.Language = BookPartialModel.Book.Language;
+
                 Console.WriteLine("POST HAHAHA");
                 PublisherSelectList = new SelectList(_context.Publishers, "PublisherId", "PublisherName");
                 PickPublisherModel.PublishersSelectlist = PublisherSelectList;
                 LanguageSelectList = new SelectList(_context.Languages, "LanguageId", "LanguageName");
                 PickLanguageModel.LanguagesSelectlist = LanguageSelectList;
-                return Page();
             }
- 
+
+            Console.WriteLine("\n\nthis is the book partial " + BookPartialModel);
             return Page();
 
             _context.Books.Add(BookPartialModel.Book);

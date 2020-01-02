@@ -20,14 +20,19 @@ namespace Domain
         public int LanguageId { get; set; }
         public Language? Language { get; set; }
 
-        public int? PublisherId { get; set; }
-        public Publisher Publisher { get; set; }
+        public int PublisherId { get; set; }
+        public Publisher? Publisher { get; set; }
 
         public ICollection<Review>? Reviews { get; set; }
 
         public override string ToString()
         {
             return $"{nameof(BookId)}: {BookId}, {nameof(Title)}: {Title}, {nameof(PublishingYear)}: {PublishingYear}, {nameof(AuthoredYear)}: {AuthoredYear}, {nameof(WordCount)}: {WordCount}, {nameof(LanguageId)}: {LanguageId}, {nameof(Language)}: {Language}, {nameof(PublisherId)}: {PublisherId}, {nameof(Publisher)}: {Publisher}";
+        }
+
+        public Book()
+        {
+            
         }
         
     }
