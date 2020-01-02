@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Domain;
 
 namespace WebApp
 {
-    public class LanguagePartialModel : PageModel
+    public class LanguagePartialModel
     {
-        
+        public Language Language { get; set; }
     }
 }

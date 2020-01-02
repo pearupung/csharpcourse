@@ -7,6 +7,15 @@ namespace Domain
 {
     public class Language
     {
+        public Language()
+        {
+        }
+
+        public Language(string? newLanguage)
+        {
+            LanguageName = newLanguage;
+        }
+
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
 

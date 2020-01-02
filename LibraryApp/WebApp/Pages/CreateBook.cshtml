@@ -1,4 +1,5 @@
 @page
+@using WebApp.Pages.Shared.Partials
 @model WebApp.Pages.CreateBookModel
 
 @{
@@ -15,10 +16,19 @@
             <div asp-validation-summary="None"  class="text-danger"></div>
             
             @Html.Partial("Shared/Partials/BookPartial", Model.BookPartialModel)
-            @Html.Partial("Shared/Partials/LanguagePartial", Model.LanguagePartialModel)
-            @if (Model.Book != null)
+            @if (Model.BookPartialModel?.Book?.Language != null)
             {
-                @Html.Partial("Shared/Publisher/PublisherPartial", Model.PublisherPartialModel)
+                <p>Book language is @Model.BookPartialModel.Book.Language.LanguageName</p>
+            }
+            else
+            {
+                <p> this is the language picker</p>
+                @Html.Partial("Shared/Partials/PickLanguage", Model.PickLanguageModel)
+                
+            }
+            @if (Model.BookPartialModel?.Book?.Publisher != null)
+            {
+                <p>Book has a publisher</p>
             }
             else
             {

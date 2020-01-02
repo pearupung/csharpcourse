@@ -141,8 +141,11 @@
               <e p="AuthorPartial.cshtml.cs" t="Include" />
               <e p="BookPartial.cshtml" t="Include" />
               <e p="BookPartial.cshtml.cs" t="Include" />
+              <e p="CreateAuthorPartial.cshtml" t="Include" />
               <e p="LanguagePartial.cshtml" t="Include" />
               <e p="LanguagePartial.cshtml.cs" t="Include" />
+              <e p="PickLanguage.cshtml" t="Include" />
+              <e p="PickLanguage.cshtml.cs" t="Include" />
             </e>
             <e p="Publisher" t="Include">
               <e p="PickPublisher.cshtml" t="Include" />
