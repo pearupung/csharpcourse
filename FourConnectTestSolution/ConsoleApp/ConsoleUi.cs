@@ -12,7 +12,7 @@ namespace FourConnectCore
         {
             
             var longTitleBuilder = new StringBuilder();
-            foreach (var menu in menuView.MenuTypePath)
+            foreach (var menu in menuView.MenuTypeStringsPathReverse)
             {
                 longTitleBuilder.Insert(0, $"/{menu}");
             }

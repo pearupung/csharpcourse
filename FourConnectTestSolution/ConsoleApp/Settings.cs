@@ -9,9 +9,9 @@ namespace FourConnectCore
 {
     public class Settings
     {
-        private readonly GameSetting[] settings;
+        public GameSetting[] settings;
 
-        private static int _selectedSetting = 0;
+        public int SelectedSetting = 0;
         private static readonly Settings _settings = new Settings();
 
         private Settings()
@@ -29,7 +29,7 @@ namespace FourConnectCore
 
         public string IncreaseValue()
         {
-            var gameSetting = settings[_selectedSetting];
+            var gameSetting = settings[SelectedSetting];
             if (gameSetting.Value < gameSetting.MaxValue)
             {
                 gameSetting.Value++;
@@ -39,7 +39,7 @@ namespace FourConnectCore
 
         public string DecreaseValue()
         {
-            var gameSetting = settings[_selectedSetting];
+            var gameSetting = settings[SelectedSetting];
             if (gameSetting.Value > gameSetting.MinValue)
             {
                 gameSetting.Value--;
@@ -50,7 +50,7 @@ namespace FourConnectCore
 
         public string ToggleValueSelected()
         {
-            _selectedSetting = (_selectedSetting+1) % settings.Length;
+            SelectedSetting = (SelectedSetting+1) % settings.Length;
             return "";
         }
 
@@ -69,7 +69,7 @@ namespace FourConnectCore
             var builder = new StringBuilder();
             for (var index = 0; index < settings.Length; index++)
             {
-                var pointer = index == _selectedSetting ? "> " : "  ";
+                var pointer = index == SelectedSetting ? "> " : "  ";
                 builder.Append(pointer);
                 var setting = settings[index];
                 builder.Append(setting.Name);

@@ -8,6 +8,11 @@ namespace WebApp
     {
         public Book Book { get; set; }
 
+        public BookPartialModel(Book book)
+        {
+            Book = book;
+        }
+
         public BookPartialModel()
         {
             

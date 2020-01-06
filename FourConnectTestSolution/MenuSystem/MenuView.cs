@@ -13,7 +13,8 @@ namespace MenuSystem
         private readonly Menu _startMenu;
         private List<MenuItem> _menuItems = default!;
 
-        public string[] MenuTypePath => _menuStack.Select(menu => menu.MenuType.ToString()).ToArray();
+        public string[] MenuTypeStringsPathReverse => _menuStack.Select(menu => menu.MenuType.ToString()).ToArray();
+        public int[] MenuTypeIntegersPath => _menuStack.Select(menu => (int) menu.MenuType).Reverse().ToArray();
         public string[] Path => _menuStack.Select(menu => menu.Title).ToArray();
         
         private Menu GetMenu(MenuType type)
@@ -116,6 +117,19 @@ namespace MenuSystem
         public void Exit()
         {
             _menuStack.Clear();
+        }
+
+        public void ReconstructMenuStack(MenuType[] hiddenMenuStack)
+        {
+            _menuStack.Clear();
+            foreach (var menuType in hiddenMenuStack)
+            {
+                Console.WriteLine();
+                _menuStack.Push(GetMenu(menuType));
+            }
+
+            _menuItems = GetMenuItems();
+
         }
     }
 }

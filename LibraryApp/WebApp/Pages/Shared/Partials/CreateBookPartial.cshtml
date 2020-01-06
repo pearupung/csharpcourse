@@ -1,0 +1,27 @@
+@model Domain.Book
+
+<div class="form-group">
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control"/>
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="PublishingYear" class="control-label"></label>
+    <input asp-for="PublishingYear" class="form-control"/>
+    <span asp-validation-for="PublishingYear" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="AuthoredYear" class="control-label"></label>
+    <input asp-for="AuthoredYear" class="form-control"/>
+    <span asp-validation-for="AuthoredYear" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="WordCount" class="control-label"></label>
+    <input asp-for="WordCount" class="form-control"/>
+    <span asp-validation-for="WordCount" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Summary" class="control-label"></label>
+    <input asp-for="Summary" class="form-control"/>
+    <span asp-validation-for="Summary" class="text-danger"></span>
+</div>

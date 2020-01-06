@@ -100,6 +100,19 @@ namespace FourConnectCore
 
             return board;
         }
+
+        public static Stack<CellType>[] CreateBoardFromPlayedColumns(CellType firstMove, int Height, int Width, List<int> playedColumns)
+        {
+            var gameBoard = new GameBoard(Height, Width);
+            var playedColumn = firstMove;
+            foreach (var column in playedColumns)
+            {
+                gameBoard.Add(column, playedColumn);
+                playedColumn = playedColumn == CellType.X ? CellType.O : CellType.X;
+            }
+
+            return gameBoard.Board;
+        }
         
         
         

@@ -16,9 +16,9 @@ namespace FourConnectCore
         private GameBoard _board = default!;
         private List<GameState> _gameStates  = default!;
         private MenuView _menuView  = default!;
-        private LoadGameView _loadView  = default!;
         private Settings _settings  = default!;
-        private GameEndView _endView  = default!;
+        private LoadGameView _loadView  = new LoadGameView();
+        private GameEndView _endView  = new GameEndView();
         private bool _isPaused = true;
         private string _input  = default!;
         private string _previousInput  = default!;
@@ -34,10 +34,61 @@ namespace FourConnectCore
         private Action<string> _showUserInput = default!;
         private Func<GameBoard, int> _getMachineMove = default!;
         private readonly List<Func<GameBoard, List<GameState>>> _gameStateProviders = 
-            new List<Func<GameBoard, List<GameState>>>();
+            new List<Func<GameBoard, List<GameState>>>()
+            {
+                CursorStateProvider,
+                PlayerMoveProvider,
+                EndStateProvider
+            };
 
         private Action<GameEndView> _showGameEndView = default!;
+        
+        // Properties for outside use
+        public GameBoard GameBoard => _board;
+        public MenuView MenuView => _menuView;
+        public Settings Settings => _settings;
+        public bool Ispaused => _isPaused;
+        public bool MachinePlay => _machinePlay;
 
+        public List<GameState> GameStates => _gameStates;
+
+        public LoadGameView LoadView => _loadView;
+
+        public static ConsoleApp GetAppStateUponAction(GameBoard board, MenuView menuView, 
+            Settings settings, bool isPaused, AppAction action, bool machinePlay, string input, List<GameState> gameStates, LoadGameView loadGameView)
+        {
+            var consoleApp = new ConsoleApp();
+            consoleApp._board = board;
+            consoleApp._menuView = menuView;
+            consoleApp._settings = settings;
+            consoleApp._previousInput = input;
+            consoleApp._loadView = new LoadGameView();
+            consoleApp._gameStates = gameStates;
+            consoleApp._machinePlay = machinePlay;
+            consoleApp._isPaused = isPaused;
+            consoleApp._loadView = loadGameView;
+
+            if (action == AppAction.Chill) return consoleApp;
+            // Change state due to input
+            consoleApp.ApplyAppStateChanges(action);
+
+            if (consoleApp._isPaused) return consoleApp;
+            consoleApp._gameStates.Clear();
+            if (consoleApp._machinePlay && action == AppAction.PlayO)
+            {
+                var col = GetMachineMove(consoleApp._board);
+                consoleApp._board.Add(col, consoleApp.All(OTurn) ? CellType.O : CellType.X);
+            }
+            consoleApp.ApplyCurrentGameState();
+            consoleApp.ApplyNextGameMenu();
+            return consoleApp;
+        }
+
+        public void RunAppOnStaticCalls()
+        {
+            
+        }
+        
         public void RunApp()
         {
             // Set up game state providers
@@ -53,11 +104,7 @@ namespace FourConnectCore
             _endView = new GameEndView();
 
             // Set up user interaction functions
-            _getMachineMove = board =>
-            {
-                var randint = new Random();
-                return randint.Next(0, board.Width);
-            };
+            _getMachineMove = GetMachineMove;
             _getLongInput = () => { return _menuView.Menu.MenuType == MenuType.GameSaveMenu; };
             _getInput = (_getLongInput) =>
             {
@@ -154,7 +201,7 @@ namespace FourConnectCore
                 Console.Clear();
                 
                 Console.WriteLine(_input);
-                if (action != AppAction.Chill)
+                /*if (action != AppAction.Chill)
                 {
                     // Change state due to input
                     ApplyAppStateChanges(action);
@@ -162,7 +209,7 @@ namespace FourConnectCore
                     if (!_isPaused)
                     {
                         _gameStates.Clear();
-                        if (_machinePlay)
+                        if (_machinePlay && action == AppAction.PlayO)
                         {
                             var col = _getMachineMove(_board);
                             _board.Add(col, All(OTurn) ? CellType.O : CellType.X);
@@ -170,14 +217,29 @@ namespace FourConnectCore
                         ApplyCurrentGameState();
                         ApplyNextGameMenu();
                     }
-                }
+                }*/
 
+                var app = GetAppStateUponAction(_board, _menuView, _settings, _isPaused, action, _machinePlay, _previousInput, _gameStates, _loadView);
+                _isPaused = app._isPaused;
+                _board = app._board;
+                _menuView = app._menuView;
+                _settings = app._settings;
+                _machinePlay = app._machinePlay;
+                _gameStates = app._gameStates;
+                _loadView = app._loadView;
+                
                 _previousInput = _input;
 
             } while (_menuView.MenuStackSize > 0);
         }
 
-        private List<GameState> EndStateProvider(GameBoard board)
+        private static int GetMachineMove(GameBoard board)
+        {
+            var randint = new Random();
+            return randint.Next(0, board.Width);
+        }
+
+        private static List<GameState> EndStateProvider(GameBoard board)
         {
            var list = new List<GameState>();
            var hasOWon = HasFourConnected(board, CellType.O);
@@ -241,7 +303,7 @@ namespace FourConnectCore
             return false;
         } 
         
-        private List<GameState> PlayerMoveProvider(GameBoard gameBoard)
+        private static List<GameState> PlayerMoveProvider(GameBoard gameBoard)
         {
             var xCount = 0;
             var oCount = 0;
@@ -285,7 +347,7 @@ namespace FourConnectCore
             return stateList;
         }
 
-        private List<GameState> CursorStateProvider(GameBoard board)
+        private static List<GameState> CursorStateProvider(GameBoard board)
         {
             var list = new List<GameState>();
             if (board.SelectedColumn == 0)

@@ -1,0 +1,28 @@
+@model CreateAuthorPartialModel
+
+<div asp-validation-summary="All"  class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="Author.FirstName" class="control-label"></label>
+    <input asp-for="Author.FirstName" class="form-control" />
+    <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Author.LastName" class="control-label"></label>
+    <input asp-for="Author.LastName" class="form-control" />
+    <span asp-validation-for="Author.LastName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Author.BirthYear" class="control-label"></label>
+    <input asp-for="Author.BirthYear" class="form-control" />
+    <span asp-validation-for="Author.BirthYear" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Author.DeathYear" class="control-label"></label>
+    <input asp-for="Author.DeathYear" class="form-control" />
+    <span asp-validation-for="Author.DeathYear" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Author.Description" class="control-label"></label>
+    <input asp-for="Author.Description" class="form-control" />
+    <span asp-validation-for="Author.Description" class="text-danger"></span>
+</div>

@@ -1,6 +1,6 @@
 namespace WebApp
 {
-    public class AuthorPartialModel
+    public interface DummyInterface
     {
         
     }
