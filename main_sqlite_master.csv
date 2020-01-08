@@ -1,0 +1,46 @@
+table,__EFMigrationsHistory,__EFMigrationsHistory,2,"CREATE TABLE ""__EFMigrationsHistory"" (
+    ""MigrationId"" TEXT NOT NULL CONSTRAINT ""PK___EFMigrationsHistory"" PRIMARY KEY,
+    ""ProductVersion"" TEXT NOT NULL
+)"
+index,sqlite_autoindex___EFMigrationsHistory_1,__EFMigrationsHistory,3,
+table,sqlite_sequence,sqlite_sequence,5,"CREATE TABLE sqlite_sequence(name,seq)"
+table,MenuItems,MenuItems,10,"CREATE TABLE ""MenuItems"" (
+    ""MenuItemId"" INTEGER NOT NULL CONSTRAINT ""PK_MenuItems"" PRIMARY KEY AUTOINCREMENT,
+    ""Title"" TEXT NOT NULL,
+    ""AppActionToTake"" INTEGER NOT NULL
+, ""AppActionId"" INTEGER NOT NULL DEFAULT 0)"
+table,Menus,Menus,11,"CREATE TABLE ""Menus"" (
+    ""MenuId"" INTEGER NOT NULL CONSTRAINT ""PK_Menus"" PRIMARY KEY AUTOINCREMENT,
+    ""MenuType"" INTEGER NOT NULL,
+    ""Title"" TEXT NOT NULL
+)"
+table,MenuItemsInMenus,MenuItemsInMenus,12,"CREATE TABLE ""MenuItemsInMenus"" (
+    ""MenuItemsInMenuId"" INTEGER NOT NULL CONSTRAINT ""PK_MenuItemsInMenus"" PRIMARY KEY AUTOINCREMENT,
+    ""MenuId"" INTEGER NOT NULL,
+    ""MenuItemId"" INTEGER NOT NULL,
+    CONSTRAINT ""FK_MenuItemsInMenus_Menus_MenuId"" FOREIGN KEY (""MenuId"") REFERENCES ""Menus"" (""MenuId"") ON DELETE CASCADE,
+    CONSTRAINT ""FK_MenuItemsInMenus_MenuItems_MenuItemId"" FOREIGN KEY (""MenuItemId"") REFERENCES ""MenuItems"" (""MenuItemId"") ON DELETE CASCADE
+)"
+index,IX_MenuItemsInMenus_MenuId,MenuItemsInMenus,13,CREATE INDEX "IX_MenuItemsInMenus_MenuId" ON "MenuItemsInMenus" ("MenuId")
+index,IX_MenuItemsInMenus_MenuItemId,MenuItemsInMenus,14,CREATE INDEX "IX_MenuItemsInMenus_MenuItemId" ON "MenuItemsInMenus" ("MenuItemId")
+table,Games,Games,4,"CREATE TABLE ""Games"" (
+    ""GameId"" INTEGER NOT NULL CONSTRAINT ""PK_Games"" PRIMARY KEY AUTOINCREMENT,
+    ""GameName"" TEXT NOT NULL,
+    ""TimeSaved"" TEXT NOT NULL,
+    ""FirstMove"" INTEGER NOT NULL,
+    ""Height"" INTEGER NOT NULL,
+    ""Width"" INTEGER NOT NULL,
+    ""SelectedColumn"" INTEGER NOT NULL
+)"
+table,Moves,Moves,6,"CREATE TABLE ""Moves"" (
+    ""MoveId"" INTEGER NOT NULL CONSTRAINT ""PK_Moves"" PRIMARY KEY AUTOINCREMENT,
+    ""Column"" INTEGER NOT NULL,
+    ""GameId"" INTEGER NOT NULL,
+    CONSTRAINT ""FK_Moves_Games_GameId"" FOREIGN KEY (""GameId"") REFERENCES ""Games"" (""GameId"") ON DELETE CASCADE
+)"
+index,IX_Moves_GameId,Moves,7,CREATE INDEX "IX_Moves_GameId" ON "Moves" ("GameId")
+table,GameSettings,GameSettings,8,"CREATE TABLE ""GameSettings"" (
+    ""GameSettingId"" INTEGER NOT NULL CONSTRAINT ""PK_GameSettings"" PRIMARY KEY AUTOINCREMENT,
+    ""Name"" TEXT NOT NULL,
+    ""Value"" INTEGER NOT NULL
+, ""MaxValue"" INTEGER NOT NULL DEFAULT 2147483647, ""MinValue"" INTEGER NOT NULL DEFAULT -2147483648)"

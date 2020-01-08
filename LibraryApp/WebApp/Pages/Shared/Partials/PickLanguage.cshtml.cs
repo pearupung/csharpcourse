@@ -1,3 +1,4 @@
+using Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApp.Pages.Shared.Partials
@@ -5,17 +6,20 @@ namespace WebApp.Pages.Shared.Partials
     public class PickLanguageModel
     {
         public SelectList LanguagesSelectlist { get; set; }
+
+        public int LanguageId { get; set; }
+        public string NewLanguageName { get; set; }
         
-        public int? Language { get; set; }
-        public string? NewLanguage { get; set; }
-        
-        public PickLanguageModel()
+        public PickLanguageModel(int language, SelectList languagesSelectList)
         {
+            LanguageId = language;
+            LanguagesSelectlist = languagesSelectList;
+            
         }
 
-        public PickLanguageModel(SelectList languagesSelectList)
+        public PickLanguageModel()
         {
-            LanguagesSelectlist = languagesSelectList;
+            
         }
     }
 }

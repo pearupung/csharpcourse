@@ -49,6 +49,7 @@ namespace FourConnectCore
         public Settings Settings => _settings;
         public bool Ispaused => _isPaused;
         public bool MachinePlay => _machinePlay;
+        public GameEndView GameEndView => _endView;
 
         public List<GameState> GameStates => _gameStates;
 
@@ -200,7 +201,6 @@ namespace FourConnectCore
                 var action = _getAction(_input);
                 Console.Clear();
                 
-                Console.WriteLine(_input);
                 /*if (action != AppAction.Chill)
                 {
                     // Change state due to input
@@ -227,6 +227,7 @@ namespace FourConnectCore
                 _machinePlay = app._machinePlay;
                 _gameStates = app._gameStates;
                 _loadView = app._loadView;
+                _endView = app._endView;
                 
                 _previousInput = _input;
 
@@ -236,7 +237,13 @@ namespace FourConnectCore
         private static int GetMachineMove(GameBoard board)
         {
             var randint = new Random();
-            return randint.Next(0, board.Width);
+            int col;
+            do
+            {
+                col = randint.Next(0, board.Width);
+            } while (board.IsColumnFull(col));
+
+            return col;
         }
 
         private static List<GameState> EndStateProvider(GameBoard board)
@@ -245,8 +252,11 @@ namespace FourConnectCore
            var hasOWon = HasFourConnected(board, CellType.O);
            var hasXWon = HasFourConnected(board, CellType.X);
            
-           if (hasOWon) list.Add(OWon);
-           if (hasXWon) list.Add(XWon);
+           if (hasOWon) {list.Add(OWon);}
+           if (hasXWon) {list.Add(XWon);}
+           if (!list.Any(state => state == OWon || state == XWon) && 
+               board.PlayedColumns.Count == board.Height * board.Width) 
+           {list.Add(Tie);}
            return list;
         }
         
@@ -410,6 +420,7 @@ namespace FourConnectCore
                     break;
                 case AppAction.PlayAgainstALocalPlayer:
                     _board = new GameBoard(_settings.GetBoardHeight(), _settings.GetBoardWidth());
+                    _machinePlay = false;
                     _isPaused = false;
                     break;
                 case AppAction.PlayX:

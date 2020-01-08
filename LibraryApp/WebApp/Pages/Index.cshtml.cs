@@ -31,13 +31,17 @@ namespace WebApp.Pages
 
         public IActionResult OnGet(string? searchString)
         {
-            return RedirectToPage("CreateBook");
+            //return RedirectToPage("Details", new {id= 5});
             SearchString = searchString;
             Console.WriteLine(SearchString);
 
             if (string.IsNullOrEmpty(SearchString))
             {
-                BookIndexDtos = _context.Books.Include(b => b.Reviews).Select(b => new BookIndexDto(){Book = b, ReviewCount = b.Reviews.Count})
+                BookIndexDtos = _context.Books
+                    .Include(b => b.Reviews)
+                    .Include(b => b.BookAuthors)
+                    .ThenInclude(a => a.Author)
+                    .Select(b => new BookIndexDto(){Book = b, ReviewCount = b.Reviews.Count, Authors = b.BookAuthors.Select(a => a.Author).ToList()})
                     .ToList();
                 SearchButtons = new List<CheckboxAbstraction>()
                 {
@@ -64,6 +68,8 @@ namespace WebApp.Pages
                     new CheckboxAbstraction() {Title = "Publishers", IsChecked = false},
                 };
             }
+
+            return Page();
         }
     }
 }

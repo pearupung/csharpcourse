@@ -24,8 +24,10 @@ namespace WebApplication.Pages
         [BindProperty] public bool MachinePlay { get; set; }
         [BindProperty] public string Input { get; set; }
         public List<GameState> GameStates { get; set; }
-        public LoadGameView LoadGameView { get; set; } = new LoadGameView();
+        [BindProperty] public LoadGameView LoadGameView { get; set; } = new LoadGameView();
         public CellType[,] GameBoardArray { get; set; }
+        public List<Domain.Game> Games { get; set; }
+        public GameEndView GameEndView { get; set; }
 
 
 
@@ -44,6 +46,8 @@ namespace WebApplication.Pages
             MachinePlay = false;
             GameStates = new List<GameState>();
             LoadGameView = new LoadGameView();
+            Games = LoadGameView.GetGames();
+            GameEndView = new GameEndView();
 
         }
 
@@ -52,22 +56,13 @@ namespace WebApplication.Pages
             int[] settings, List<GameState> hiddenGameStates,
             MenuType[] hiddenMenuStack)
         {
-            Console.WriteLine("MachinePlay on post start: " +MachinePlay);
-
-            foreach (var menuType in hiddenMenuStack)
-            {
-                Console.WriteLine("Here the menutype: " + menuType);
-            }
             Settings = Settings.GetSettings();
             if (settings != null)
             {
-                
-                Settings.settings = new GameSetting[]
+                for (var i = 0; i < settings.Length; i++)
                 {
-                    new GameSetting("Board Height", settings[0]), 
-                    new GameSetting("Board Width", settings[1]), 
-                };
-                
+                    Settings.settings[i].Value = settings[i];
+                }
             }
 
             MenuView.ReconstructMenuStack(hiddenMenuStack);
@@ -75,42 +70,31 @@ namespace WebApplication.Pages
             GameBoard.PlayedColumns = hiddenPlayedColumnsList;
             GameBoard.Board = LoadGameView.CreateBoardFromPlayedColumns(GameBoard.FirstMove, GameBoard.Height,
                 GameBoard.Width, hiddenPlayedColumnsList);
-            Console.WriteLine(MenuView.MenuItems.Count);
-            Console.WriteLine(menuItemPushed);
             if (!(menuItemPushed < MenuView.MenuItems.Count))
             {
                 return Page();
             }
 
             var appAction = MenuView.MenuItems[menuItemPushed].AppActionToTake;
-            foreach (var menuType in hiddenMenuStack)
-            {
-                Console.WriteLine("Here the menutype in menustack: " + menuType);
-            }
-
-            Console.WriteLine(appAction);
-            Console.WriteLine(IsPaused);
-            Console.WriteLine("MachinePlay before logic: " +MachinePlay);
+            
             var app = ConsoleApp.GetAppStateUponAction(GameBoard, MenuView, Settings, IsPaused, 
                 appAction, MachinePlay, Input,
                 GameStates, LoadGameView);
-            Console.WriteLine(MenuView.MenuItems);
             GameBoard = app.GameBoard;
             GameBoardArray = GameBoard.ToArray();
             MenuView = app.MenuView;
-            foreach (var type in MenuView.MenuTypeIntegersPath)
+            GameEndView = app.GameEndView;
+            
+            if (MenuView.MenuStackSize == 0)
             {
-                Console.WriteLine("Here is the menutype after: "+(MenuType) type);
-                
+                return Redirect("./Privacy");
             }
             Settings = app.Settings;
             IsPaused = app.Ispaused;
-            Console.WriteLine(IsPaused);
             MachinePlay = app.MachinePlay;
-            Console.WriteLine("MachinePlay: " + MachinePlay);
             GameStates = app.GameStates;
             LoadGameView = app.LoadView;
-            Console.WriteLine(GameBoard);
+            Games = LoadGameView.GetGames();
             return Page();
 
         }

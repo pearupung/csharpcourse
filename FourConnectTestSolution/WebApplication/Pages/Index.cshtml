@@ -1,69 +1,148 @@
 ﻿@page
+@using Domain
 @using Game
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Layout = "Shared/_Layout";
 }
+<div class="container align-items-center" style="height: 100%">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<form method="post">
-    <div></div>
-    <label asp-for="IsPaused"></label>
-    <input hidden asp-for="IsPaused" type="hidden" value="@Model.IsPaused"/>
-    <label asp-for="MachinePlay"></label>
-    <input hidden asp-for="MachinePlay" type="hidden" value="@Model.MachinePlay"/>
-    <label asp-for="GameBoard.Height"></label>
-    <input asp-for="GameBoard.Height" value="@Model.GameBoard.Height"/>
-    <label asp-for="GameBoard.Width"></label>
-    <input asp-for="GameBoard.Width" value="@Model.GameBoard.Width"/>
-    <label asp-for="GameBoard.SelectedColumn"></label>
-    <input asp-for="GameBoard.SelectedColumn" value="@Model.GameBoard.SelectedColumn"/>
-    <label asp-for="GameBoard.FirstMove"></label>
-    <input asp-for="GameBoard.FirstMove" value="@Model.GameBoard.FirstMove"/>
-    
-    @foreach (var column in Model.GameBoard.PlayedColumns)
-    {
-        
-        <input asp-for="@column" name="hiddenPlayedColumnsList" value="@column"/>
-    }
-    @foreach (var gamestate in Model.GameStates)
-    {
-        <input asp-for="@gamestate" name="hiddenGameStates" value="@gamestate"/>
-    }
-    @foreach (var menuType in Model.MenuView.MenuTypeIntegersPath)
-    {
-        <label asp-for="@menuType"></label>
-        <input asp-for="@menuType" name="hiddenMenuStack" value="@menuType"/>
-    }
-    
-    @foreach (var setting in Model.Settings.settings)
-    {
-        <label asp-for="Settings"></label>
-        <input asp-for="@setting.Value" name="settings" value="@setting.Value"/>
-    }
-    <input asp-for="Settings.SelectedSetting" value="@Model.Settings.SelectedSetting"/>
-    <table>
-        
-        @for (int i = 0; i < @Model.GameBoardArray.GetLength(0); i++)
-        {    
-            <tr>
-                @for (int j = 0; j < @Model.GameBoardArray.GetLength(1); j++)
-                {
-                    <td>@Model.GameBoardArray[i, j]</td>   
-                }
-            </tr>
+    <form method="post" style="height: 100%" class="">
+        <div hidden>
+            <label asp-for="IsPaused"></label>
+            <input hidden asp-for="IsPaused" type="hidden" value="@Model.IsPaused"/>
+            <label asp-for="MachinePlay"></label>
+            <input hidden asp-for="MachinePlay" type="hidden" value="@Model.MachinePlay"/>
+            <label asp-for="GameBoard.Height"></label>
+            <input asp-for="GameBoard.Height" value="@Model.GameBoard.Height"/>
+            <label asp-for="GameBoard.Width"></label>
+            <input asp-for="GameBoard.Width" value="@Model.GameBoard.Width"/>
+            <label asp-for="GameBoard.SelectedColumn"></label>
+            <input asp-for="GameBoard.SelectedColumn" value="@Model.GameBoard.SelectedColumn"/>
+            <label asp-for="GameBoard.FirstMove"></label>
+            <input asp-for="GameBoard.FirstMove" value="@Model.GameBoard.FirstMove"/>
+            <input asp-for="LoadGameView.GameSelected" value="@Model.LoadGameView.GameSelected"/>
+           
+            @foreach (var column in Model.GameBoard.PlayedColumns)
+            {
+                <input asp-for="@column" name="hiddenPlayedColumnsList" value="@column"/>
+            }
+            @foreach (var gamestate in Model.GameStates)
+            {
+                <input asp-for="@gamestate" name="hiddenGameStates" value="@gamestate"/>
+            }
+            @foreach (var menuType in Model.MenuView.MenuTypeIntegersPath)
+            {
+                <label asp-for="@menuType"></label>
+                <input asp-for="@menuType" name="hiddenMenuStack" value="@menuType"/>
+            }
+
+            @foreach (var setting in Model.Settings.settings)
+            {
+                <label asp-for="Settings"></label>
+                <input asp-for="@setting.Value" name="settings" value="@setting.Value"/>
+            }
+            <input asp-for="Settings.SelectedSetting" value="@Model.Settings.SelectedSetting"/>
+        </div>
+        <div class="row align-items-center justify-content-center" style="height: 50%">
+            <div class="">
+                @switch (Model.MenuView.MenuType)
+                            {
+                                case { } gameString when gameString.ToString().Contains("GameMenu"):
+                                    <table>
+                                        @foreach (var i in Enumerable.Range(0, Model.GameBoard.Board.Length))
+                                        {
+                                            <th>@(Model.GameBoard.SelectedColumn == i ? " \\/ " : "")</th>
+                                        }
+                                        @for (int i = 0; i < @Model.GameBoardArray.GetLength(0); i++)
+                                        {
+
+                                            <tr class="col-sm-2">
+                                                @for (int j = 0; j < @Model.GameBoardArray.GetLength(1); j++)
+                                                {
+                                                    <td>@(Model.GameBoardArray[i, j] == CellType.Empty ? "_  _" : Model.GameBoardArray[i, j].ToString())</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </table>
+                                    break;
+                                case MenuType.SettingsMenu:
+                                    @for (int i = 0; i < Model.Settings.settings.Length; i++)
+                                    {
+                                        @(Model.Settings.SelectedSetting == i ? "Selected setting" : "")
+
+                                        <div class=@(Model.Settings.SelectedSetting == i ? "terminal-card" : "")>
+                                            <p>@Model.Settings.settings[i].Name - @Model.Settings.settings[i].Value</p>
+                                                                                    
+                                        </div>
+                                           
+                                    }
+                                    break;
+                                case MenuType.GameSaveMenu:
+                                    <label asp-for="Input">Game name:</label>
+                                    <input asp-for="Input" class="form-control"/>
+                                    break;
+                                case { } gameString when gameString.ToString().Contains("LoadMenu"):
+                                    @for (int i = 0; i < Model.Games.Count; i++)
+                                    {
+                                        @(Model.LoadGameView.GameSelected == i ? "Selected game" : "")
+
+                                        <div class=@(Model.LoadGameView.GameSelected == i ? "terminal-card":"")>
+                                            <p>@Model.Games[i].GameName</p>
+                                            <p>@Model.Games[i].TimeSaved</p>
+                                            <p></p>
+                                        </div>
+                                    }
+                                    break;
+                                case MenuType.GameEndMenu:
+                                    <table>
+                                        @foreach (var i in Enumerable.Range(0, Model.GameBoard.Board.Length))
+                                        {
+                                            <th>@(Model.GameBoard.SelectedColumn == i ? " \\/ " : "")</th>
+                                        }
+                                        @for (int i = 0; i < @Model.GameBoardArray.GetLength(0); i++)
+                                        {
+
+                                            <tr class="col-sm-2">
+                                                @for (int j = 0; j < @Model.GameBoardArray.GetLength(1); j++)
+                                                {
+                                                    <td>@(Model.GameBoardArray[i, j] == CellType.Empty ? "_  _" : Model.GameBoardArray[i, j].ToString())</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </table>
+                                    @Model.GameEndView
+                                    break;
+                            }
+                
+            </div>
             
-        }
-    </table>
-    <ul>
-        @for (int i = 0; i < Model.MenuView.MenuItems.Count; i++)
-        {
-            <button type="submit" name="menuItemPushed" value="@i">@Model.MenuView.MenuItems[i]</button>
-        }
-    </ul>
-    <label asp-for="Input"></label>
-    <input asp-for="Input"/>
-</form>
+        </div>
+        
+        <!-- SETTINGS VIEW -->
+
+        <!-- GAME END VIEW -->
+
+
+        <!-- GAME BOARD VIEW -->
+        <!-- MENU -->
+
+        
+        <div class="row" style="height: 50%">
+            <div class="col ">
+                @for (int i = 0; i < Model.MenuView.MenuItems.Count; i++)
+                {
+                    <div class="row text-center">
+                        <button class="col-lg btn btn-default btn-ghost" type="submit" name="menuItemPushed" value="@i">@Model.MenuView.MenuItems[i]</button>
+                       
+
+                    </div>
+                }
+            </div>
+            
+        </div>
+            
+
+    </form>
+</div>

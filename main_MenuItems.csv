@@ -1,0 +1,23 @@
+2,Go left one column,11,0
+3,Write anything and press enter!,20,0
+4,Confirm,14,0
+5,Cancel,15,0
+6,Toggle value selected,17,0
+7,Increment,18,0
+8,Decrement,19,0
+9,Load Game,5,0
+10,Back,1,0
+11,Back to main menu,2,0
+12,Play,16,0
+13,Exit,3,0
+14,Settings,6,0
+15,Play,16,0
+16,Initiate gameplay against a local foe,8,0
+17,Play against the machine,7,0
+18,Save,13,0
+19,Place X in the selected column,9,0
+20,Place O in the selected column,10,0
+21,Go right one column,12,0
+22,Select the next game,21,0
+23,New Game,16,0
+24,Delete,22,22

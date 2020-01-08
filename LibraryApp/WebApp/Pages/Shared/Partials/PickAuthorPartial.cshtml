@@ -1,6 +1,7 @@
-@model CreateAuthorPartialModel
-
-<div asp-validation-summary="All"  class="text-danger"></div>
+@model PickAuthorPartialModel
+<>Choose an autho>@Html.ListBoxFor(model => model.SelectedAuthorIds, Model.BookAuthorsSelectList)
+<button type="submit" name="authorPick" value="pick">Pick!</button>
+<p>or create one yourself:</p>
 <div class="form-group">
     <label asp-for="Author.FirstName" class="control-label"></label>
     <input asp-for="Author.FirstName" class="form-control" />
@@ -26,3 +27,4 @@
     <input asp-for="Author.Description" class="form-control" />
     <span asp-validation-for="Author.Description" class="text-danger"></span>
 </div>
+<button type="submit" name="authorPick" value="add">Add and pick this one!</button>

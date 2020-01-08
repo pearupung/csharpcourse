@@ -1,5 +1,5 @@
 @page
-@model WebApp.Pages.Books.DetailsModel
+@model WebApp.Pages.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -45,13 +45,13 @@
             @Html.DisplayNameFor(model => model.Book.Language)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Language.LanguageName)
+            @Html.Partial("Shared/Partials/LanguagePartial", Model.Book.Language)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Book.Publisher)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Publisher.PublisherName)
+            @Html.Partial("Shared/Partials/PublisherPartial", Model.Book.Publisher)
         </dd>
     </dl>
 </div>

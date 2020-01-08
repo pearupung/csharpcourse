@@ -124,7 +124,6 @@ namespace MenuSystem
             _menuStack.Clear();
             foreach (var menuType in hiddenMenuStack)
             {
-                Console.WriteLine();
                 _menuStack.Push(GetMenu(menuType));
             }
 

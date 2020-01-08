@@ -1,0 +1,16 @@
+@model BookIndexDto
+
+<div class="card m-3">
+    <img src="resources/uzbekistan-forests.jpg" class="card-img-top rounded" alt="...">
+
+    <div class="card-body container">
+        <div class="row">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6>by @Model.BookAuthors</h6>
+        </div>
+
+
+        <p class="card-text">@Model.Summary</p>
+        <a href="#" class="btn btn-dark">Look at this book!</a>
+    </div>
+</div>

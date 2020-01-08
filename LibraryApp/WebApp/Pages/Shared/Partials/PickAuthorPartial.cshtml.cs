@@ -1,19 +1,29 @@
+using System.Collections.Generic;
 using Domain;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApp.Pages.Shared.Partials
 {
-    public class CreateAuthorPartialModel
+    public class PickAuthorPartialModel
     {
         public Author Author { get; set; }
-
-        public CreateAuthorPartialModel()
+        public List<int> Type { get; set; }
+        public MultiSelectList BookAuthorsSelectList { get; set; }
+        public List<int> SelectedAuthorIds { get; set; }
+        
+        public PickAuthorPartialModel()
         {
             
         }
 
-        public CreateAuthorPartialModel(Author author)
+        public PickAuthorPartialModel(Author author)
         {
             Author = author;
         }
+
+        
+        
     }
 }

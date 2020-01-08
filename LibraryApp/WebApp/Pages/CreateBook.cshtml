@@ -1,4 +1,5 @@
 @page
+@using Domain
 @using WebApp.Pages.Shared.Partials
 @model WebApp.Pages.CreateBookModel
 
@@ -9,39 +10,56 @@
 <h1>Create</h1>
 
 <h4>Book</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <div asp-validation-summary="None"  class="text-danger"></div>
+            <div asp-validation-summary="None" class="text-danger"></div>
+            <input hidden asp-for="LanguageIsSet" type="hidden" value="@Model.LanguageIsSet"/>
+            <input hidden asp-for="PublisherIsSet" type="hidden" value="@Model.PublisherIsSet"/>
             
-            @Html.Partial("Shared/Partials/BookPartial", Model.BookPartialModel)
-            @if (Model.BookPartialModel?.Book?.Language != null)
+            @Html.Partial("Shared/Partials/CreateBookPartial", @Model)
+            <div>
+                @foreach (var author in Model.Authors)
+                {
+                    @Html.Partial("Shared/Partials/AuthorPartialDelete", author)
+                }
+            </div>
+            <div>
+                @Html.Partial("Shared/Partials/PickAuthorPartial", @Model.PickAuthorPartialModel)
+            </div>
+
+            <div hidden>
+                @foreach (var authorId in  @Model.AuthorIds)
+                {
+                    <input asp-for="@authorId" name="hiddenAuthorsList" value="@authorId"/>
+                }
+            </div>
+
+
+            @if (!Model.LanguageIsSet)
             {
-                <p>Book language is @Model.BookPartialModel.Book.Language.LanguageName</p>
+                @Html.Partial("Shared/Partials/PickLanguage", @Model.PickLanguageModel)
             }
             else
             {
-                <p> this is the language picker</p>
-                @Html.Partial("Shared/Partials/PickLanguage", Model.PickLanguageModel)
-                
+                @Html.Partial("Shared/Partials/LanguagePartialDelete", @Model.Book?.Language)
             }
-            @if (Model.BookPartialModel?.Book?.Publisher != null)
+            @if (!Model.PublisherIsSet)
             {
-                <p>Book has a publisher</p>
+                @Html.Partial("Shared/Publisher/PickPublisher", @Model.PickPublisherModel)
             }
             else
             {
-                @Html.Partial("Shared/Publisher/PickPublisher", Model.PickPublisherModel)
+                @Html.Partial("Shared/Publisher/PublisherPartialDelete", @Model.Book?.Publisher)
             }
-            
-            @Html.Partial("Shared/Partials/AuthorPartial", Model.AuthorPartialModel)
-            
+
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" name="final" value="Create" class="btn btn-primary"/>
             </div>
         </form>
-        
+
     </div>
 </div>
 
@@ -50,5 +68,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

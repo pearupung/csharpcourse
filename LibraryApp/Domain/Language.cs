@@ -11,9 +11,10 @@ namespace Domain
         {
         }
 
-        public Language(string? newLanguage)
+        public Language(string newLanguageName, string? newCode)
         {
-            LanguageName = newLanguage;
+            LanguageName = newLanguageName;
+            LanguageCode = newCode;
         }
 
         public int LanguageId { get; set; }

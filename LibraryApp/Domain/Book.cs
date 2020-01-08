@@ -17,7 +17,7 @@ namespace Domain
         public string? Summary { get; set; }
 
         public ICollection<BookAuthor>? BookAuthors { get; set; }
-        public int LanguageId { get; set; }
+        public int LanguageId { get; set; } = default!;
         public Language? Language { get; set; }
 
         public int PublisherId { get; set; }

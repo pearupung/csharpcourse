@@ -173,9 +173,7 @@
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Edit.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Reviews/Index.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/AuthorPartial.cshtml.g.cs
-/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/BookPartial.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Publisher/PickPublisher.cshtml.g.cs
-/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Publisher/PublisherPartial.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/_Layout.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/_ValidationScriptsPartial.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/_ViewImports.cshtml.g.cs
@@ -186,6 +184,16 @@
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/WebApp.csproj.CopyComplete
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/WebApp.dll
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/WebApp.pdb
-/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/CreateAuthorPartial.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/PickLanguage.cshtml.g.cs
 /home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/LanguagePartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/PickAuthorPartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/CreateBookPartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Details.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Edit.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/AuthorPartialDelete.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/CreateReviewPartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/LanguagePartialDelete.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/PublisherPartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Partials/ReviewPartial.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/Publisher/PublisherPartialDelete.cshtml.g.cs
+/home/pearu/Documents/V_SEMESTER/PROGRAMMEERIMINE_CSHARP_KEELES/GIT/LibraryApp/WebApp/obj/Debug/netcoreapp3.0/Razor/Pages/Shared/BookCard.cshtml.g.cs

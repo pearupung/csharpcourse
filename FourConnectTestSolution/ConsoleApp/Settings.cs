@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,7 @@ namespace FourConnectCore
         public string IncreaseValue()
         {
             var gameSetting = settings[SelectedSetting];
+
             if (gameSetting.Value < gameSetting.MaxValue)
             {
                 gameSetting.Value++;

@@ -77,9 +77,6 @@ body {
   font-family: sans-serif;
 }
 
-input[type=checkbox]{
-  display: none;
-}
 
 .toggle-label {
   font-size: 10pt;
@@ -99,4 +96,8 @@ input[type=checkbox]{
   color: #212529;
   background-color: #f8f9fa;
   border-color: #f8f9fa;
+}
+
+.dynamicFormHide {
+  display: none;
 }

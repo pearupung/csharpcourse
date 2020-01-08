@@ -12,7 +12,8 @@
                     
                     <div class="row justify-content-start">
                         <div class="col-auto">
-                            <label class="btn" style="font-size: 11pt; color: white">Search from:</label>
+                            <label class="btn" style="
+                            font-size: 11pt; color: white">Search from:</label>
                             @*@for (var i = 0; i < Model.SearchButtons.Count; i++)
                             {
                                 var item = Model.SearchButtons[i];
@@ -44,7 +45,7 @@
 
 
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row row-cols-5 justify-content-center">
         @if (Model.BookIndexDtos.Count == 0)
         {
             <p>Did not find the book you were looking for?</p>
@@ -54,14 +55,7 @@
         }
         @foreach (var item in Model.BookIndexDtos)
         {
-            <div class="card col-sm m-3 p-3">
-                <img src="resources/uzbekistan-forests.jpg" class="card-img-top rounded" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Title</h5>
-                    <p class="card-text">@item.Summary</p>
-                    <a href="#" class="btn btn-dark">Look at this book!</a>
-                </div>
-            </div>
+            @Html.Partial("Shared/BookCard", item)
         }
     </div>
 

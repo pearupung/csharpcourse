@@ -26,10 +26,10 @@
 @foreach (var item in Model.BookAuthor) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Book.Summary)
+                @Html.DisplayFor(modelItem => item.Book.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author.Description)
+                @Html.DisplayFor(modelItem => item.Author.FirstName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.BookAuthorId">Edit</a> |

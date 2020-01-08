@@ -15,8 +15,9 @@ namespace FourConnectCore
     public class LoadGameView
     {
         private List<Domain.Game> _savedGames = new List<Domain.Game>();
-        private int _gameSelected = 0;
+        public int GameSelected { get; set; } = 0;
         public int GameCount => _savedGames.Count;
+
 
         public LoadGameView()
         {
@@ -53,7 +54,7 @@ namespace FourConnectCore
             if (_savedGames.Count > 0)
             {
                 using var ctx = new AppDbContext();
-                ctx.Games.Remove(ctx.Games.Find(_savedGames[_gameSelected].GameId));
+                ctx.Games.Remove(ctx.Games.Find(_savedGames[GameSelected].GameId));
                 ctx.SaveChanges();
                 GameLoadFromDb();
             }
@@ -83,7 +84,7 @@ namespace FourConnectCore
 
         public GameBoard GetSelectedGameBoard()
         {
-            var game = _savedGames[_gameSelected];
+            var game = _savedGames[GameSelected];
             var firstMove = game.FirstMove;
             var board = new GameBoard(game.Height, game.Width)
             {
@@ -147,7 +148,7 @@ namespace FourConnectCore
             var builder = new StringBuilder();
             for (int i = 0; i < _savedGames.Count; i++)
             {
-                builder.Append(i == _gameSelected ? "> " : "  ");
+                builder.Append(i == GameSelected ? "> " : "  ");
                 var savedGame = _savedGames[i];
                 builder.AppendLine(savedGame.GameName);
                 builder.AppendLine($"\t {savedGame.TimeSaved.ToLocalTime()}");
@@ -156,9 +157,15 @@ namespace FourConnectCore
             return builder.ToString();
         }
 
+        public List<Domain.Game> GetGames()
+        {
+            GameLoadFromDb();
+            return _savedGames;
+        }
+
         public void NextGame()
         {
-            _gameSelected = (_gameSelected + 1) % _savedGames.Count;
+            GameSelected = (GameSelected + 1) % _savedGames.Count;
         }
     }
 }

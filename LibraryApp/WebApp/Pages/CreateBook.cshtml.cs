@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Pages.Shared;
 using WebApp.Pages.Shared.Partials;
 using WebApp.Pages.Shared.Publisher;
@@ -17,101 +19,219 @@ namespace WebApp.Pages
     public class CreateBookModel : PageModel
     {
         private readonly DAL.AppDbContext _context;
-        [BindProperty]
-        public BookPartialModel BookPartialModel { get; set; }
-        public AuthorPartialModel AuthorPartialModel { get; set; }
-        [BindProperty]
-        public PublisherPartialModel PublisherPartialModel { get; set; }
+        public List<Author> Authors { get; set; }
+        public Author NewAuthor { get; set; }
+
+        [BindProperty] public Book Book { get; set; }
+        public MultiSelectList BookAuthorsSelectList { get; set; }
+        [BindProperty] public bool LanguageIsSet { get; set; }
+        [BindProperty] public bool PublisherIsSet { get; set; }
+        [BindProperty] public List<int> SelectedAuthorIds { get; set; } = new List<int>();
+        [BindProperty] public List<int> AuthorIds { get; set; }
+
         [BindProperty]
         public PickLanguageModel PickLanguageModel { get; set; }
-        public SelectList PublisherSelectList { get; set; }
         [BindProperty]
         public PickPublisherModel PickPublisherModel { get; set; }
-
-        public SelectList LanguageSelectList { get; set; }
-        [BindProperty]
-        public LanguagePartialModel LanguagePartialModel { get; set; }
-
+        [BindProperty] public PickAuthorPartialModel PickAuthorPartialModel { get; set; }
+        
+       
+       
         public CreateBookModel(DAL.AppDbContext context)
         {
             _context = context;
+            
         }
+        
 
         public IActionResult OnGet()
         {
-            LanguageSelectList = new SelectList(_context.Languages, "LanguageId", "LanguageName");
-            PublisherSelectList = new SelectList(_context.Publishers, "PublisherId", "PublisherName");
-            PickPublisherModel = new PickPublisherModel(PublisherSelectList);
-            PublisherPartialModel = new PublisherPartialModel();
-            PickLanguageModel = new PickLanguageModel(LanguageSelectList);
-            
+            PickPublisherModel ??= new PickPublisherModel();
+            PickLanguageModel ??= new PickLanguageModel();
+            PickAuthorPartialModel ??= new PickAuthorPartialModel();
+            PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages, 
+                nameof(Language.LanguageId), nameof(Language.LanguageName));
+            PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers, 
+                nameof(Publisher.PublisherId), nameof(Publisher.PublisherName));
+            PickAuthorPartialModel.BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
+            Authors = new List<Author>();
+            AuthorIds = new List<int>();
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(string? publisherPick, string? languagePick, BookPartialModel bookPartialModel, LanguagePartialModel languagePartialModel, PublisherPartialModel publisherPartialModel)
+        public async Task<IActionResult> OnPostAsync(string? languagePick, 
+            string? publisherPick, string? deleteLanguage, string? deletePublisher, 
+            string? deleteAuthor, string? authorPick, List<int>? hiddenAuthorsList,
+            string? final)
         {
-            BookPartialModel = bookPartialModel;
-            if (!ModelState.IsValid)
+            if (!string.IsNullOrEmpty(languagePick) && "pick".Equals(languagePick))
             {
-                Console.WriteLine(BookPartialModel.Book);
-                // PUBLISHER
-                var newPublisher = PickPublisherModel?.NewPublisher;
-                if (!string.IsNullOrEmpty(newPublisher) && "add".Equals(publisherPick))
+                LanguageIsSet = true;
+                Book.LanguageId = PickLanguageModel.LanguageId;
+                Book.Language = _context.Languages.Find(Book.LanguageId);
+            } 
+            else if (!string.IsNullOrEmpty(languagePick) && "add".Equals(languagePick) && 
+                       !string.IsNullOrEmpty(PickLanguageModel.NewLanguageName))
+            {
+                LanguageIsSet = true;
+                var language = new Language(PickLanguageModel.NewLanguageName, "EE");
+                if (!_context.Languages.Any(l => l.LanguageName == language.LanguageName))
                 {
-                    Console.WriteLine("Added Publisher" + newPublisher);
-                    var publisher = new Publisher(newPublisher);
-                    publisher = _context.Publishers.Add(publisher).Entity;
-                    BookPartialModel.Book.Publisher = publisher;
-                    Console.WriteLine(BookPartialModel.Book.Publisher.PublisherName);
-                    PublisherPartialModel.Publisher = BookPartialModel.Book.Publisher;
-                    await _context.SaveChangesAsync();
+                    _context.Languages.Add(language);
+                    _context.SaveChanges();
+                    Book.LanguageId = language.LanguageId;
                 }
-                if ("pick".Equals(publisherPick))
+                else
                 {
-                    Console.WriteLine("Picked Publisher" + PickPublisherModel?.Publisher);
-                    BookPartialModel.Book.Publisher = await _context.Publishers.FindAsync(PickPublisherModel?.Publisher);
-                    Console.WriteLine(BookPartialModel.Book.Publisher.PublisherName);
+                    Book.LanguageId = _context.Languages
+                        .First(l => l.LanguageName == language.LanguageName).LanguageId;
                 }
-                PublisherPartialModel.Publisher = BookPartialModel.Book.Publisher;
 
-                // LANGUAGE
-                var newLanguage = PickLanguageModel?.NewLanguage;
-                if (!string.IsNullOrEmpty(newLanguage) && "add".Equals(languagePick))
-                {
-                    Console.WriteLine("Added Language" + newLanguage);
-                    var language = new Language(newLanguage);
-                    language = _context.Languages.Add(language).Entity;
-                    BookPartialModel.Book.Language = language;
-                    Console.WriteLine(BookPartialModel.Book.Language.LanguageName);
-                    LanguagePartialModel.Language = BookPartialModel.Book.Language;
-                    await _context.SaveChangesAsync();
-                }
-                if ("pick".Equals(languagePick))
-                {
-                    Console.WriteLine("Picked Language" + PickLanguageModel?.Language);
-                    BookPartialModel.Book.Language = await _context.Languages.FindAsync(PickLanguageModel?.Language);
-                    Console.WriteLine(BookPartialModel.Book.Language.LanguageName);
-                    LanguagePartialModel.Language = BookPartialModel.Book.Language;
-                }
-                LanguagePartialModel.Language = BookPartialModel.Book.Language;
-
-                Console.WriteLine("POST HAHAHA");
-                PublisherSelectList = new SelectList(_context.Publishers, "PublisherId", "PublisherName");
-                PickPublisherModel.PublishersSelectlist = PublisherSelectList;
-                LanguageSelectList = new SelectList(_context.Languages, "LanguageId", "LanguageName");
-                PickLanguageModel.LanguagesSelectlist = LanguageSelectList;
+                Book.Language = _context.Languages.Find(Book.LanguageId);
             }
 
-            Console.WriteLine("\n\nthis is the book partial " + BookPartialModel);
+            if (!string.IsNullOrEmpty(deleteLanguage))
+            {
+                Book.LanguageId = 0;
+                LanguageIsSet = false;
+            }
+
+            if (!string.IsNullOrEmpty(publisherPick) && "pick".Equals(publisherPick) && PickPublisherModel.PublisherId != null)
+            {
+                PublisherIsSet = true;
+                Book.PublisherId = (int) PickPublisherModel.PublisherId;
+                Book.Publisher = _context.Publishers.Find(Book.PublisherId);
+            } 
+            else if (!string.IsNullOrEmpty(publisherPick) && "add".Equals(publisherPick) && 
+                       !string.IsNullOrEmpty(PickPublisherModel.NewPublisherName))
+            {
+                PublisherIsSet = true;
+                var publisher = new Publisher(PickPublisherModel.NewPublisherName);
+                if (!_context.Publishers.Any(a => a.PublisherName == publisher.PublisherName))
+                {
+                    _context.Publishers.Add(publisher);
+                    _context.SaveChanges();
+                    Book.PublisherId = publisher.PublisherId;
+
+                }
+                else
+                {
+                    Book.PublisherId = _context.Publishers
+                        .First(p => p.PublisherName == publisher.PublisherName).PublisherId;
+                }
+                Book.Publisher = _context.Publishers.Find(Book.PublisherId);
+            }
+
+            if (!string.IsNullOrEmpty(deletePublisher))
+            {
+                Book.PublisherId = 0;
+                PublisherIsSet = false;
+            }
+
+            if (LanguageIsSet)
+            {
+                Book.Language = _context.Languages.Find(Book.LanguageId);
+            }
+            else
+            {
+                PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages, 
+                    nameof(Language.LanguageId), nameof(Language.LanguageName));
+            }
+
+            if (PublisherIsSet)
+            {
+                Book.Publisher = _context.Publishers.Find(Book.PublisherId);
+            }
+            else
+            {
+                PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers, 
+                    nameof(Publisher.PublisherId), nameof(Publisher.PublisherName));
+            }
+
+            AuthorIds = hiddenAuthorsList;
+            if (!string.IsNullOrEmpty(authorPick) && "pick".Equals(authorPick))
+            {
+                Console.WriteLine("Got to Pick!" + SelectedAuthorIds.Count + PickAuthorPartialModel.SelectedAuthorIds.Count);
+                foreach (var selectedAuthorId in PickAuthorPartialModel.SelectedAuthorIds)
+                {
+                    if (!AuthorIds.Contains(selectedAuthorId))
+                    {
+                        AuthorIds.Add(selectedAuthorId);
+                    }
+                }
+            }
+            var author = PickAuthorPartialModel.Author;
+
+            if (!string.IsNullOrEmpty(authorPick) && "add".Equals(authorPick) &&
+                !string.IsNullOrEmpty(author.FirstName) && !string.IsNullOrEmpty(author.LastName))
+            {
+                Console.WriteLine(author);
+                if (!_context.Authors.Any(a => a.FirstName == author.FirstName &&
+                                               a.LastName == author.LastName &&
+                                               a.BirthYear == author.BirthYear &&
+                                               a.DeathYear == author.DeathYear &&
+                                               a.Description == author.Description))
+                {
+                    Console.WriteLine("Got to add author!");
+                    _context.Authors.Add(author);
+                    _context.SaveChanges();
+                    AuthorIds.Add(author.AuthorId);
+                }
+                else
+                {
+                    AuthorIds.Add(_context.Authors.FirstOrDefault(a => a.FirstName == author.FirstName &&
+                                                                       a.LastName == author.LastName &&
+                                                                       a.BirthYear == author.BirthYear &&
+                                                                       a.DeathYear == author.DeathYear &&
+                                                                       a.Description == author.Description).AuthorId);
+                }
+            }
+            
+
+            if (!string.IsNullOrEmpty(deleteAuthor) && int.TryParse(deleteAuthor, out var authorId))
+            {
+                Console.WriteLine("AuhorInt: " + authorId);
+                AuthorIds.Remove(authorId);
+            }
+
+            BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
+            PickAuthorPartialModel.BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
+            Authors = new List<Author>();
+            Console.WriteLine(hiddenAuthorsList);
+
+            foreach (var id in AuthorIds)
+            {
+                Authors.Add(_context.Authors.Find(id));
+            }
+
+            if (!string.IsNullOrEmpty(final) && "Create".Equals(final) 
+                                             && !string.IsNullOrEmpty(Book.Title) 
+                                             && Book.Language != null
+                                             && Book.Publisher != null 
+                                             && AuthorIds.Count > 0 )
+            {
+                _context.Books.Add(Book);
+                _context.SaveChanges();
+                Book.BookAuthors = new List<BookAuthor>();
+                foreach (var id in AuthorIds)
+                {
+                    _context.BookAuthors.Add(new BookAuthor()
+                    {
+                        BookId = Book.BookId,
+                        AuthorId = id,
+                        Author = _context.Authors.Find(id)
+                    });
+                    _context.SaveChanges();
+                }
+
+
+                return Redirect("./Index");
+            }
+            
             return Page();
 
-            _context.Books.Add(BookPartialModel.Book);
-            await _context.SaveChangesAsync();
-
-
-            return RedirectToPage("./Index");
         }
     }
 }

@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using DAL;
-using Domain;
 
-namespace WebApp.Pages.Books
+namespace WebApp.Pages
 {
     public class DetailsModel : PageModel
     {
@@ -25,7 +21,8 @@ namespace WebApp.Pages.Books
         {
             if (id == null)
             {
-                return NotFound();
+                //return NotFound();
+                id = 5;
             }
 
             Book = await _context.Books

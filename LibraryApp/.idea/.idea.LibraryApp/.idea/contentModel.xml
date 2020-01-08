@@ -3,8 +3,12 @@
   <component name="ContentModelStore">
     <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_popper.js@1.16.0_dist_umd_popper.js" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_code.jquery.com_jquery-3.4.1.js" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_code.jquery.com_jquery-3.4.1.slim.js" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_gitcdn.github.io_bootstrap-toggle_2.2.2_js_bootstrap-toggle.js" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_stackpath.bootstrapcdn.com_bootstrap_4.4.1_css_bootstrap.css" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_stackpath.bootstrapcdn.com_bootstrap_4.4.1_js_bootstrap.js" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_LibraryApp.-1692391768.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
@@ -53,6 +57,7 @@
         <e p="DTO" t="Include">
           <e p="BookDto.cs" t="Include" />
         </e>
+        <e p="DummyInterface.cs" t="Include" />
         <e p="Pages" t="Include">
           <e p="Authors" t="Include">
             <e p="Create.cshtml" t="Include" />
@@ -92,6 +97,10 @@
           </e>
           <e p="CreateBook.cshtml" t="Include" />
           <e p="CreateBook.cshtml.cs" t="Include" />
+          <e p="Details.cshtml" t="Include" />
+          <e p="Details.cshtml.cs" t="Include" />
+          <e p="Edit.cshtml" t="Include" />
+          <e p="Edit.cshtml.cs" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
@@ -136,22 +145,26 @@
           </e>
           <e p="Shared" t="Include">
             <e p="Author" t="Include" />
+            <e p="BookCard.cshtml" t="Include" />
             <e p="Partials" t="Include">
               <e p="AuthorPartial.cshtml" t="Include" />
-              <e p="AuthorPartial.cshtml.cs" t="Include" />
-              <e p="BookPartial.cshtml" t="Include" />
-              <e p="BookPartial.cshtml.cs" t="Include" />
-              <e p="CreateAuthorPartial.cshtml" t="Include" />
+              <e p="AuthorPartialDelete.cshtml" t="Include" />
+              <e p="CreateBookPartial.cshtml" t="Include" />
+              <e p="CreateBookPartial.cshtml.cs" t="Include" />
+              <e p="CreateReviewPartial.cshtml" t="Include" />
               <e p="LanguagePartial.cshtml" t="Include" />
-              <e p="LanguagePartial.cshtml.cs" t="Include" />
+              <e p="LanguagePartialDelete.cshtml" t="Include" />
+              <e p="PickAuthorPartial.cshtml" t="Include" />
+              <e p="PickAuthorPartial.cshtml.cs" t="Include" />
               <e p="PickLanguage.cshtml" t="Include" />
               <e p="PickLanguage.cshtml.cs" t="Include" />
+              <e p="PublisherPartial.cshtml" t="Include" />
+              <e p="ReviewPartial.cshtml" t="Include" />
             </e>
             <e p="Publisher" t="Include">
               <e p="PickPublisher.cshtml" t="Include" />
               <e p="PickPublisher.cshtml.cs" t="Include" />
-              <e p="PublisherPartial.cshtml" t="Include" />
-              <e p="PublisherPartial.cshtml.cs" t="Include" />
+              <e p="PublisherPartialDelete.cshtml" t="Include" />
             </e>
             <e p="_Layout.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />

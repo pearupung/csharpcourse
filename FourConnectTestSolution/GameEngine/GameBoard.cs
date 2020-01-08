@@ -15,6 +15,7 @@ namespace Game
         public CellType FirstMove { get; set; } = CellType.Empty;
         
         public List<int> PlayedColumns = new List<int>();
+        public Func<int, bool> IsColumnFull => (i) => Board[i].Count == Height;
 
         public GameBoard()
         {}

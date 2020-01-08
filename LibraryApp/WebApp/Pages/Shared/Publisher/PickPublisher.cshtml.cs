@@ -6,8 +6,8 @@ namespace WebApp.Pages.Shared.Publisher
     {
         public SelectList PublishersSelectlist { get; set; }
         
-        public int? Publisher { get; set; }
-        public string? NewPublisher { get; set; }
+        public int? PublisherId { get; set; }
+        public string? NewPublisherName { get; set; }
         
         public PickPublisherModel()
         {

@@ -10,8 +10,13 @@ namespace Domain
         public string LastName { get; set; } = default!;
         public int BirthYear { get; set; } = default!;
         public int? DeathYear { get; set; }
+        public string FirstLastName => FirstName + " " + LastName;
         public string? Description { get; set; }
 
         public ICollection<BookAuthor>? AuthoredBooks { get; set; }
+
+        public Author()
+        {
+        }
     }
 }
