@@ -14,16 +14,16 @@
                         <div class="col-auto">
                             <label class="btn" style="
                             font-size: 11pt; color: white">Search from:</label>
-                            @*@for (var i = 0; i < Model.SearchButtons.Count; i++)
+                            @for (var i = 0; i < Model.SearchButtons.Count; i++)
                             {
                                 var item = Model.SearchButtons[i];
-                                <input asp-for="SearchButtons[i].IsChecked" asp-route-search="@Model.SearchString" value="@Model.SearchString" class="haioo"/>
+                                <input style="display: none" asp-for="SearchButtons[i].IsChecked" asp-route-search="@Model.SearchString" value="@Model.SearchString" class="haioo"/>
                                 <label
                                     class=" btn toggle-label"
                                     for="SearchButtons_@(i)__IsChecked">
                                     @item.Title
                                 </label>
-                            }*@
+                            }
                         </div>
 
                     </div>
@@ -32,9 +32,33 @@
                             <input asp-for="SearchString" class="form-control "  placeholder="Moby Dick">
                         </div>
                         <div class="col-auto">
+                            <button disabled=@(!string.IsNullOrEmpty(Model.SearchString)? "true":"false") type="submit" class="btn btn-dark">Clear</button>
+                        </div>
+                        <div class="col-auto">
                             <button type="submit" class="btn btn-dark">Go fetch!</button>
                         </div>
                     </div>
+                    
+                        @if (Model.BookIndexDtos.Count == 0)
+                                {
+                                    <div class="row justify-content-center no-gutters text-light">
+                                        <p><br/>Did not find the book you were looking for?<br/></p></div>
+                                    <div class="row justify-content-center no-gutters text-light">
+                                    <p>
+                                        <a class="btn btn-outline-light" asp-page="CreateBook">Take care to add it yourself.</a>
+                                    </p></div>
+                                }
+                        else
+                        {
+                            <div class="row justify-content-center no-gutters text-light">
+
+                                <p><br/>Or, instead of searching, you can</p>
+                            </div>
+                            <div class="row justify-content-center no-gutters text-light">
+                                <p>
+                                    <a class="btn btn-outline-light" asp-page="CreateBook">go and add one yourself.</a>
+                                </p></div>
+                        }
                 </form>
             </div>
         </div>

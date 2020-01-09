@@ -1,6 +1,9 @@
 @model Domain.Publisher
 
-<div class="form-group border">
-    @Model.PublisherName is the publisher
+<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Book publisher</div>
+    <div class="card-body">
+        <p class="card-text">@Model.PublisherName</p>
+        <button class="btn btn-danger" type="submit" name="deletePublisher" value="@Model.PublisherId">Remove</button>
+    </div>
 </div>
-<button type="submit" name="deletePublisher" value="@Model.PublisherId">kustuta kirjastaja</button>

@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
+using WebApp.DTO;
 using WebApp.Pages.Shared;
 using WebApp.Pages.Shared.Partials;
 using WebApp.Pages.Shared.Publisher;
@@ -19,7 +23,10 @@ namespace WebApp.Pages
     public class CreateBookModel : PageModel
     {
         private readonly DAL.AppDbContext _context;
-        public List<Author> Authors { get; set; }
+
+        private readonly IWebHostEnvironment _env;
+
+        public List<AuthorDto> Authors { get; set; }
         public Author NewAuthor { get; set; }
 
         [BindProperty] public Book Book { get; set; }
@@ -29,51 +36,56 @@ namespace WebApp.Pages
         [BindProperty] public List<int> SelectedAuthorIds { get; set; } = new List<int>();
         [BindProperty] public List<int> AuthorIds { get; set; }
 
-        [BindProperty]
-        public PickLanguageModel PickLanguageModel { get; set; }
-        [BindProperty]
-        public PickPublisherModel PickPublisherModel { get; set; }
+        [BindProperty] public PickLanguageModel PickLanguageModel { get; set; }
+        [BindProperty] public PickPublisherModel PickPublisherModel { get; set; }
         [BindProperty] public PickAuthorPartialModel PickAuthorPartialModel { get; set; }
         
-       
-       
-        public CreateBookModel(DAL.AppDbContext context)
+        [BindProperty] public IFormFile Upload { get; set; }
+        [BindProperty] public string UploadImagePath { get; set; }
+        
+        [BindProperty] public PickPictureModel PickPictureModel { get; set; }
+        [BindProperty] public IFormFile FormFile { get; set; }
+
+
+        public CreateBookModel(DAL.AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
-            
+            _env = env;
         }
-        
+
 
         public IActionResult OnGet()
         {
             PickPublisherModel ??= new PickPublisherModel();
             PickLanguageModel ??= new PickLanguageModel();
             PickAuthorPartialModel ??= new PickAuthorPartialModel();
-            PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages, 
+            PickPictureModel ??= new PickPictureModel();
+            PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages,
                 nameof(Language.LanguageId), nameof(Language.LanguageName));
-            PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers, 
+            PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers,
                 nameof(Publisher.PublisherId), nameof(Publisher.PublisherName));
-            PickAuthorPartialModel.BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
-            Authors = new List<Author>();
+            PickAuthorPartialModel.BookAuthorsSelectList =
+                new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
+            Authors = new List<AuthorDto>();
             AuthorIds = new List<int>();
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(string? languagePick, 
-            string? publisherPick, string? deleteLanguage, string? deletePublisher, 
+        public async Task<IActionResult> OnPostAsync(string? languagePick,
+            string? publisherPick, string? deleteLanguage, string? deletePublisher,
             string? deleteAuthor, string? authorPick, List<int>? hiddenAuthorsList,
-            string? final)
+            string? final, string? picturePick, string? deletePicture)
         {
             if (!string.IsNullOrEmpty(languagePick) && "pick".Equals(languagePick))
             {
                 LanguageIsSet = true;
                 Book.LanguageId = PickLanguageModel.LanguageId;
                 Book.Language = _context.Languages.Find(Book.LanguageId);
-            } 
-            else if (!string.IsNullOrEmpty(languagePick) && "add".Equals(languagePick) && 
-                       !string.IsNullOrEmpty(PickLanguageModel.NewLanguageName))
+            }
+            else if (!string.IsNullOrEmpty(languagePick) && "add".Equals(languagePick) &&
+                     !string.IsNullOrEmpty(PickLanguageModel.NewLanguageName))
             {
                 LanguageIsSet = true;
                 var language = new Language(PickLanguageModel.NewLanguageName, "EE");
@@ -98,14 +110,15 @@ namespace WebApp.Pages
                 LanguageIsSet = false;
             }
 
-            if (!string.IsNullOrEmpty(publisherPick) && "pick".Equals(publisherPick) && PickPublisherModel.PublisherId != null)
+            if (!string.IsNullOrEmpty(publisherPick) && "pick".Equals(publisherPick) &&
+                PickPublisherModel.PublisherId != null)
             {
                 PublisherIsSet = true;
                 Book.PublisherId = (int) PickPublisherModel.PublisherId;
                 Book.Publisher = _context.Publishers.Find(Book.PublisherId);
-            } 
-            else if (!string.IsNullOrEmpty(publisherPick) && "add".Equals(publisherPick) && 
-                       !string.IsNullOrEmpty(PickPublisherModel.NewPublisherName))
+            }
+            else if (!string.IsNullOrEmpty(publisherPick) && "add".Equals(publisherPick) &&
+                     !string.IsNullOrEmpty(PickPublisherModel.NewPublisherName))
             {
                 PublisherIsSet = true;
                 var publisher = new Publisher(PickPublisherModel.NewPublisherName);
@@ -114,13 +127,13 @@ namespace WebApp.Pages
                     _context.Publishers.Add(publisher);
                     _context.SaveChanges();
                     Book.PublisherId = publisher.PublisherId;
-
                 }
                 else
                 {
                     Book.PublisherId = _context.Publishers
                         .First(p => p.PublisherName == publisher.PublisherName).PublisherId;
                 }
+
                 Book.Publisher = _context.Publishers.Find(Book.PublisherId);
             }
 
@@ -136,7 +149,7 @@ namespace WebApp.Pages
             }
             else
             {
-                PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages, 
+                PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages,
                     nameof(Language.LanguageId), nameof(Language.LanguageName));
             }
 
@@ -146,14 +159,15 @@ namespace WebApp.Pages
             }
             else
             {
-                PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers, 
+                PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers,
                     nameof(Publisher.PublisherId), nameof(Publisher.PublisherName));
             }
 
             AuthorIds = hiddenAuthorsList;
             if (!string.IsNullOrEmpty(authorPick) && "pick".Equals(authorPick))
             {
-                Console.WriteLine("Got to Pick!" + SelectedAuthorIds.Count + PickAuthorPartialModel.SelectedAuthorIds.Count);
+                Console.WriteLine("Got to Pick!" + SelectedAuthorIds.Count +
+                                  PickAuthorPartialModel.SelectedAuthorIds.Count);
                 foreach (var selectedAuthorId in PickAuthorPartialModel.SelectedAuthorIds)
                 {
                     if (!AuthorIds.Contains(selectedAuthorId))
@@ -162,6 +176,7 @@ namespace WebApp.Pages
                     }
                 }
             }
+
             var author = PickAuthorPartialModel.Author;
 
             if (!string.IsNullOrEmpty(authorPick) && "add".Equals(authorPick) &&
@@ -188,7 +203,7 @@ namespace WebApp.Pages
                                                                        a.Description == author.Description).AuthorId);
                 }
             }
-            
+
 
             if (!string.IsNullOrEmpty(deleteAuthor) && int.TryParse(deleteAuthor, out var authorId))
             {
@@ -197,20 +212,41 @@ namespace WebApp.Pages
             }
 
             BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
-            PickAuthorPartialModel.BookAuthorsSelectList = new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
-            Authors = new List<Author>();
-            Console.WriteLine(hiddenAuthorsList);
+            PickAuthorPartialModel.BookAuthorsSelectList =
+                new SelectList(_context.Authors, nameof(Author.AuthorId), nameof(Author.FirstName));
 
-            foreach (var id in AuthorIds)
+            Authors =_context.Authors.Where(a => AuthorIds.Contains(a.AuthorId))
+                .Select(a => new AuthorDto()
+                {
+                    Author = a,
+                    BooksAuthored = a.AuthoredBooks.Count
+                }).ToList();
+            Console.WriteLine("Before picturepick!");
+            if (!string.IsNullOrEmpty(picturePick) && "add".Equals(picturePick)
+                && FormFile != null)
             {
-                Authors.Add(_context.Authors.Find(id));
+                Console.WriteLine("Inside picturePick! " + FormFile.FileName);
+                var file = Path.Combine(_env.WebRootPath, "resources", FormFile.FileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await FormFile.CopyToAsync(fileStream);
+                }
+
+                UploadImagePath = FormFile.FileName;
+                Book.PicturePath = UploadImagePath;
             }
 
-            if (!string.IsNullOrEmpty(final) && "Create".Equals(final) 
-                                             && !string.IsNullOrEmpty(Book.Title) 
+            if (!string.IsNullOrEmpty(deletePicture) && "remove".Equals(deletePicture))
+            {
+                UploadImagePath = null;
+                Book.PicturePath = null;
+            }
+
+            if (!string.IsNullOrEmpty(final) && "Create".Equals(final)
+                                             && !string.IsNullOrEmpty(Book.Title)
                                              && Book.Language != null
-                                             && Book.Publisher != null 
-                                             && AuthorIds.Count > 0 )
+                                             && Book.Publisher != null
+                                             && AuthorIds.Count > 0)
             {
                 _context.Books.Add(Book);
                 _context.SaveChanges();
@@ -229,9 +265,8 @@ namespace WebApp.Pages
 
                 return Redirect("./Index");
             }
-            
-            return Page();
 
+            return Page();
         }
     }
 }

@@ -11,61 +11,75 @@
 
 <h4>Book</h4>
 <hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<div class="">
+    <div class="">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="None" class="text-danger"></div>
             <input hidden asp-for="LanguageIsSet" type="hidden" value="@Model.LanguageIsSet"/>
             <input hidden asp-for="PublisherIsSet" type="hidden" value="@Model.PublisherIsSet"/>
-            
-            @Html.Partial("Shared/Partials/CreateBookPartial", @Model)
-            <div>
-                @foreach (var author in Model.Authors)
+            <input hidden asp-for="UploadImagePath" type="hidden" value="@Model.UploadImagePath"/>
+
+            <div class="card-columns">
+                @Html.Partial("Shared/Partials/CreateBookPartial", @Model)
+                <div>
+                    @for (var i = 0; i < Model.Authors.Count; i++)
+                    {
+                        var author = Model.Authors[i];
+                        author.Number = i + 1;
+                        @Html.Partial("Shared/Partials/AuthorPartialDelete", author)
+                    }
+                </div>
+                <div>
+                    @Html.Partial("Shared/Partials/PickAuthorPartial", @Model.PickAuthorPartialModel)
+                </div>
+
+                <div hidden>
+                    @foreach (var authorId in  @Model.AuthorIds)
+                    {
+                        <input asp-for="@authorId" name="hiddenAuthorsList" value="@authorId"/>
+                    }
+                </div>
+
+
+                @if (!Model.LanguageIsSet)
                 {
-                    @Html.Partial("Shared/Partials/AuthorPartialDelete", author)
+                    @Html.Partial("Shared/Partials/PickLanguage", @Model.PickLanguageModel)
                 }
-            </div>
-            <div>
-                @Html.Partial("Shared/Partials/PickAuthorPartial", @Model.PickAuthorPartialModel)
-            </div>
-
-            <div hidden>
-                @foreach (var authorId in  @Model.AuthorIds)
+                else
                 {
-                    <input asp-for="@authorId" name="hiddenAuthorsList" value="@authorId"/>
+                    @Html.Partial("Shared/Partials/LanguagePartialDelete", @Model.Book?.Language)
                 }
+                @if (!Model.PublisherIsSet)
+                {
+                    @Html.Partial("Shared/Publisher/PickPublisher", @Model.PickPublisherModel)
+                }
+                else
+                {
+                    @Html.Partial("Shared/Publisher/PublisherPartialDelete", @Model.Book?.Publisher)
+                }
+                @if (!string.IsNullOrEmpty(Model.UploadImagePath))
+                {
+                    @Html.Partial("Shared/Partials/PicturePartial", Model)
+                }
+                else
+                {
+                    @Html.Partial("Shared/Partials/PickPicture", Model)
+                }
+                
+                
+                <div class="form-group">
+                    <input type="submit" name="final" value="Create" class="btn btn-warning"/>
+                    <a class="btn-light" asp-page="Index">Back to front page</a>
+                </div>
+
             </div>
 
 
-            @if (!Model.LanguageIsSet)
-            {
-                @Html.Partial("Shared/Partials/PickLanguage", @Model.PickLanguageModel)
-            }
-            else
-            {
-                @Html.Partial("Shared/Partials/LanguagePartialDelete", @Model.Book?.Language)
-            }
-            @if (!Model.PublisherIsSet)
-            {
-                @Html.Partial("Shared/Publisher/PickPublisher", @Model.PickPublisherModel)
-            }
-            else
-            {
-                @Html.Partial("Shared/Publisher/PublisherPartialDelete", @Model.Book?.Publisher)
-            }
-
-
-            <div class="form-group">
-                <input type="submit" name="final" value="Create" class="btn btn-primary"/>
-            </div>
         </form>
 
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

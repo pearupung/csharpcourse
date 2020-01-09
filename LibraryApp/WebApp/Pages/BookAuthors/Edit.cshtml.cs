@@ -38,8 +38,8 @@ namespace WebApp.Pages.BookAuthors
             {
                 return NotFound();
             }
-           ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", "Description");
-           ViewData["BookId"] = new SelectList(_context.Books, "BookId", "Summary");
+           ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", nameof(Author.FirstLastName));
+           ViewData["BookId"] = new SelectList(_context.Books, "BookId", nameof(Book.Title));
             return Page();
         }
 

@@ -1,4 +1,9 @@
 @model Domain.Language
 
-<p>Language is @Model.LanguageName</p>
-<button type="submit" name="deleteLanguage" value="@Model.LanguageId">kustuta keel</button>
+<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Book language</div>
+    <div class="card-body">
+        <p class="card-text">@Model.LanguageName</p>
+        <button class="btn btn-danger" type="submit" name="deleteLanguage" value="@Model.LanguageId">Remove</button>
+    </div>
+</div>

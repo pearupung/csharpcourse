@@ -12,6 +12,5 @@ namespace WebApp
         public string? LastComment { get; set; }
         public string Title => Book.Title;
         public string Summary => Book.Summary;
-        public string BookAuthors => Authors.Select(a => a.FirstLastName).ToString();
     }
 }

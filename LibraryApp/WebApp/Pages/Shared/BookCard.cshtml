@@ -1,16 +1,23 @@
 @model BookIndexDto
 
 <div class="card m-3">
-    <img src="resources/uzbekistan-forests.jpg" class="card-img-top rounded" alt="...">
-
-    <div class="card-body container">
-        <div class="row">
-            <h5 class="card-title">@Model.Title</h5>
-            <h6>by @Model.BookAuthors</h6>
-        </div>
-
-
+    <img src="resources/@Model.Book.PicturePath" height="50%" class="card-img-top rounded" alt="...">
+    
+    
+    <div class="card-body">
+        <h6 class="card-text">
+            <small>
+                @string.Join(" | ", Model.Authors.Select(author => author.FirstLastName))
+            </small>
+        </h6>
+        <h5 class="card-title">@Model.Title</h5>
         <p class="card-text">@Model.Summary</p>
-        <a href="#" class="btn btn-dark">Look at this book!</a>
     </div>
+    <div class="card-footer">
+        <a href="#" class="card-link">View</a>
+        <a href="#" class="card-link">Edit</a>
+        <a href="#" class="card-link">Delete</a>
+    </div>
+
+
 </div>

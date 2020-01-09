@@ -1,15 +1,16 @@
 @model PickPublisherModel
 
-<div class="form-group border">
-        <p>Choose a publisher</p>
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">Choose a publisher</div>
+    <div class="card-body">
         <label asp-for="PublisherId" class="control-label"></label>
-        <select asp-for="PublisherId" class="form-control" asp-items="@Model.PublishersSelectlist"></select>
-        <button type="submit" name="publisherPick" value="pick">Pick!</button>
-        <p>or create one yourself:</p>
+        <select asp-for="PublisherId" class="form-control" asp-items="Model.PublishersSelectlist"></select>
+        <div class="text-center"> <button class="btn btn-info" type="submit" name="publisherPick" value="pick">Pick from these!</button></div>
         <div class="form-group">
             <label asp-for="NewPublisherName" class="control-label"></label>
             <input asp-for="NewPublisherName" class="form-control"/>
             <span asp-validation-for="NewPublisherName" class="text-danger"></span>
         </div>
-        <button type="submit" name="publisherPick" value="add">Add and pick this one!</button>
+        <div class="text-center"> <button class="btn btn-info" type="submit" name="publisherPick" value="add">Pick this new one instead!</button></div>
+    </div>
 </div>

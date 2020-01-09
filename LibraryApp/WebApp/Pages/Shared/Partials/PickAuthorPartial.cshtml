@@ -1,30 +1,43 @@
 @model PickAuthorPartialModel
-<>Choose an autho>@Html.ListBoxFor(model => model.SelectedAuthorIds, Model.BookAuthorsSelectList)
-<button type="submit" name="authorPick" value="pick">Pick!</button>
-<p>or create one yourself:</p>
-<div class="form-group">
-    <label asp-for="Author.FirstName" class="control-label"></label>
-    <input asp-for="Author.FirstName" class="form-control" />
-    <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header">Choose authors</div>
+    <div class="card-body">
+
+        <div class="text-center">
+            @Html.ListBoxFor(model => model.SelectedAuthorIds, Model.BookAuthorsSelectList)
+        </div>
+        <div class="text-center">
+            <button class="btn btn-info" type="submit" name="authorPick" value="pick">Pick from these!</button>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Author.FirstName" class="control-label"></label>
+            <input asp-for="Author.FirstName" class="form-control"/>
+            <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author.LastName" class="control-label"></label>
+            <input asp-for="Author.LastName" class="form-control"/>
+            <span asp-validation-for="Author.LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author.BirthYear" class="control-label"></label>
+            <input asp-for="Author.BirthYear" class="form-control"/>
+            <span asp-validation-for="Author.BirthYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author.DeathYear" class="control-label"></label>
+            <input asp-for="Author.DeathYear" class="form-control"/>
+            <span asp-validation-for="Author.DeathYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author.Description" class="control-label"></label>
+            <input asp-for="Author.Description" class="form-control"/>
+            <span asp-validation-for="Author.Description" class="text-danger"></span>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-info" type="submit" name="authorPick" value="add">Pick this new one instead!</button>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label asp-for="Author.LastName" class="control-label"></label>
-    <input asp-for="Author.LastName" class="form-control" />
-    <span asp-validation-for="Author.LastName" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Author.BirthYear" class="control-label"></label>
-    <input asp-for="Author.BirthYear" class="form-control" />
-    <span asp-validation-for="Author.BirthYear" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Author.DeathYear" class="control-label"></label>
-    <input asp-for="Author.DeathYear" class="form-control" />
-    <span asp-validation-for="Author.DeathYear" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Author.Description" class="control-label"></label>
-    <input asp-for="Author.Description" class="form-control" />
-    <span asp-validation-for="Author.Description" class="text-danger"></span>
-</div>
-<button type="submit" name="authorPick" value="add">Add and pick this one!</button>

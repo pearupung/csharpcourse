@@ -1,30 +1,36 @@
 @model CreateBookModel
 
-<div class="form-group">
-    <label asp-for="Book.Title" class="control-label"></label>
-    <input asp-for="Book.Title" class="form-control"/>
-    <span asp-validation-for="Book.Title" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Book.PublishingYear" class="control-label"></label>
-    <input asp-for="Book.PublishingYear" class="form-control"/>
-    <span asp-validation-for="Book.PublishingYear" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Book.AuthoredYear" class="control-label"></label>
-    <input asp-for="Book.AuthoredYear" class="form-control"/>
-    <span asp-validation-for="Book.AuthoredYear" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Book.WordCount" class="control-label"></label>
-    <input asp-for="Book.WordCount" class="form-control"/>
-    <span asp-validation-for="Book.WordCount" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Book.Summary" class="control-label"></label>
-    <input asp-for="Book.Summary" class="form-control"/>
-    <span asp-validation-for="Book.Summary" class="text-danger"></span>
-</div>
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Book details</div>
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Book.Title" class="control-label"></label>
+            <input asp-for="Book.Title" class="form-control"/>
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.PublishingYear" class="control-label"></label>
+            <input asp-for="Book.PublishingYear" class="form-control"/>
+            <span asp-validation-for="Book.PublishingYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.AuthoredYear" class="control-label"></label>
+            <input asp-for="Book.AuthoredYear" class="form-control"/>
+            <span asp-validation-for="Book.AuthoredYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.WordCount" class="control-label"></label>
+            <input asp-for="Book.WordCount" class="form-control"/>
+            <span asp-validation-for="Book.WordCount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.Summary" class="control-label"></label>
+            <input asp-for="Book.Summary" class="form-control"/>
+            <span asp-validation-for="Book.Summary" class="text-danger"></span>
+        </div>
 
-<input hidden asp-for="Book.LanguageId" class="form-control" value="@Model.Book?.LanguageId"/>
-<input hidden asp-for="Book.PublisherId" class="form-control" value="@Model.Book?.PublisherId"/>
+        <input hidden asp-for="Book.LanguageId" class="form-control" value="@Model.Book?.LanguageId"/>
+        <input hidden asp-for="Book.PublisherId" class="form-control" value="@Model.Book?.PublisherId"/>
+  
+    </div>
+    </div>
