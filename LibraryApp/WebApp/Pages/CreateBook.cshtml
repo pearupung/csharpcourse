@@ -1,6 +1,4 @@
 @page
-@using Domain
-@using WebApp.Pages.Shared.Partials
 @model WebApp.Pages.CreateBookModel
 
 @{
@@ -59,7 +57,7 @@
                 }
                 @if (!string.IsNullOrEmpty(Model.UploadImagePath))
                 {
-                    @Html.Partial("Shared/Partials/PicturePartial", Model)
+                    @Html.Partial("Shared/Partials/PicturePartial", Model.Book)
                 }
                 else
                 {

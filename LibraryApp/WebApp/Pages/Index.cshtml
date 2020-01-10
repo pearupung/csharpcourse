@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Library app";
 }
 <div class="hello container">
     <div class="row hello align-items-center">
@@ -17,7 +17,9 @@
                             @for (var i = 0; i < Model.SearchButtons.Count; i++)
                             {
                                 var item = Model.SearchButtons[i];
-                                <input style="display: none" asp-for="SearchButtons[i].IsChecked" asp-route-search="@Model.SearchString" value="@Model.SearchString" class="haioo"/>
+                                <input style="display: none" asp-for="SearchButtons[i].IsChecked"
+                                       class="haioo"
+                                       />
                                 <label
                                     class=" btn toggle-label"
                                     for="SearchButtons_@(i)__IsChecked">
@@ -29,10 +31,11 @@
                     </div>
                     <div class="row justify-content-end no-gutters">
                         <div class="col">
-                            <input asp-for="SearchString" class="form-control "  placeholder="Moby Dick">
+                            <input asp-for="SearchString" class="form-control "  placeholder="Moby Dick" value="@Model.SearchString">
                         </div>
                         <div class="col-auto">
-                            <button disabled=@(!string.IsNullOrEmpty(Model.SearchString)? "true":"false") type="submit" class="btn btn-dark">Clear</button>
+                            <input type="submit" value="Reset" name="ToDoActionReset" class="btn btn-secondary"
+                                   @(string.IsNullOrWhiteSpace(Model.SearchString) ? "disabled=\"disabled\"" : "")/>
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-dark">Go fetch!</button>
@@ -68,19 +71,22 @@
 </div>
 
 
-<div class="container-fluid">
-    <div class="row row-cols-5 justify-content-center">
-        @if (Model.BookIndexDtos.Count == 0)
-        {
-            <p>Did not find the book you were looking for?</p>
+<div class="container">
+    
+    @if (Model.BookIndexDtos.Count == 0)
+    {
+        <div class="row justify-content-center no-gutters text-dark">
+            <p><br/>Ohoh... Seems we found nothing.<br/></p></div>
+        <div class="row justify-content-center no-gutters text-dark">
             <p>
-                <a asp-page="CreateBook">Take care to add it yourself.</a>
-            </p>
-        }
-        @foreach (var item in Model.BookIndexDtos)
-        {
-            @Html.Partial("Shared/BookCard", item)
-        }
-    </div>
+                <a class="btn btn-outline-dark" asp-page="CreateBook">Care to add the book you searched to the library?</a>
+            </p></div>
+    }
+    <div class="row row-cols-4 justify-content-center">
+    @foreach (var item in Model.BookIndexDtos)
+{
+    <div class="col-md-4">@Html.Partial("Shared/BookCard", item)</div>
 
+}
+    </div>
 </div>

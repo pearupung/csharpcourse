@@ -2,58 +2,62 @@
 @model WebApp.Pages.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Book View";
 }
 
-<h1>Details</h1>
+@{
+    ViewData["Title"] = "Delete";
+}
 
+<div class="card-deck">
+    @Html.Partial("Shared/Partials/BookPartial", Model.Book)
+    <div>
+        @for (var i = 0; i < Model.Authors.Count; i++)
+        {
+            var author = Model.Authors[i];
+            author.Number = i + 1;
+            @Html.Partial("Shared/Partials/AuthorPartial", author)
+        }
+    </div>
+    @Html.Partial("Shared/Partials/LanguagePartial", Model.Book.Language)
+    @Html.Partial("Shared/Partials/PublisherPartial", Model.Book.Publisher)
+
+
+</div>
+
+<h3 class="text-center">Reviews</h3>
+<div class="row card">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All"  class="text-danger"></div>
+            <div class="row">
+            <div class="form-group col-8">
+                <label asp-for="Review.Title" class="control-label"></label>
+                <input asp-for="Review.Title" class="form-control" />
+                <span asp-validation-for="Review.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="Review.Stars" class="control-label"></label>
+                <input asp-for="Review.Stars" class="form-control" />
+                <span asp-validation-for="Review.Stars" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.ReviewText" class="control-label"></label>
+                <textarea asp-for="Review.ReviewText" class="form-control" ></textarea>
+                <span asp-validation-for="Review.ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Post review" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 <div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.PublishingYear)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.PublishingYear)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.AuthoredYear)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.AuthoredYear)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.WordCount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.WordCount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Summary)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Summary)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Language)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.Partial("Shared/Partials/LanguagePartial", Model.Book.Language)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Publisher)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.Partial("Shared/Partials/PublisherPartial", Model.Book.Publisher)
-        </dd>
-    </dl>
+    @foreach (var review in Model.Reviews)
+    {
+        @Html.Partial("ReviewCard", review)
+    }
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Book.BookId">Edit</a> |

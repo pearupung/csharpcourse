@@ -2,62 +2,119 @@
 @model WebApp.Pages.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Change book";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
 <h4>Book</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="All"  class="text-danger"></div>
-            <input type="hidden" asp-for="Book.BookId" />
-            <div class="form-group">
-                <label asp-for="Book.Title" class="control-label"></label>
-                <input asp-for="Book.Title" class="form-control" />
-                <span asp-validation-for="Book.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.PublishingYear" class="control-label"></label>
-                <input asp-for="Book.PublishingYear" class="form-control" />
-                <span asp-validation-for="Book.PublishingYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.AuthoredYear" class="control-label"></label>
-                <input asp-for="Book.AuthoredYear" class="form-control" />
-                <span asp-validation-for="Book.AuthoredYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.WordCount" class="control-label"></label>
-                <input asp-for="Book.WordCount" class="form-control" />
-                <span asp-validation-for="Book.WordCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.Summary" class="control-label"></label>
-                <input asp-for="Book.Summary" class="form-control" />
-                <span asp-validation-for="Book.Summary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.LanguageId" class="control-label"></label>
-                <select asp-for="Book.LanguageId" class="form-control" asp-items="ViewBag.LanguageId"></select>
-                <span asp-validation-for="Book.LanguageId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.PublisherId" class="control-label"></label>
-                <select asp-for="Book.PublisherId" class="form-control" asp-items="ViewBag.PublisherId"></select>
-                <span asp-validation-for="Book.PublisherId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<hr/>
+<div class="">
+    <div class="">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="None" class="text-danger"></div>
+            <input hidden asp-for="LanguageIsSet" type="hidden" value="@Model.LanguageIsSet"/>
+            <input hidden asp-for="PublisherIsSet" type="hidden" value="@Model.PublisherIsSet"/>
+            <input hidden asp-for="UploadImagePath" type="hidden" value="@Model.UploadImagePath"/>
+                        <input type="hidden" asp-for="Book.BookId" />
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+            <div class="card-columns">
+                
+
+            
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Book details</div>
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Book.Title" class="control-label"></label>
+            <input asp-for="Book.Title" class="form-control"/>
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.PublishingYear" class="control-label"></label>
+            <input asp-for="Book.PublishingYear" class="form-control"/>
+            <span asp-validation-for="Book.PublishingYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.AuthoredYear" class="control-label"></label>
+            <input asp-for="Book.AuthoredYear" class="form-control"/>
+            <span asp-validation-for="Book.AuthoredYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.WordCount" class="control-label"></label>
+            <input asp-for="Book.WordCount" class="form-control"/>
+            <span asp-validation-for="Book.WordCount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Book.Summary" class="control-label"></label>
+            <input asp-for="Book.Summary" class="form-control"/>
+            <span asp-validation-for="Book.Summary" class="text-danger"></span>
+        </div>
+
+        <input hidden asp-for="Book.LanguageId" class="form-control" value="@Model.Book?.LanguageId"/>
+        <input hidden asp-for="Book.PublisherId" class="form-control" value="@Model.Book?.PublisherId"/>
+  
+    </div>
+    </div>
+            
+    
+                <div>
+                    @for (var i = 0; i < Model.Authors.Count; i++)
+                    {
+                        var author = Model.Authors[i];
+                        author.Number = i + 1;
+                        @Html.Partial("Shared/Partials/AuthorPartialDelete", author)
+                    }
+                </div>
+                <div>
+                    @Html.Partial("Shared/Partials/PickAuthorPartial", @Model.PickAuthorPartialModel)
+                </div>
+
+                <div hidden>
+                    @foreach (var authorId in  @Model.AuthorIds)
+                    {
+                        <input asp-for="@authorId" name="hiddenAuthorsList" value="@authorId"/>
+                    }
+                </div>
+
+
+                @if (!Model.LanguageIsSet)
+                {
+                    @Html.Partial("Shared/Partials/PickLanguage", @Model.PickLanguageModel)
+                }
+                else
+                {
+                    @Html.Partial("Shared/Partials/LanguagePartialDelete", @Model.Book?.Language)
+                }
+                @if (!Model.PublisherIsSet)
+                {
+                    @Html.Partial("Shared/Publisher/PickPublisher", @Model.PickPublisherModel)
+                }
+                else
+                {
+                    @Html.Partial("Shared/Publisher/PublisherPartialDelete", @Model.Book?.Publisher)
+                }
+                @if (!string.IsNullOrEmpty(Model.UploadImagePath))
+                {
+                    @Html.Partial("Shared/Partials/PicturePartial", Model.Book)
+                }
+                else
+                {
+                    @Html.Partial("Shared/Partials/PickPictureEdit", Model)
+                }
+
+
+                <div class="form-group">
+                    <input type="submit" name="final" value="Create" class="btn btn-warning"/>
+                    <a class="btn-light" asp-page="Index">Back to front page</a>
+                </div>
+
+            </div>
+
+
+        </form>
+
+    </div>
 </div>
 
 @section Scripts {

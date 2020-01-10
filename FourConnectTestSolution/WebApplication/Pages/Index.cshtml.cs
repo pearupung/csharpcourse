@@ -87,7 +87,7 @@ namespace WebApplication.Pages
             
             if (MenuView.MenuStackSize == 0)
             {
-                return Redirect("./Privacy");
+                return Redirect("./End");
             }
             Settings = app.Settings;
             IsPaused = app.Ispaused;

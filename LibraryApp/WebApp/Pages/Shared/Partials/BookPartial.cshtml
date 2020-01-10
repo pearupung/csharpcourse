@@ -1,2 +1,14 @@
-@model TModel
+@model Domain.Book
 
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Book details</div>
+    <div class="card-body">
+
+        <h3 class="card-title">@Model.Title</h3>
+        <p class="text-light">Published @Model.PublishingYear, authored @Model.AuthoredYear</p>
+        <p class="text-light blockquote-footer">@Model.WordCount words to read</p>
+        <p class="control-label">@Model.Summary</p>
+        <img src="resources/@Model.PicturePath" width="100%" class="rounded" alt="Picture of a forest"/>
+
+    </div>
+    </div>

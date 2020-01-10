@@ -29,7 +29,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+            <e p="netcoreapp3.1" t="Include">
               <e p="DAL.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -46,7 +46,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+            <e p="netcoreapp3.1" t="Include">
               <e p="Domain.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -59,6 +59,7 @@
         <e p="DTO" t="Include">
           <e p="AuthorDto.cs" t="Include" />
           <e p="BookDto.cs" t="Include" />
+          <e p="ReviewDto.cs" t="Include" />
         </e>
         <e p="DummyInterface.cs" t="Include" />
         <e p="Pages" t="Include">
@@ -100,6 +101,8 @@
           </e>
           <e p="CreateBook.cshtml" t="Include" />
           <e p="CreateBook.cshtml.cs" t="Include" />
+          <e p="Delete.cshtml" t="Include" />
+          <e p="Delete.cshtml.cs" t="Include" />
           <e p="Details.cshtml" t="Include" />
           <e p="Details.cshtml.cs" t="Include" />
           <e p="Edit.cshtml" t="Include" />
@@ -134,6 +137,7 @@
             <e p="Index.cshtml" t="Include" />
             <e p="Index.cshtml.cs" t="Include" />
           </e>
+          <e p="ReviewCard.cshtml" t="Include" />
           <e p="Reviews" t="Include">
             <e p="Create.cshtml" t="Include" />
             <e p="Create.cshtml.cs" t="Include" />
@@ -152,17 +156,21 @@
             <e p="Partials" t="Include">
               <e p="AuthorPartial.cshtml" t="Include" />
               <e p="AuthorPartialDelete.cshtml" t="Include" />
+              <e p="BookPartial.cshtml" t="Include" />
               <e p="CreateBookPartial.cshtml" t="Include" />
               <e p="CreateBookPartial.cshtml.cs" t="Include" />
               <e p="CreateReviewPartial.cshtml" t="Include" />
               <e p="LanguagePartial.cshtml" t="Include" />
               <e p="LanguagePartialDelete.cshtml" t="Include" />
+              <e p="NoDeletePicturePartial.cshtml" t="Include" />
               <e p="PickAuthorPartial.cshtml" t="Include" />
               <e p="PickAuthorPartial.cshtml.cs" t="Include" />
               <e p="PickLanguage.cshtml" t="Include" />
               <e p="PickLanguage.cshtml.cs" t="Include" />
               <e p="PickPicture.cshtml" t="Include" />
               <e p="PickPicture.cshtml.cs" t="Include" />
+              <e p="PickPictureEdit.cshtml" t="Include" />
+              <e p="PickPictureEdit.cshtml.cs" t="Include" />
               <e p="PicturePartial.cshtml" t="Include" />
               <e p="PublisherPartial.cshtml" t="Include" />
               <e p="ReviewPartial.cshtml" t="Include" />
@@ -189,7 +197,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+            <e p="netcoreapp3.1" t="Include">
               <e p="WebApp.AssemblyInfo.cs" t="Include" />
               <e p="WebApp.RazorAssemblyInfo.cs" t="Include" />
             </e>
@@ -257,9 +265,14 @@
             </e>
           </e>
           <e p="resources" t="Include">
+            <e p="0*S0EUat4BGC-Rqx8V.jpeg" t="Include" />
             <e p="20200107_204657.jpg" t="Include" />
+            <e p="6518707t1h13e1.jpg" t="Include" />
             <e p="fumatoforest.jpg" t="Include" />
+            <e p="metsandus-metsandus.jpg" t="Include" />
+            <e p="misty forest ferns.jpg" t="Include" />
             <e p="raamatukogu.jpg" t="Include" />
+            <e p="tiir.jpg" t="Include" />
             <e p="uzbeki_mets.jpg" t="Include" />
           </e>
         </e>

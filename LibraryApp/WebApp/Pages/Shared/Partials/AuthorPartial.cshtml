@@ -1,0 +1,11 @@
+@model WebApp.DTO.AuthorDto
+
+<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Author #@Model.Number</div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Author.FirstLastName</h5>
+        <p class="card-text">Born year @Model.Author.BirthYear@if(Model.Author.DeathYear != null){<span>, dead @Model.Author.DeathYear</span>}, 
+            @(Model.BooksAuthored != 0 ? "no" : Model.BooksAuthored.ToString()) books authored</p>
+        <p class="card-text">@Model.Author.Description</p>
+    </div>
+</div>

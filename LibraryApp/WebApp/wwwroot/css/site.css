@@ -72,6 +72,7 @@ body {
 
 .hello {
   height: 50vh;
+  width: 100%;
   background-image: url('../resources/fumatoforest.jpg');
   background-size: cover;
   font-family: sans-serif;

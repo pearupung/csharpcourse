@@ -1,2 +1,13 @@
-@model TModel
+@model WebApp.DTO.ReviewDto
 
+<div class="card m-3">
+    <div class="card-header">@Model.Review.Title</div>
+    <div class="card-body">
+        <p class="card-text">@Model.Review.ReviewText</p>
+    </div>
+    <div class="card-footer">
+        <p class="blockquote-footer">@Model.Review.TimePosted</p>
+    </div>
+
+
+</div>

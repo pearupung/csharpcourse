@@ -43,7 +43,7 @@ namespace WebApp.Pages
         [BindProperty] public IFormFile Upload { get; set; }
         [BindProperty] public string UploadImagePath { get; set; }
         
-        [BindProperty] public PickPictureModel PickPictureModel { get; set; }
+        [BindProperty] public PickPictureEditModel PickPictureModel { get; set; }
         [BindProperty] public IFormFile FormFile { get; set; }
 
 
@@ -59,7 +59,7 @@ namespace WebApp.Pages
             PickPublisherModel ??= new PickPublisherModel();
             PickLanguageModel ??= new PickLanguageModel();
             PickAuthorPartialModel ??= new PickAuthorPartialModel();
-            PickPictureModel ??= new PickPictureModel();
+            PickPictureModel ??= new PickPictureEditModel();
             PickLanguageModel.LanguagesSelectlist = new SelectList(_context.Languages,
                 nameof(Language.LanguageId), nameof(Language.LanguageName));
             PickPublisherModel.PublishersSelectlist = new SelectList(_context.Publishers,
@@ -242,11 +242,14 @@ namespace WebApp.Pages
                 Book.PicturePath = null;
             }
 
+            Book.PicturePath = UploadImagePath;
+
             if (!string.IsNullOrEmpty(final) && "Create".Equals(final)
                                              && !string.IsNullOrEmpty(Book.Title)
                                              && Book.Language != null
                                              && Book.Publisher != null
-                                             && AuthorIds.Count > 0)
+                                             && AuthorIds.Count > 0
+                                             && !string.IsNullOrEmpty(Book.PicturePath))
             {
                 _context.Books.Add(Book);
                 _context.SaveChanges();

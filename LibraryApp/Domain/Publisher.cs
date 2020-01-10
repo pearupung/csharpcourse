@@ -6,7 +6,7 @@ namespace Domain
     public class Publisher
     {
         public Publisher(){}
-        public Publisher(string? newPublisher)
+        public Publisher(string newPublisher)
         {
             PublisherName = newPublisher;
         }
