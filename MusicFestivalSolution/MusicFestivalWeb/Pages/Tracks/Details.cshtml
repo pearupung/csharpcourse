@@ -1,0 +1,55 @@
+@page
+@model MusicFestivalWeb.Pages.Tracks.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Track</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.TrackName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.TrackName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.Artist)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.Artist)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.TimeSpan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.TimeSpan)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.Vibe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.Vibe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.PopularityOutOfTen)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.PopularityOutOfTen)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.MinutePrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.MinutePrice)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Track.TrackId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

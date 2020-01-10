@@ -1,0 +1,65 @@
+@page
+@model MusicFestivalWeb.Pages.Persons.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Person</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Person.PersonId" />
+            <div class="form-group">
+                <label asp-for="Person.Name" class="control-label"></label>
+                <input asp-for="Person.Name" class="form-control" />
+                <span asp-validation-for="Person.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.IdCode" class="control-label"></label>
+                <input asp-for="Person.IdCode" class="form-control" />
+                <span asp-validation-for="Person.IdCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.CompanyCode" class="control-label"></label>
+                <input asp-for="Person.CompanyCode" class="form-control" />
+                <span asp-validation-for="Person.CompanyCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Address" class="control-label"></label>
+                <input asp-for="Person.Address" class="form-control" />
+                <span asp-validation-for="Person.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.PhoneNumber" class="control-label"></label>
+                <input asp-for="Person.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Person.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.EmailAddress" class="control-label"></label>
+                <input asp-for="Person.EmailAddress" class="form-control" />
+                <span asp-validation-for="Person.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.VatSubjectNumber" class="control-label"></label>
+                <input asp-for="Person.VatSubjectNumber" class="form-control" />
+                <span asp-validation-for="Person.VatSubjectNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

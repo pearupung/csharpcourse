@@ -1,0 +1,58 @@
+@page
+@model MusicFestivalWeb.Pages.Tracks.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Track</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.TrackName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.TrackName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.Artist)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.Artist)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.TimeSpan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.TimeSpan)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.Vibe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.Vibe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.PopularityOutOfTen)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.PopularityOutOfTen)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Track.MinutePrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Track.MinutePrice)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Track.TrackId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

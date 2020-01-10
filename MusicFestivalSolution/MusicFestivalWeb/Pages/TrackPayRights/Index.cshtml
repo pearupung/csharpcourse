@@ -1,0 +1,48 @@
+@page
+@model MusicFestivalWeb.Pages.TrackPayRights.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackPayRight[0].Track)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackPayRight[0].Person)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackPayRight[0].PayRightPercentage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TrackPayRight) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Track.TrackId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.PersonId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayRightPercentage)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.TrackPayRightId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.TrackPayRightId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TrackPayRightId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

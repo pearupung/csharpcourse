@@ -1,0 +1,48 @@
+@page
+@model MusicFestivalWeb.Pages.FestivalEvents.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FestivalEvent[0].Event)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FestivalEvent[0].Festival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FestivalEvent[0].IsIncludedInFestivalPass)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FestivalEvent) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.EventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Festival.FestivalId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsIncludedInFestivalPass)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FestivalEventId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FestivalEventId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FestivalEventId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

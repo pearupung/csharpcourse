@@ -1,0 +1,50 @@
+@page
+@model MusicFestivalWeb.Pages.Sets.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Set</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Set.SetId" />
+            <div class="form-group">
+                <label asp-for="Set.SetName" class="control-label"></label>
+                <input asp-for="Set.SetName" class="form-control" />
+                <span asp-validation-for="Set.SetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Set.SetDuration" class="control-label"></label>
+                <input asp-for="Set.SetDuration" class="form-control" />
+                <span asp-validation-for="Set.SetDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Set.PersonId" class="control-label"></label>
+                <select asp-for="Set.PersonId" class="form-control" asp-items="ViewBag.PersonId"></select>
+                <span asp-validation-for="Set.PersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Set.EventId" class="control-label"></label>
+                <select asp-for="Set.EventId" class="form-control" asp-items="ViewBag.EventId"></select>
+                <span asp-validation-for="Set.EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
