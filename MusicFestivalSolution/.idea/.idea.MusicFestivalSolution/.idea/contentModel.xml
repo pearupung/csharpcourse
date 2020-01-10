@@ -6,6 +6,7 @@
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_MusicFestivalSolution.2095161686.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Basic Database ER Diagram (Crow's Foot).pdf" t="Include" />
       <e p="DAL" t="IncludeRecursive">
         <e p="DAL.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
@@ -18,8 +19,26 @@
         </e>
       </e>
       <e p="Domain" t="IncludeRecursive">
-        <e p="AppDbContext.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
+        <e p="Event" t="Include">
+          <e p="Event.cs" t="Include" />
+          <e p="Festival.cs" t="Include" />
+          <e p="FestivalEvent.cs" t="Include" />
+          <e p="Participant.cs" t="Include" />
+          <e p="ParticipantType.cs" t="Include" />
+        </e>
+        <e p="Person.cs" t="Include" />
+        <e p="Track sets" t="Include">
+          <e p="Set.cs" t="Include" />
+          <e p="SetTrack.cs" t="Include" />
+          <e p="Track.cs" t="Include" />
+          <e p="TrackPayRight.cs" t="Include" />
+        </e>
+        <e p="Venue" t="Include">
+          <e p="Equipment.cs" t="Include" />
+          <e p="Venue.cs" t="Include" />
+          <e p="VenueEquipment.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -125,6 +144,7 @@
           </e>
         </e>
       </e>
+      <e p="SolutionFiles" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>

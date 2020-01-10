@@ -1,0 +1,13 @@
+namespace Domain.Track_sets
+{
+    public class TrackPayRight
+    {
+        public int TrackId { get; set; }
+        public Track Track { get; set; }
+
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
+
+        public int PayRightPercentage { get; set; }
+    }
+}
