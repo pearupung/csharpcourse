@@ -1,0 +1,13 @@
+@model CreateBookModel
+
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">Choose an image</div>
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="FormFile" class="control-label"></label>
+            <input asp-for="FormFile" class="form-control"/>
+            <span asp-validation-for="FormFile" class="text-danger"></span>
+        </div>
+        <div class="text-center"> <button class="btn btn-info" type="submit" name="picturePick" value="add">Pick this picture!</button></div>
+    </div>
+</div>
