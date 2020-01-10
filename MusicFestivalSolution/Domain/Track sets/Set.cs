@@ -5,6 +5,8 @@ namespace Domain.Track_sets
 {
     public class Set
     {
+
+        public int SetId { get; set; }
         public string SetName { get; set; }
         public TimeSpan SetDuration { get; set; }
 

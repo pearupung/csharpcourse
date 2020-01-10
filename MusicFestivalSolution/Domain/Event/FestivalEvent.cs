@@ -2,6 +2,7 @@ namespace Domain.Event
 {
     public class FestivalEvent
     {
+        public int FestivalEventId { get; set; }
         public int EventId { get; set; }
         public Event Event { get; set; }
 

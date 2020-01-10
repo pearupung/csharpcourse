@@ -4,6 +4,8 @@ namespace Domain.Event
 {
     public class Participant
     {
+        public int ParticipantId { get; set; }
+        
         public int ParticipantTypeId { get; set; }
         public ParticipantType ParticipantType { get; set; }
 

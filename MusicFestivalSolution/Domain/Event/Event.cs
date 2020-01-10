@@ -5,6 +5,7 @@ namespace Domain.Event
 {
     public class Event
     {
+        public int EventId { get; set; }
         public string EventName { get; set; }
         
         public int TicketCountPrediction { get; set; }
@@ -15,9 +16,6 @@ namespace Domain.Event
         public TimeSpan PreparationTime { get; set; }
         public TimeSpan CleanUpTime { get; set; }
         
-        public int EventId { get; set; }
-        public Event SubEvent { get; set; }
-
         public int VenueId { get; set; }
         public Venue.Venue Venue { get; set; }
 

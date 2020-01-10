@@ -5,6 +5,7 @@ namespace Domain.Event
 {
     public class Festival
     {
+        public int FestivalId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 

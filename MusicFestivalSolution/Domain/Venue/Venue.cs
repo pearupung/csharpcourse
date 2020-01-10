@@ -4,6 +4,8 @@ namespace Domain.Venue
 {
     public class Venue
     {
+        public int VenueId { get; set; }
+        
         public string VenueName { get; set; }
         public string VenueAddress { get; set; }
         public int HourlyPrice { get; set; }

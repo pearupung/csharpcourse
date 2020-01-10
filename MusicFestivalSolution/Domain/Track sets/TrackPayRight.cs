@@ -2,6 +2,7 @@ namespace Domain.Track_sets
 {
     public class TrackPayRight
     {
+        public int TrackPayRightId { get; set; }
         public int TrackId { get; set; }
         public Track Track { get; set; }
 

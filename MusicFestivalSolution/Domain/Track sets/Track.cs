@@ -5,6 +5,8 @@ namespace Domain.Track_sets
 {
     public class Track
     {
+        public int TrackId { get; set; }
+        
         public string TrackName { get; set; }
         public string Artist { get; set; }
 
@@ -15,7 +17,6 @@ namespace Domain.Track_sets
 
         public List<SetTrack> SetTracks { get; set; }
 
-        public int TrackPayRightId { get; set; }
-        public TrackPayRight TrackPayRight { get; set; }
+        public List<TrackPayRight> TrackPayRights { get; set; }
     }
 }

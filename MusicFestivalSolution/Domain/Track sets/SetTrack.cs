@@ -4,6 +4,8 @@ namespace Domain.Track_sets
 {
     public class SetTrack
     {
+        public int SetTrackId { get; set; }
+        
         public int QueueNumber { get; set; }
         public TimeSpan PlannedPlayTime { get; set; }
         public TimeSpan ActualPlayTime { get; set; }
