@@ -6,17 +6,17 @@ namespace Domain
     public class EventSet
     {
 
-        public int SetId { get; set; }
-        public string SetName { get; set; }
-        public string SetDuration { get; set; }
+        public int EventSetId { get; set; }
+        public string SetName { get; set; } = default!;
+        public string SetDuration { get; set; } = default!;
 
         // Set Dj
-        public int? PersonId { get; set; }
-        public Person? Person { get; set; }
+        public int PersonId { get; set; } = default!;
+        public Person? Dj { get; set; }
 
-        public int? EventId { get; set; }
+        public int EventId { get; set; } = default!;
         public OrganisedEvent? Event { get; set; }
 
-        public List<SetTrack>? SetTracks { get; set; }
+        public List<SetTrack> SetTracks { get; set; } = default!;
     }
 }

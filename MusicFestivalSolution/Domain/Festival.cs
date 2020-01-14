@@ -6,12 +6,12 @@ namespace Domain
     public class Festival
     {
         public int FestivalId { get; set; }
-        public string FestivalName { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-
-        public List<FestivalEvent> FestivalEvents { get; set; }
+        public string FestivalName { get; set; } = default!;
+        public string StartTime { get; set; } = default!;
+        public string EndTime { get; set; } = default!;
         
-        public string Venue { get; set; }
+        public List<FestivalEvent>? FestivalEvents { get; set; }
+
+        public string Venue { get; set; } = default!;
     }
 }

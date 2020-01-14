@@ -1,0 +1,15 @@
+copy eventset to minimise data loss
+
+Track view should include add author form, add person form, 
+    add trackauthortype form.
+    
+Track view create should include only main fields, addAuthor includes all
+    other stuff: adding authors.
+    
+Every view with children should have one edit page that does not 
+    touch its own values.
+    
+Track index is more of a event tracks set view. 
+Event index is more like a set list/overview. Plus the venue. Plus any equipment
+    you would have at a gig. Plus participants/setup team thing.
+    

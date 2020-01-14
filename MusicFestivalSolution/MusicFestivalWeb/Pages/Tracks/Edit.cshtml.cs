@@ -23,6 +23,8 @@ namespace MusicFestivalWeb.Pages.Tracks
         [BindProperty]
         public Track Track { get; set; }
 
+        public TrackAuthor NewTrackAuthor { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,7 +32,9 @@ namespace MusicFestivalWeb.Pages.Tracks
                 return NotFound();
             }
 
-            Track = await _context.Tracks.FirstOrDefaultAsync(m => m.TrackId == id);
+            Track = await _context.Tracks
+                .Include(e => e.TrackAuthors)
+                .FirstOrDefaultAsync(m => m.TrackId == id);
 
             if (Track == null)
             {

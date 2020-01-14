@@ -10,11 +10,11 @@ using Domain;
 
 namespace MusicFestivalWeb.Pages.Tracks
 {
-    public class DetailsModel : PageModel
+    public class AddAuthorTrackViewModel : PageModel
     {
         private readonly DAL.AppDbContext _context;
 
-        public DetailsModel(DAL.AppDbContext context)
+        public AddAuthorTrackViewModel(DAL.AppDbContext context)
         {
             _context = context;
         }

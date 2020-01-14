@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/MusicFestivalWeb/festival.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="student2018_peapun_LibraryAppDb@alpha.akaver.com" uuid="8e6e8b28-0a5e-4817-b0f3-46a7f674bd24">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://alpha.akaver.com:3306/student2018_peapun_LibraryAppDb</jdbc-url>
+    </data-source>
   </component>
 </project>

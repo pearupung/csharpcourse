@@ -20,11 +20,20 @@ namespace MusicFestivalWeb.Pages.OrganisedEvents
         }
 
         public IList<OrganisedEvent> OrganisedEvent { get;set; }
+        public int FestivalId { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? festivalId)
         {
+            if (festivalId.HasValue)
+            {
+                FestivalId = festivalId.Value;
+            }
+
             OrganisedEvent = await _context.Events
-                .Include(o => o.Venue).ToListAsync();
+                .Include(o => o.Venue)
+                .Where(e => !festivalId.HasValue || e.FestivalEvents
+                    .Any(i => i.FestivalId == festivalId))
+                .ToListAsync();
         }
     }
 }

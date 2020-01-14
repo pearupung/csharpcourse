@@ -7,16 +7,12 @@ namespace Domain
     public class Track
     {
         public int TrackId { get; set; }
-        
-        public string TrackName { get; set; }
-        public string Artist { get; set; }
-        public int LengthInSeconds { get; set; }
-        public string Vibe { get; set; }
-        public int PopularityOutOfTen { get; set; }
-        public int MinutePrice { get; set; }
 
-        public List<SetTrack> SetTracks { get; set; }
+        public string TrackName { get; set; } = default!;
+        public int LengthInSeconds { get; set; } = default!;
 
-        public List<TrackPayRight>? TrackPayRights { get; set; }
+        public List<TrackAuthor>? TrackAuthors { get; set; }
+       
+        public List<SetTrack>? SetTracks { get; set; }
     }
 }

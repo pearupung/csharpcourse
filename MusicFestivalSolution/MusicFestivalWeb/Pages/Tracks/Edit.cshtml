@@ -24,6 +24,57 @@
                 <input asp-for="Track.LengthInSeconds" class="form-control" />
                 <span asp-validation-for="Track.LengthInSeconds" class="text-danger"></span>
             </div>
+            <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Track.TrackAuthors[0].Author)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Track.TrackAuthors[0].Track)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Track.TrackAuthors[0].TrackAuthorType)
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model.Track.TrackAuthors) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Author.EmailAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Track.TrackName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TrackAuthorType.TrackAuthorTypeName)
+                                    </td>
+                                    <td>
+                                        <a asp-page="./Edit" asp-route-id="@item.TrackAuthorId">Edit</a> |
+                                        <a asp-page="./Details" asp-route-id="@item.TrackAuthorId">Details</a> |
+                                        <a asp-page="./Delete" asp-route-id="@item.TrackAuthorId">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                        <form method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="NewTrackAuthor.PersonId" class="control-label"></label>
+                                        <select asp-for="NewTrackAuthor.PersonId" class ="form-control" asp-items="ViewBag.PersonId"></select>
+                                    </div>
+                            <div class="form-group">
+                                        <label asp-for="NewTrackAuthor.TrackAuthorTypeId" class="control-label"></label>
+                                        <select asp-for="NewTrackAuthor.TrackAuthorTypeId" class ="form-control" asp-items="ViewBag.TrackAuthorTypeId"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                    </div>
+                                </form>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

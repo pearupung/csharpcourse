@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DAL;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace MusicFestivalWeb.Pages.Tracks
 {
@@ -14,6 +15,9 @@ namespace MusicFestivalWeb.Pages.Tracks
     {
         private readonly DAL.AppDbContext _context;
 
+        [BindProperty]
+        public Track Track { get; set; }
+        
         public CreateModel(DAL.AppDbContext context)
         {
             _context = context;
@@ -23,9 +27,6 @@ namespace MusicFestivalWeb.Pages.Tracks
         {
             return Page();
         }
-
-        [BindProperty]
-        public Track Track { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -39,7 +40,7 @@ namespace MusicFestivalWeb.Pages.Tracks
             _context.Tracks.Add(Track);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./AddAuthor", new {id = Track.TrackId});
         }
     }
 }
