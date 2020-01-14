@@ -17,13 +17,13 @@
                 @Html.DisplayNameFor(model => model.SetTrack[0].QueueNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetTrack[0].PlannedPlayTime)
+                @Html.DisplayNameFor(model => model.SetTrack[0].PlannedPlayTimeInSeconds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetTrack[0].ActualPlayTime)
+                @Html.DisplayNameFor(model => model.SetTrack[0].ActualPlayTimeInSeconds)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetTrack[0].Set)
+                @Html.DisplayNameFor(model => model.SetTrack[0].SetId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SetTrack[0].Track)
@@ -38,16 +38,16 @@
                 @Html.DisplayFor(modelItem => item.QueueNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PlannedPlayTime)
+                @Html.DisplayFor(modelItem => item.PlannedPlayTimeInSeconds)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActualPlayTime)
+                @Html.DisplayFor(modelItem => item.ActualPlayTimeInSeconds)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Set.SetId)
+                @Html.DisplayFor(modelItem => item.SetId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Track.TrackId)
+                @Html.DisplayFor(modelItem => item.Track.TrackName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.SetTrackId">Edit</a> |

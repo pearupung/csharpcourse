@@ -21,8 +21,8 @@ namespace MusicFestivalWeb.Pages.Participants
 
         public IActionResult OnGet()
         {
-        ViewData["ParticipantTypeId"] = new SelectList(_context.ParticipantTypes, "ParticipantTypeId", "ParticipantTypeId");
-        ViewData["PersonId"] = new SelectList(_context.Persons, "PersonId", "PersonId");
+        ViewData["ParticipantTypeId"] = new SelectList(_context.ParticipantTypes, "ParticipantTypeId", "ParticipantTypeName");
+        ViewData["PersonId"] = new SelectList(_context.Persons, "PersonId", "EmailAddress");
             return Page();
         }
 

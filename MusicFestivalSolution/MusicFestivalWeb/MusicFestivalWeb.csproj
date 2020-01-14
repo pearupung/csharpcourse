@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,10 +11,74 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DAL\DAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Equipments\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Equipments\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Equipments\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Equipments\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Equipments\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Events\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Events\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Events\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Events\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Events\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FestivalEvents\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FestivalEvents\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FestivalEvents\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FestivalEvents\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FestivalEvents\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Festivals\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Festivals\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Festivals\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Festivals\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Festivals\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Participants\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Participants\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Participants\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Participants\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Participants\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ParticipantTypes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ParticipantTypes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ParticipantTypes\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ParticipantTypes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ParticipantTypes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Persons\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Persons\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Persons\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Persons\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Persons\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Sets\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Sets\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Sets\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Sets\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Sets\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\SetTracks\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\SetTracks\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\SetTracks\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\SetTracks\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\SetTracks\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\TrackPayRights\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\TrackPayRights\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\TrackPayRights\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\TrackPayRights\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\TrackPayRights\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tracks\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tracks\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tracks\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tracks\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tracks\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Venues\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Venues\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Venues\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Venues\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Venues\Index.cshtml" />
     </ItemGroup>
 
 

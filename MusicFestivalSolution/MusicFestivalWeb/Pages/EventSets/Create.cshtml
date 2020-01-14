@@ -1,0 +1,47 @@
+@page
+@model MusicFestivalWeb.Pages.EventSets.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EventSet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventSet.SetName" class="control-label"></label>
+                <input asp-for="EventSet.SetName" class="form-control" />
+                <span asp-validation-for="EventSet.SetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventSet.SetDuration" class="control-label"></label>
+                <input asp-for="EventSet.SetDuration" class="form-control" />
+                <span asp-validation-for="EventSet.SetDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventSet.PersonId" class="control-label"></label>
+                <select asp-for="EventSet.PersonId" class ="form-control" asp-items="ViewBag.PersonId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventSet.EventId" class="control-label"></label>
+                <select asp-for="EventSet.EventId" class ="form-control" asp-items="ViewBag.EventId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

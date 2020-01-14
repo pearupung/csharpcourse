@@ -31,15 +31,15 @@ namespace MusicFestivalWeb.Pages.FestivalEvents
             }
 
             FestivalEvent = await _context.FestivalEvents
-                .Include(f => f.Event)
-                .Include(f => f.Festival).FirstOrDefaultAsync(m => m.FestivalEventId == id);
+                .Include(f => f.Festival)
+                .Include(f => f.OrganisedEvent).FirstOrDefaultAsync(m => m.FestivalEventId == id);
 
             if (FestivalEvent == null)
             {
                 return NotFound();
             }
-           ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventId");
-           ViewData["FestivalId"] = new SelectList(_context.Festivals, "FestivalId", "FestivalId");
+           ViewData["FestivalId"] = new SelectList(_context.Festivals, "FestivalId", "EndTime");
+           ViewData["OrganisedEventId"] = new SelectList(_context.Events, "OrganisedEventId", "CleanUpTime");
             return Page();
         }
 

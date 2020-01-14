@@ -12,22 +12,16 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FestivalEvent.Event)
+            @Html.DisplayNameFor(model => model.FestivalEvent.OrganisedEvent)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FestivalEvent.Event.EventId)
+            @Html.DisplayFor(model => model.FestivalEvent.OrganisedEvent.CleanUpTime)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FestivalEvent.Festival)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FestivalEvent.Festival.FestivalId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FestivalEvent.IsIncludedInFestivalPass)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FestivalEvent.IsIncludedInFestivalPass)
+            @Html.DisplayFor(model => model.FestivalEvent.Festival.EndTime)
         </dd>
     </dl>
 </div>

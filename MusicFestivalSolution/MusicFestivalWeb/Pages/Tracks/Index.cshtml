@@ -17,19 +17,7 @@
                 @Html.DisplayNameFor(model => model.Track[0].TrackName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Track[0].Artist)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].TimeSpan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].Vibe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].PopularityOutOfTen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].MinutePrice)
+                @Html.DisplayNameFor(model => model.Track[0].LengthInSeconds)
             </th>
             <th></th>
         </tr>
@@ -41,19 +29,7 @@
                 @Html.DisplayFor(modelItem => item.TrackName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Artist)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeSpan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vibe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PopularityOutOfTen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinutePrice)
+                @Html.DisplayFor(modelItem => item.LengthInSeconds)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TrackId">Edit</a> |

@@ -1,0 +1,90 @@
+@page
+@model MusicFestivalWeb.Pages.OrganisedEvents.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].TicketCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].TicketPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].PreparationTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].CleanUpTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent[0].Venue)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrganisedEvent) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreparationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CleanUpTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.VenueAddress)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrganisedEventId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OrganisedEventId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrganisedEventId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

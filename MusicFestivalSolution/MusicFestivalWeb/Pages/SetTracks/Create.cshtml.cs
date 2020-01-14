@@ -21,8 +21,7 @@ namespace MusicFestivalWeb.Pages.SetTracks
 
         public IActionResult OnGet()
         {
-        ViewData["SetId"] = new SelectList(_context.Sets, "SetId", "SetId");
-        ViewData["TrackId"] = new SelectList(_context.Tracks, "TrackId", "TrackId");
+        ViewData["TrackId"] = new SelectList(_context.Tracks, "TrackId", "TrackName");
             return Page();
         }
 

@@ -15,25 +15,37 @@
             @Html.DisplayNameFor(model => model.Participant.ParticipantType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Participant.ParticipantType.ParticipantTypeId)
+            @Html.DisplayFor(model => model.Participant.ParticipantType.ParticipantTypeName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Participant.Person)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Participant.Person.PersonId)
+            @Html.DisplayFor(model => model.Participant.Person.EmailAddress)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Participant.ParticipateBegin)
+            @Html.DisplayNameFor(model => model.Participant.ParticipateBeginDate)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Participant.ParticipateBegin)
+            @Html.DisplayFor(model => model.Participant.ParticipateBeginDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Participant.ParticipateEnd)
+            @Html.DisplayNameFor(model => model.Participant.ParticipateBeginTime)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Participant.ParticipateEnd)
+            @Html.DisplayFor(model => model.Participant.ParticipateBeginTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.ParticipateEndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.ParticipateEndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.ParticipateEndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.ParticipateEndTime)
         </dd>
     </dl>
 </div>

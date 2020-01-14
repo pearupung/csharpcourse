@@ -25,7 +25,10 @@ namespace MusicFestivalWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=festival.db"));
+            services.AddDbContext<AppDbContext>(options => options
+                .UseMySql("server=alpha.akaver.com;database=student2018_peapun_LibraryAppDb;user=student2018;password=student2018"));
+
+                //.UseSqlite("Data Source=festival.db"));
             services.AddRazorPages();
         }
 

@@ -21,8 +21,8 @@ namespace MusicFestivalWeb.Pages.FestivalEvents
 
         public IActionResult OnGet()
         {
-        ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventId");
-        ViewData["FestivalId"] = new SelectList(_context.Festivals, "FestivalId", "FestivalId");
+        ViewData["FestivalId"] = new SelectList(_context.Festivals, "FestivalId", "EndTime");
+        ViewData["OrganisedEventId"] = new SelectList(_context.Events, "OrganisedEventId", "CleanUpTime");
             return Page();
         }
 

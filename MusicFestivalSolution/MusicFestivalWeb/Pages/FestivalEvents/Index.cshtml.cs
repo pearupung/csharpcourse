@@ -24,8 +24,8 @@ namespace MusicFestivalWeb.Pages.FestivalEvents
         public async Task OnGetAsync()
         {
             FestivalEvent = await _context.FestivalEvents
-                .Include(f => f.Event)
-                .Include(f => f.Festival).ToListAsync();
+                .Include(f => f.Festival)
+                .Include(f => f.OrganisedEvent).ToListAsync();
         }
     }
 }

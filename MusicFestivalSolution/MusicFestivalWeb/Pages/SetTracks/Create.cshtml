@@ -19,18 +19,19 @@
                 <span asp-validation-for="SetTrack.QueueNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SetTrack.PlannedPlayTime" class="control-label"></label>
-                <input asp-for="SetTrack.PlannedPlayTime" class="form-control" />
-                <span asp-validation-for="SetTrack.PlannedPlayTime" class="text-danger"></span>
+                <label asp-for="SetTrack.PlannedPlayTimeInSeconds" class="control-label"></label>
+                <input asp-for="SetTrack.PlannedPlayTimeInSeconds" class="form-control" />
+                <span asp-validation-for="SetTrack.PlannedPlayTimeInSeconds" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SetTrack.ActualPlayTime" class="control-label"></label>
-                <input asp-for="SetTrack.ActualPlayTime" class="form-control" />
-                <span asp-validation-for="SetTrack.ActualPlayTime" class="text-danger"></span>
+                <label asp-for="SetTrack.ActualPlayTimeInSeconds" class="control-label"></label>
+                <input asp-for="SetTrack.ActualPlayTimeInSeconds" class="form-control" />
+                <span asp-validation-for="SetTrack.ActualPlayTimeInSeconds" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SetTrack.SetId" class="control-label"></label>
-                <select asp-for="SetTrack.SetId" class ="form-control" asp-items="ViewBag.SetId"></select>
+                <input asp-for="SetTrack.SetId" class="form-control" />
+                <span asp-validation-for="SetTrack.SetId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SetTrack.TrackId" class="control-label"></label>

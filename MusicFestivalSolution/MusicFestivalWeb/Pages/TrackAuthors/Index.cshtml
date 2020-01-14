@@ -1,0 +1,48 @@
+@page
+@model MusicFestivalWeb.Pages.TrackAuthors.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackAuthor[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackAuthor[0].Track)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackAuthor[0].TrackAuthorType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TrackAuthor) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Track.TrackName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackAuthorType.TrackAuthorTypeName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.TrackAuthorId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.TrackAuthorId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TrackAuthorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

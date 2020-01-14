@@ -15,6 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Festival.FestivalId" />
             <div class="form-group">
+                <label asp-for="Festival.FestivalName" class="control-label"></label>
+                <input asp-for="Festival.FestivalName" class="form-control" />
+                <span asp-validation-for="Festival.FestivalName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Festival.StartTime" class="control-label"></label>
                 <input asp-for="Festival.StartTime" class="form-control" />
                 <span asp-validation-for="Festival.StartTime" class="text-danger"></span>

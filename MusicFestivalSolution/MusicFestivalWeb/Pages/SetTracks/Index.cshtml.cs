@@ -24,7 +24,6 @@ namespace MusicFestivalWeb.Pages.SetTracks
         public async Task OnGetAsync()
         {
             SetTrack = await _context.SetTracks
-                .Include(s => s.Set)
                 .Include(s => s.Track).ToListAsync();
         }
     }

@@ -31,15 +31,13 @@ namespace MusicFestivalWeb.Pages.SetTracks
             }
 
             SetTrack = await _context.SetTracks
-                .Include(s => s.Set)
                 .Include(s => s.Track).FirstOrDefaultAsync(m => m.SetTrackId == id);
 
             if (SetTrack == null)
             {
                 return NotFound();
             }
-           ViewData["SetId"] = new SelectList(_context.Sets, "SetId", "SetId");
-           ViewData["TrackId"] = new SelectList(_context.Tracks, "TrackId", "TrackId");
+           ViewData["TrackId"] = new SelectList(_context.Tracks, "TrackId", "TrackName");
             return Page();
         }
 

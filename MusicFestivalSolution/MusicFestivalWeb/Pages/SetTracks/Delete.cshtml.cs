@@ -30,7 +30,6 @@ namespace MusicFestivalWeb.Pages.SetTracks
             }
 
             SetTrack = await _context.SetTracks
-                .Include(s => s.Set)
                 .Include(s => s.Track).FirstOrDefaultAsync(m => m.SetTrackId == id);
 
             if (SetTrack == null)

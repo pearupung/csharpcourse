@@ -20,10 +20,16 @@
                 @Html.DisplayNameFor(model => model.Participant[0].Person)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Participant[0].ParticipateBegin)
+                @Html.DisplayNameFor(model => model.Participant[0].ParticipateBeginDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Participant[0].ParticipateEnd)
+                @Html.DisplayNameFor(model => model.Participant[0].ParticipateBeginTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].ParticipateEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].ParticipateEndTime)
             </th>
             <th></th>
         </tr>
@@ -32,16 +38,22 @@
 @foreach (var item in Model.Participant) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ParticipantType.ParticipantTypeId)
+                @Html.DisplayFor(modelItem => item.ParticipantType.ParticipantTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Person.PersonId)
+                @Html.DisplayFor(modelItem => item.Person.EmailAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParticipateBegin)
+                @Html.DisplayFor(modelItem => item.ParticipateBeginDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParticipateEnd)
+                @Html.DisplayFor(modelItem => item.ParticipateBeginTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParticipateEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParticipateEndTime)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ParticipantId">Edit</a> |
