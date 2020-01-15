@@ -35,6 +35,6 @@
     <form method="post">
         <input type="hidden" asp-for="TrackAuthor.TrackAuthorId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="/Tracks/Index" asp-route-id="@Model.TrackAuthor.TrackId">Back to List</a>
     </form>
 </div>

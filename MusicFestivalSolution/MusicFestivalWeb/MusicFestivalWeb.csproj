@@ -182,22 +182,21 @@
       <UpToDateCheckInput Remove="Pages\Persons\Details.cshtml" />
       <UpToDateCheckInput Remove="Pages\Persons\Edit.cshtml" />
       <UpToDateCheckInput Remove="Pages\Persons\Index.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Pages\No Focus\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="Pages\No Focus\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Pages\No Focus\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Pages\No Focus\**" />
+      <UpToDateCheckInput Remove="Pages\No Focus\EventSets\Create.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\EventSets\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\EventSets\Details.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\EventSets\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\EventSets\Index.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\SetTracks\Create.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\SetTracks\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\SetTracks\Details.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\SetTracks\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\SetTracks\Index.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\OrganisedEvents\Create.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\OrganisedEvents\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\OrganisedEvents\Details.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\OrganisedEvents\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Pages\No Focus\OrganisedEvents\Index.cshtml" />
     </ItemGroup>
 
 

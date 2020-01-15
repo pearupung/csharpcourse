@@ -11,7 +11,7 @@ namespace DAL
         public DbSet<FestivalEvent> FestivalEvents { get; set; } = default!;
         public DbSet<Participant> Participants { get; set; } = default!;
         public DbSet<ParticipantType> ParticipantTypes { get; set; } = default!;
-        public DbSet<EventSet> Sets { get; set; } = default!;
+        public DbSet<EventSet> EventSets { get; set; } = default!;
         public DbSet<SetTrack> SetTracks { get; set; } = default!;
         public DbSet<Track> Tracks { get; set; } = default!;
         public DbSet<Equipment> Equipments { get; set; } = default!;

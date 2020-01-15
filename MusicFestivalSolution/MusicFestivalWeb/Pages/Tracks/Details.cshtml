@@ -10,20 +10,60 @@
 <div>
     <h4>Track</h4>
     <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Track.TrackName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Track.TrackName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Track.LengthInSeconds)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Track.LengthInSeconds)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Track.TrackName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Track.TrackName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Track.LengthInSeconds)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Track.LengthInSeconds)
+                </dd>
+            </dl>
+            
+            </div>
+        <form class="col" method="post" asp-page-handler="NewAuthor" asp-route-id="@Model.Track.TrackId">
+            <input hidden asp-for="SetId" value="@Model.SetId"/>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NewAuthor.StageName" class="control-label"></label>
+                <input asp-for="NewAuthor.StageName" class="form-control"/>
+                <span asp-validation-for="NewAuthor.StageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewAuthor.FirstName" class="control-label"></label>
+                <input asp-for="NewAuthor.FirstName" class="form-control"/>
+                <span asp-validation-for="NewAuthor.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewAuthor.LastName" class="control-label"></label>
+                <input asp-for="NewAuthor.LastName" class="form-control"/>
+                <span asp-validation-for="NewAuthor.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+        <form class="col" method="post" asp-page-handler="NewTrackAuthorType" asp-route-id="@Model.Track.TrackId">
+                        <input hidden asp-for="SetId" value="@Model.SetId"/>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                <label asp-for="NewTrackAuthorType.TrackAuthorTypeName" class="control-label"></label>
+                <input asp-for="NewTrackAuthorType.TrackAuthorTypeName" class="form-control" />
+                <span asp-validation-for="NewTrackAuthorType.TrackAuthorTypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        </div>
     <table class="table">
         <thead>
         <tr>
@@ -41,41 +81,41 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Author.EmailAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Track.TrackName)
+                    @Html.DisplayFor(modelItem => item.Author.LastNameFirstNameStageName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TrackAuthorType.TrackAuthorTypeName)
                 </td>
+                
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.TrackAuthorId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.TrackAuthorId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.TrackAuthorId">Delete</a>
+                   <a asp-page="/TrackAuthors/Delete" 
+                       asp-route-id="@item.TrackAuthorId"
+                       asp-route-returnurl="/Tracks/Details">Delete</a>
                 </td>
             </tr>
         }
         <tr>
-        <form method="post">
-            
+        <form method="post" asp-page-handler="trackauthors" asp-route-id="@Model.Track.TrackId">
+            <input hidden asp-for="SetId" value="@Model.SetId"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <td class="form-group">
-                <select asp-for="NewTrackAuthor.PersonId" class="form-control" asp-items="ViewBag.PersonId"></select>
+                <select asp-for="NewTrackAuthor.PersonId" class="form-control" asp-items="Model.AuthorSelectList"></select>
             </td>
             <td class="form-group">
-                <select asp-for="NewTrackAuthor.TrackAuthorTypeId" class="form-control" asp-items="ViewBag.TrackAuthorTypeId"></select>
+                <select asp-for="NewTrackAuthor.TrackAuthorTypeId" class="form-control" asp-items="Model.TrackAuthorTypeSelectList"></select>
             </td>
             <td class="form-group">
-                <input type="submit" value="Add an author" class="btn btn-primary"/>
+                <input type="submit" name="" value="Add an author" class="btn btn-primary"/>
             </td>
         </form>
         </tr>
         </tbody>
     </table>
-    
-</div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Track.TrackId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+    @if (Model.SetId.HasValue)
+    {
+        <a asp-page="/EventSets/Details" asp-route-id="@Model.SetId">Back to event set</a>
+        
+    }
+</div></div>

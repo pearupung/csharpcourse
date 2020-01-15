@@ -1,0 +1,78 @@
+@page
+@model MusicFestivalWeb.Pages.EventSets.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EventSet</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventSet.SetName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventSet.SetName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventSet.SetDuration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventSet.SetDuration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventSet.Dj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventSet.Dj.LastNameFirstNameStageName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventSet.Event)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventSet.Event.EventName)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-page="/Tracks/Create" asp-route-setid="@Model.EventSet.EventSetId">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventSet.SetTracks[0].Track.TrackName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventSet.SetTracks[0].Track.LengthInSeconds)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var setTrack in Model.EventSet.SetTracks) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => setTrack.Track.TrackName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => setTrack.Track.LengthInSeconds)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@setTrack.TrackId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@setTrack.TrackId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@setTrack.TrackId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.EventSet.EventSetId">Edit</a> |
+    <a asp-page="/OrganisedEvents/Details" asp-route-id="@Model.EventSet.EventId">Back to event</a>
+</div>

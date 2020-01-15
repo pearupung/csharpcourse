@@ -17,6 +17,6 @@ namespace Domain
         public int EventId { get; set; } = default!;
         public OrganisedEvent? Event { get; set; }
 
-        public List<SetTrack> SetTracks { get; set; } = default!;
+        public List<SetTrack>? SetTracks { get; set; }
     }
 }

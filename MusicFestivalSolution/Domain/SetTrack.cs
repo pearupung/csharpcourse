@@ -10,7 +10,7 @@ namespace Domain
         public int PlannedPlayTimeInSeconds { get; set; } = default!;
         public int ActualPlayTimeInSeconds { get; set; } = default!;
 
-        public int SetId { get; set; } = default!;
+        public int EventSetId { get; set; }
         public EventSet? EventSet { get; set; }
 
         public int TrackId { get; set; } = default!;

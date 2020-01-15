@@ -1,15 +1,21 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
     public class Person
     {
         public int PersonId { get; set; }
-        public string StageName { get; set; }
+        public string? StageName { get; set; }
 
         public string FirstName { get; set; } = default!;
 
         public string LastName { get; set; } = default!;
+
+        [NotMapped]
+        public string LastNameFirstNameStageName => 
+            LastName + ", " + FirstName 
+            + (string.IsNullOrEmpty(StageName) ? "" :  " | " + StageName);
         public string? IdCode { get; set; }
 
         public string? CompanyCode { get; set; }

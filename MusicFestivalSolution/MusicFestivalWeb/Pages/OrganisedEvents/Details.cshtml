@@ -1,0 +1,135 @@
+@page
+@model MusicFestivalWeb.Pages.OrganisedEvents.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>OrganisedEvent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EventName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.TicketCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.TicketCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.TicketPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.TicketPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.PreparationTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.PreparationTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.CleanUpTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.CleanUpTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.Venue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.Venue.VenueAddress)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-page="/EventSets/Create" 
+       asp-route-eventid="@Model.OrganisedEvent.OrganisedEventId"
+       asp-route-festivalid="@Model.FestivalId">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].SetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].SetDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].Dj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].Event)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var eventSet in Model.OrganisedEvent.Sets) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => eventSet.SetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => eventSet.SetDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => eventSet.Dj.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => eventSet.Event.CleanUpTime)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@eventSet.EventSetId">Edit</a> |
+                <a asp-page="/EventSets/Details" asp-route-id="@eventSet.EventSetId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@eventSet.EventSetId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.OrganisedEvent.OrganisedEventId">Edit</a> |
+    @if (Model.FestivalId.HasValue)
+    {
+        <a asp-page="/Festivals/Details" asp-route-id="@Model.FestivalId">Back to festival</a>
+    }
+    else
+    {
+        <a asp-page="./Index">Back to events list</a>
+    }
+</div>

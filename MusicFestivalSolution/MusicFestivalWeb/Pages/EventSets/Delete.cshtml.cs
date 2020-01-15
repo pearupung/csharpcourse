@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DAL;
 using Domain;
 
-namespace MusicFestivalWeb.Pages.TrackAuthors
+namespace MusicFestivalWeb.Pages.EventSets
 {
     public class DeleteModel : PageModel
     {
@@ -20,21 +20,20 @@ namespace MusicFestivalWeb.Pages.TrackAuthors
         }
 
         [BindProperty]
-        public TrackAuthor TrackAuthor { get; set; }
+        public EventSet EventSet { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
-                return RedirectToPage("/Tracks/Index");
+                return NotFound();
             }
 
-            TrackAuthor = await _context.TrackAuthors
-                .Include(t => t.Author)
-                .Include(t => t.Track)
-                .Include(t => t.TrackAuthorType).FirstOrDefaultAsync(m => m.TrackAuthorId == id);
+            EventSet = await _context.EventSets
+                .Include(e => e.Dj)
+                .Include(e => e.Event).FirstOrDefaultAsync(m => m.EventSetId == id);
 
-            if (TrackAuthor == null)
+            if (EventSet == null)
             {
                 return NotFound();
             }
@@ -48,17 +47,15 @@ namespace MusicFestivalWeb.Pages.TrackAuthors
                 return NotFound();
             }
 
-            TrackAuthor = await _context.TrackAuthors.FindAsync(id);
+            EventSet = await _context.EventSets.FindAsync(id);
 
-            if (TrackAuthor != null)
+            if (EventSet != null)
             {
-                _context.TrackAuthors.Remove(TrackAuthor);
+                _context.EventSets.Remove(EventSet);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("/Tracks/Details", new {id = TrackAuthor.TrackId});
-
             }
 
-            return RedirectToPage("/Tracks/Index");
+            return RedirectToPage("./Index");
         }
     }
 }

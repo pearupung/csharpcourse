@@ -7,62 +7,54 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DAL;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 
-namespace MusicFestivalWeb.Pages.Tracks
+namespace MusicFestivalWeb.Pages.EventSets
 {
     public class CreateModel : PageModel
     {
         private readonly DAL.AppDbContext _context;
-
-        [BindProperty]
-        public Track Track { get; set; }
-
-        public int? SetId { get; set; }
 
         public CreateModel(DAL.AppDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet(int? setid)
+        public IActionResult OnGet(int? festivalId, int? eventId)
         {
-            SetId = setid;
+            FestivalId = festivalId;
+            EventId = eventId;
+            
+        PersonSelectList = new SelectList(_context.Persons, nameof(Person.PersonId), nameof(Person.LastNameFirstNameStageName));
             return Page();
         }
 
+        [BindProperty]
+        public EventSet EventSet { get; set; }
+
+        [BindProperty] public int? FestivalId { get; set; }
+        [BindProperty] public int? EventId { get; set; }
+        public SelectList PersonSelectList { get; set; }
+
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int? setid)
+        public async Task<IActionResult> OnPostAsync(int? eventId, int? festivalId)
         {
-            SetId = setid;
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Tracks.Add(Track);
-            await _context.SaveChangesAsync();
-            if (SetId.HasValue)
+
+            if (EventId.HasValue)
             {
-                _context.SetTracks.Add(new SetTrack()
-                {
-                    EventSetId = SetId.Value,
-                    TrackId = Track.TrackId,
-
-                });
+                EventSet.EventId = EventId.Value;
             }
+            
 
+            _context.EventSets.Add(EventSet);
             await _context.SaveChangesAsync();
 
-
-            return RedirectToPage("./Details", 
-                new
-                {
-                    id = Track.TrackId,
-                    setid = SetId
-                });
+            return RedirectToPage("./Index");
         }
     }
 }

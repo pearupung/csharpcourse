@@ -1,0 +1,127 @@
+@page
+@model MusicFestivalWeb.Pages.Festivals.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Festival</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Festival.FestivalName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Festival.FestivalName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Festival.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Festival.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Festival.EndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Festival.EndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Festival.Venue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Festival.Venue)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-page="/OrganisedEvents/Create" asp-route-id="@Model.Festival.FestivalId">Create New Event</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.TicketCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.TicketPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.PreparationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.CleanUpTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Festival.FestivalEvents[0].OrganisedEvent.Venue)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Festival.FestivalEvents) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.TicketCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.TicketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.PreparationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.CleanUpTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisedEvent.Venue.VenueName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrganisedEventId">Edit</a> |
+                <a asp-page="/OrganisedEvents/Details" asp-route-id="@item.OrganisedEventId" asp-route-festivalid="@Model.Festival.FestivalId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrganisedEventId">Delete</a> |
+                <a asp-page="/Tracks/Index" 
+                   asp-route-eventid="@item.OrganisedEventId" 
+                   asp-route-festivalid="@Model.Festival.FestivalId">Tracks</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Festival.FestivalId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
