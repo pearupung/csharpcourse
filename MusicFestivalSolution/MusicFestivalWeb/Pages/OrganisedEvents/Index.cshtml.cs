@@ -19,8 +19,8 @@ namespace MusicFestivalWeb.Pages.OrganisedEvents
             _context = context;
         }
 
-        public IList<OrganisedEvent> OrganisedEvent { get;set; }
-        public int FestivalId { get; set; }
+        public IList<OrganisedEvent>? OrganisedEvent { get;set; }
+        public int? FestivalId { get; set; }
 
         public async Task OnGetAsync(int? festivalId)
         {

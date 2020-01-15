@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain
 {
     public class TrackAuthor
@@ -11,6 +13,7 @@ namespace Domain
         public Track? Track { get; set; }
 
         public int TrackAuthorTypeId { get; set; } = default!;
+        [Display(Name = "Author Type")]
         public TrackAuthorType? TrackAuthorType { get; set; }
 
     }

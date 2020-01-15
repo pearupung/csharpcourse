@@ -26,9 +26,9 @@ namespace MusicFestivalWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options
-                .UseMySql("server=alpha.akaver.com;database=student2018_peapun_LibraryAppDb;user=student2018;password=student2018"));
+                //.UseMySql("server=alpha.akaver.com;database=student2018_peapun_LibraryAppDb;user=student2018;password=student2018"));
 
-                //.UseSqlite("Data Source=festival.db"));
+                .UseSqlite("Data Source=festival.db"));
             services.AddRazorPages();
         }
 

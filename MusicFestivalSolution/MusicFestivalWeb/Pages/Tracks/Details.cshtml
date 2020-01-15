@@ -48,7 +48,7 @@
                 <span asp-validation-for="NewAuthor.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Create new author or artist" class="btn btn-primary"/>
             </div>
         </form>
         <form class="col" method="post" asp-page-handler="NewTrackAuthorType" asp-route-id="@Model.Track.TrackId">
@@ -60,7 +60,7 @@
                 <span asp-validation-for="NewTrackAuthorType.TrackAuthorTypeName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Author role" class="btn btn-primary" />
             </div>
         </form>
         </div>
@@ -117,5 +117,10 @@
     {
         <a asp-page="/EventSets/Details" asp-route-id="@Model.SetId">Back to event set</a>
         
+    } else if (Model.EventId.HasValue && Model.FestivalId.HasValue)
+    {
+        <a asp-page="/OrganisedEvent/Details" 
+           asp-route-eventid="@Model.EventId"
+           asp-route-festivalid="@Model.FestivalId">Back to festival event</a>
     }
 </div></div>

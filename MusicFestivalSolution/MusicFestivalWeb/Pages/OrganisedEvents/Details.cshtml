@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>OrganisedEvent</h4>
+    <h4>Organised Event</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -86,9 +86,6 @@
                 @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].SetName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].SetDuration)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.OrganisedEvent.Sets[0].Dj)
             </th>
             <th>
@@ -104,13 +101,10 @@
                 @Html.DisplayFor(modelItem => eventSet.SetName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => eventSet.SetDuration)
+                @Html.DisplayFor(modelItem => eventSet.Dj.LastNameFirstNameStageName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => eventSet.Dj.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => eventSet.Event.CleanUpTime)
+                @Html.DisplayFor(modelItem => eventSet.Event.EventName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@eventSet.EventSetId">Edit</a> |
@@ -123,7 +117,9 @@
 </table>
 
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.OrganisedEvent.OrganisedEventId">Edit</a> |
+    <a asp-page="./Edit" 
+       asp-route-id="@Model.OrganisedEvent.OrganisedEventId"
+       asp-route-festivalid="@Model.FestivalId">Edit</a> |
     @if (Model.FestivalId.HasValue)
     {
         <a asp-page="/Festivals/Details" asp-route-id="@Model.FestivalId">Back to festival</a>

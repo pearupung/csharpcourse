@@ -20,7 +20,7 @@ namespace MusicFestivalWeb.Pages.EventSets
         }
 
         [BindProperty]
-        public EventSet EventSet { get; set; }
+        public EventSet? EventSet { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

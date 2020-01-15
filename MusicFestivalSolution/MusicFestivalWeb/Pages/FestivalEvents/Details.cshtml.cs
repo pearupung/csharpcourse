@@ -19,7 +19,7 @@ namespace MusicFestivalWeb.Pages.FestivalEvents
             _context = context;
         }
 
-        public FestivalEvent FestivalEvent { get; set; }
+        public FestivalEvent? FestivalEvent { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -21,11 +21,6 @@
                 <span asp-validation-for="EventSet.SetName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EventSet.SetDuration" class="control-label"></label>
-                <input asp-for="EventSet.SetDuration" class="form-control" />
-                <span asp-validation-for="EventSet.SetDuration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="EventSet.PersonId" class="control-label"></label>
                 <select asp-for="EventSet.PersonId" class ="form-control" asp-items="@Model.PersonSelectList"></select>
             </div>
@@ -43,6 +38,8 @@
         </form>
     </div>
 </div>
+
+
 
 <div>
     @if (Model.EventId.HasValue)

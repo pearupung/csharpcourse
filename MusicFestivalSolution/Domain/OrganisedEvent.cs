@@ -34,6 +34,8 @@ namespace Domain
         
         [Display(Name = "Clean-Up Time", Prompt = "h:mm:ss")]
         public string CleanUpTime { get; set; } = default!;
+        
+        [Display(Name = "Venue")]
         public int VenueId { get; set; } = default!;
         
         [Display(Prompt = "Enter location...")]

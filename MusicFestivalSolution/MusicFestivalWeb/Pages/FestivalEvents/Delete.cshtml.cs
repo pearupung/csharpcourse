@@ -20,7 +20,7 @@ namespace MusicFestivalWeb.Pages.FestivalEvents
         }
 
         [BindProperty]
-        public FestivalEvent FestivalEvent { get; set; }
+        public FestivalEvent? FestivalEvent { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -21,9 +21,11 @@ namespace MusicFestivalWeb.Pages.Tracks
         }
 
         [BindProperty]
-        public Track Track { get; set; }
+        public Track? Track { get; set; }
 
-        public TrackAuthor NewTrackAuthor { get; set; }
+        public TrackAuthor? NewTrackAuthor { get; set; }
+        [BindProperty(SupportsGet = true)] public int? EventId { get; set; }
+        [BindProperty(SupportsGet = true)] public int? FestivalId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -21,7 +21,10 @@ namespace MusicFestivalWeb.Pages.EventSets
         }
 
         [BindProperty]
-        public EventSet EventSet { get; set; }
+        public EventSet? EventSet { get; set; }
+
+        public SelectList PersonSelectList { get; set; }
+        public SelectList EventSelectlist { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,7 +36,8 @@ namespace MusicFestivalWeb.Pages.EventSets
             EventSet = await _context.EventSets
                 .Include(e => e.Dj)
                 .Include(e => e.Event).FirstOrDefaultAsync(m => m.EventSetId == id);
-
+            EventSelectlist = new SelectList(_context.Events, nameof(OrganisedEvent.OrganisedEventId), nameof(OrganisedEvent.EventName));
+            PersonSelectList = new SelectList(_context.Persons, nameof(Person.PersonId), nameof(Person.LastNameFirstNameStageName));
             if (EventSet == null)
             {
                 return NotFound();
@@ -53,6 +57,7 @@ namespace MusicFestivalWeb.Pages.EventSets
             }
 
             _context.Attach(EventSet).State = EntityState.Modified;
+            PersonSelectList = new SelectList(_context.Persons, nameof(Person.PersonId), nameof(Person.LastNameFirstNameStageName));
 
             try
             {

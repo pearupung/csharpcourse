@@ -35,6 +35,7 @@ namespace MusicFestivalWeb.Pages.OrganisedEvents
             OrganisedEvent = await _context.Events
                 .Include(o => o.Venue)
                 .Include(o => o.Sets)
+                .ThenInclude(s => s.Dj)
                 .FirstOrDefaultAsync(m => m.OrganisedEventId == id);
 
             if (OrganisedEvent == null)

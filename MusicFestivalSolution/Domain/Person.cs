@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
@@ -6,13 +7,19 @@ namespace Domain
     public class Person
     {
         public int PersonId { get; set; }
+        
+        [Display(Name = "Stage Name", Prompt = "Enter stage name here...")]
         public string? StageName { get; set; }
+        
+        [Display(Name = "First Name", Prompt = "Enter first name here...")]
 
         public string FirstName { get; set; } = default!;
 
+        [Display(Name = "Last Name", Prompt = "Enter last name here...")]
         public string LastName { get; set; } = default!;
 
         [NotMapped]
+        [Display(Name = "Artist")]
         public string LastNameFirstNameStageName => 
             LastName + ", " + FirstName 
             + (string.IsNullOrEmpty(StageName) ? "" :  " | " + StageName);

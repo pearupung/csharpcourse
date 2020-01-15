@@ -5,25 +5,31 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Tracks</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<p>
+    <form method="get">
+        <input asp-for="SearchString"/>
+    </form>
+</p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].TrackName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Track[0].LengthInSeconds)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Track[0].TrackName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Track[0].LengthInSeconds)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Track) {
+    @foreach (var item in Model.AllTracks) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TrackName)
@@ -32,11 +38,25 @@
                 @Html.DisplayFor(modelItem => item.LengthInSeconds)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.TrackId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.TrackId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.TrackId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Delete</a>
+                <form method="post" asp-page-handler="AddTrack">
+                    <button type="submit">Add to set</button>
+                </form>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+
+@if (Model.FestivalId.HasValue)
+{
+    <a asp-page="/Festivals/Details" asp-route-eventid="@Model.FestivalId">Back to festival</a>
+}

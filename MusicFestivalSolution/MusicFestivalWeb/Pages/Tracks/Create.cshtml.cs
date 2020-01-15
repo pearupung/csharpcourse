@@ -19,6 +19,7 @@ namespace MusicFestivalWeb.Pages.Tracks
         public Track Track { get; set; }
 
         public int? SetId { get; set; }
+        [BindProperty] public SetTrack SetTrack { get; set; }
 
         public CreateModel(DAL.AppDbContext context)
         {
@@ -46,12 +47,9 @@ namespace MusicFestivalWeb.Pages.Tracks
             await _context.SaveChangesAsync();
             if (SetId.HasValue)
             {
-                _context.SetTracks.Add(new SetTrack()
-                {
-                    EventSetId = SetId.Value,
-                    TrackId = Track.TrackId,
-
-                });
+                SetTrack.TrackId = Track.TrackId;
+                SetTrack.EventSetId = SetId.Value;
+                _context.SetTracks.Add(SetTrack);
             }
 
             await _context.SaveChangesAsync();

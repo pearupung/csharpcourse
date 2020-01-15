@@ -18,6 +18,8 @@ namespace MusicFestivalWeb.Pages.EventSets
         {
             _context = context;
         }
+        
+        
 
         public IActionResult OnGet(int? festivalId, int? eventId)
         {
@@ -29,16 +31,18 @@ namespace MusicFestivalWeb.Pages.EventSets
         }
 
         [BindProperty]
-        public EventSet EventSet { get; set; }
+        public EventSet? EventSet { get; set; }
 
-        [BindProperty] public int? FestivalId { get; set; }
-        [BindProperty] public int? EventId { get; set; }
-        public SelectList PersonSelectList { get; set; }
-
+        [BindProperty(SupportsGet = true)] public int? FestivalId { get; set; }
+        [BindProperty(SupportsGet = true)] public int? EventId { get; set; }
+        public SelectList? PersonSelectList { get; set; }
+       
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? eventId, int? festivalId)
         {
+            PersonSelectList = new SelectList(_context.Persons, nameof(Person.PersonId), nameof(Person.LastNameFirstNameStageName));
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -50,11 +54,17 @@ namespace MusicFestivalWeb.Pages.EventSets
                 EventSet.EventId = EventId.Value;
             }
             
+            PersonSelectList = new SelectList(_context.Persons, nameof(Person.PersonId), nameof(Person.LastNameFirstNameStageName));
 
             _context.EventSets.Add(EventSet);
             await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            //TODO goto eventid
+            return RedirectToPage("/OrganisedEvents/Details", 
+                new
+                {
+                    id = EventId,
+                    festivalid = FestivalId
+                });
         }
     }
 }

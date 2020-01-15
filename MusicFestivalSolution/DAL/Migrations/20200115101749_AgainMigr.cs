@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class BigEventSetMigr : Migration
+    public partial class AgainMigr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +11,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     FestivalId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     FestivalName = table.Column<string>(nullable: false),
                     StartTime = table.Column<string>(nullable: false),
                     EndTime = table.Column<string>(nullable: false),
@@ -28,7 +27,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     ParticipantTypeId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     ParticipantTypeName = table.Column<string>(nullable: false),
                     GetsHourly = table.Column<bool>(nullable: false),
                     HourlyWage = table.Column<int>(nullable: false),
@@ -45,7 +44,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     StageName = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
@@ -66,7 +65,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     TrackAuthorTypeId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     TrackAuthorTypeName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -79,7 +78,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     TrackId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     TrackName = table.Column<string>(nullable: false),
                     LengthInSeconds = table.Column<int>(nullable: false)
                 },
@@ -93,7 +92,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     VenueId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     VenueName = table.Column<string>(nullable: false),
                     VenueAddress = table.Column<string>(nullable: false),
                     HourlyPrice = table.Column<int>(nullable: false),
@@ -109,7 +108,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     EquipmentId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     EquipmentName = table.Column<string>(nullable: false),
                     EquipmentHourlyPrice = table.Column<int>(nullable: false),
                     LenderPersonId = table.Column<int>(nullable: false)
@@ -130,7 +129,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     TrackAuthorId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     PersonId = table.Column<int>(nullable: false),
                     TrackId = table.Column<int>(nullable: false),
                     TrackAuthorTypeId = table.Column<int>(nullable: false)
@@ -163,7 +162,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     OrganisedEventId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     EventName = table.Column<string>(nullable: false),
                     TicketCount = table.Column<int>(nullable: false),
                     TicketPrice = table.Column<int>(nullable: false),
@@ -191,9 +190,8 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     EventSetId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     SetName = table.Column<string>(nullable: false),
-                    SetDuration = table.Column<string>(nullable: false),
                     PersonId = table.Column<int>(nullable: false),
                     EventId = table.Column<int>(nullable: false)
                 },
@@ -219,7 +217,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     FestivalEventId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     OrganisedEventId = table.Column<int>(nullable: false),
                     FestivalId = table.Column<int>(nullable: false)
                 },
@@ -245,7 +243,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     ParticipantId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     ParticipantTypeId = table.Column<int>(nullable: false),
                     PersonId = table.Column<int>(nullable: false),
                     ParticipateBeginDate = table.Column<string>(nullable: false),
@@ -282,7 +280,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     VenueEquipmentId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     OrganisedEventId = table.Column<int>(nullable: false),
                     EquipmentId = table.Column<int>(nullable: false),
                     ArrivalTime = table.Column<string>(nullable: false),
@@ -312,7 +310,7 @@ namespace DAL.Migrations
                 columns: table => new
                 {
                     SetTrackId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     QueueNumber = table.Column<int>(nullable: false),
                     PlannedPlayTimeInSeconds = table.Column<int>(nullable: false),
                     ActualPlayTimeInSeconds = table.Column<int>(nullable: false),

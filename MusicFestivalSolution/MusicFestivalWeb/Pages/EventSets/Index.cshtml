@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Sets</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -15,9 +15,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.EventSet[0].SetName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventSet[0].SetDuration)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EventSet[0].Dj)
@@ -35,13 +32,10 @@
                 @Html.DisplayFor(modelItem => item.SetName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SetDuration)
+                @Html.DisplayFor(modelItem => item.Dj.LastNameFirstNameStageName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dj.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.CleanUpTime)
+                @Html.DisplayFor(modelItem => item.Event.EventName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EventSetId">Edit</a> |

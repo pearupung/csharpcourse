@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
@@ -8,6 +9,8 @@ namespace Domain
 
         public int QueueNumber { get; set; } = default!;
         public int PlannedPlayTimeInSeconds { get; set; } = default!;
+        
+        [Display(Name = "Actual PlayTime in Seconds", Prompt = "Enter actual playtime here...")]
         public int ActualPlayTimeInSeconds { get; set; } = default!;
 
         public int EventSetId { get; set; }

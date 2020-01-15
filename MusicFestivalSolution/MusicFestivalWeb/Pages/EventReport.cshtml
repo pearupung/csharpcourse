@@ -1,0 +1,135 @@
+@page
+@using System.Diagnostics.Eventing.Reader
+@model MusicFestivalWeb.EventReport
+
+
+<div>
+    <h4>OrganisedEvent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EventName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.TicketCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.TicketCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.TicketPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.TicketPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganisedEvent.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganisedEvent.EndDate)
+        </dd>
+        <th>Licence fee: @(0.05 * Model.OrganisedEvent.TicketCount * Model.OrganisedEvent.TicketPrice)€</th>
+
+    </dl>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SetTrack[0].EventSet.Dj.LastNameFirstNameStageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SetTrack[0].EventSet.SetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SetTrack[0].EventSet.SetDurationInSeconds)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SetTrack) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventSet.Dj.LastNameFirstNameStageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventSet.SetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventSet.SetDurationInSeconds)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tracks[0].TrackName)
+            </th>
+            <th>
+                @Html.DisplayText("Performance count")
+            </th>
+            <th>
+                                @Html.DisplayText("Performed minutes")
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tracks[0].TrackAuthors)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var track in Model.Tracks) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => track.TrackName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => track.
+                    SetTracks.Where(e => e.EventSet.EventId == Model.EventId).ToList().Count)x
+            </td>
+            <td>
+                <p>
+                    @(track.SetTracks.Where(e => e.EventSet.EventId == Model.EventId)
+                    .Select(e => e.ActualPlayTimeInSeconds).Sum())s
+                </p>
+            </td>
+            <td>
+                @foreach (var author in track.TrackAuthors)
+                {
+                    <p>@author.Author.LastNameFirstNameStageName 
+                        (@author.TrackAuthorType.TrackAuthorTypeName)</p>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

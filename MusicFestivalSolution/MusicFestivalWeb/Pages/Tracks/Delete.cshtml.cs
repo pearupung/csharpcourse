@@ -20,7 +20,7 @@ namespace MusicFestivalWeb.Pages.Tracks
         }
 
         [BindProperty]
-        public Track Track { get; set; }
+        public Track? Track { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

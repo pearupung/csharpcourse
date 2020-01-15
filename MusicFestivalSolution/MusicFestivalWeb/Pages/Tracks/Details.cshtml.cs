@@ -15,15 +15,17 @@ namespace MusicFestivalWeb.Pages.Tracks
     {
         private readonly DAL.AppDbContext _context;
 
-        public Track Track { get; set; }
+        public Track? Track { get; set; }
 
-        [BindProperty] public TrackAuthor NewTrackAuthor { get; set; }
+        [BindProperty] public TrackAuthor? NewTrackAuthor { get; set; }
 
         public SelectList AuthorSelectList { get; set; }
         public SelectList TrackAuthorTypeSelectList { get; set; }
-        [BindProperty] public Person NewAuthor { get; set; }
-        [BindProperty] public TrackAuthorType NewTrackAuthorType { get; set; }
+        [BindProperty] public Person? NewAuthor { get; set; }
+        [BindProperty] public TrackAuthorType? NewTrackAuthorType { get; set; }
         [BindProperty] public int? SetId { get; set; }
+        [BindProperty(SupportsGet = true)] public int? EventId { get; set; }
+        [BindProperty(SupportsGet = true)] public int? FestivalId { get; set; }
 
         public DetailsModel(DAL.AppDbContext context)
         {

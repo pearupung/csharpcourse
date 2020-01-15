@@ -19,7 +19,7 @@ namespace MusicFestivalWeb.Pages.Venues
             _context = context;
         }
 
-        public IList<Venue> Venue { get;set; }
+        public IList<Venue>? Venue { get;set; }
 
         public async Task OnGetAsync()
         {

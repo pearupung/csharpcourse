@@ -110,12 +110,10 @@
                 @Html.DisplayFor(modelItem => item.OrganisedEvent.Venue.VenueName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrganisedEventId">Edit</a> |
+                <a asp-page="/OrganisedEvents/Edit" asp-route-id="@item.OrganisedEventId" asp-route-festivalid="@Model.Festival.FestivalId">Edit</a> |
                 <a asp-page="/OrganisedEvents/Details" asp-route-id="@item.OrganisedEventId" asp-route-festivalid="@Model.Festival.FestivalId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrganisedEventId">Delete</a> |
-                <a asp-page="/Tracks/Index" 
-                   asp-route-eventid="@item.OrganisedEventId" 
-                   asp-route-festivalid="@Model.Festival.FestivalId">Tracks</a>
+                <a asp-page="/OrganisedEvents/Delete" asp-route-id="@item.OrganisedEventId" asp-route-festivalid="@Model.Festival.FestivalId">Delete</a> |
+                <a asp-page="/EventReport" asp-route-eventid="@item.OrganisedEventId">Get event licence report</a>
             </td>
         </tr>
     }

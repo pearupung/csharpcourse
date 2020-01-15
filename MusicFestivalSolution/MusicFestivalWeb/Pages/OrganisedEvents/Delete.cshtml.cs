@@ -22,6 +22,8 @@ namespace MusicFestivalWeb.Pages.OrganisedEvents
         [BindProperty]
         public OrganisedEvent OrganisedEvent { get; set; }
 
+        [BindProperty(SupportsGet = true)] public int? FestivalId { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -54,7 +56,7 @@ namespace MusicFestivalWeb.Pages.OrganisedEvents
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Festivals/Details", new {id = FestivalId});
         }
     }
 }

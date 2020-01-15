@@ -77,6 +77,6 @@
     <form method="post">
         <input type="hidden" asp-for="OrganisedEvent.OrganisedEventId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="/Festivals/Details" asp-route-id="@Model.FestivalId">Back to List</a>
     </form>
 </div>

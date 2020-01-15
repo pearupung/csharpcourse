@@ -19,7 +19,7 @@ namespace MusicFestivalWeb.Pages.EventSets
             _context = context;
         }
 
-        public EventSet EventSet { get; set; }
+        public EventSet? EventSet { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,7 +35,6 @@ namespace MusicFestivalWeb.Pages.EventSets
                 .ThenInclude(e => e.Track)
                 .FirstOrDefaultAsync(m => m.EventSetId == id);
             
-            Console.WriteLine(EventSet.SetTracks.Count);
             if (EventSet == null)
             {
                 return NotFound();

@@ -11,8 +11,8 @@
         <e p="AppDbContext.cs" t="Include" />
         <e p="DAL.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20200115030604_BigEventSetMigr.Designer.cs" t="Include" />
-          <e p="20200115030604_BigEventSetMigr.cs" t="Include" />
+          <e p="20200115101749_AgainMigr.Designer.cs" t="Include" />
+          <e p="20200115101749_AgainMigr.cs" t="Include" />
           <e p="AppDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
@@ -56,6 +56,8 @@
         <e p="Pages" t="Include">
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
+          <e p="EventReport.cshtml" t="Include" />
+          <e p="EventReport.cshtml.cs" t="Include" />
           <e p="EventSets" t="Include">
             <e p="Create.cshtml" t="Include" />
             <e p="Create.cshtml.cs" t="Include" />
@@ -195,6 +197,7 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="festival.db" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

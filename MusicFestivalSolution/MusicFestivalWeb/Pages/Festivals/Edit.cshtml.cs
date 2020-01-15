@@ -19,9 +19,13 @@ namespace MusicFestivalWeb.Pages.Festivals
         {
             _context = context;
         }
+        
+        [BindProperty(SupportsGet = true)] public int Id { get; set; }
 
         [BindProperty]
-        public Festival Festival { get; set; }
+        public Festival? Festival { get; set; }
+
+        public Person NewAuthor { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -65,13 +69,15 @@ namespace MusicFestivalWeb.Pages.Festivals
                     throw;
                 }
             }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new {id = Id});
         }
 
         private bool FestivalExists(int id)
         {
             return _context.Festivals.Any(e => e.FestivalId == id);
         }
+        
+     
     }
+    
 }
