@@ -1,0 +1,54 @@
+@page
+@model NewMusicWebApp.Pages.PerformerTracks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformerTrack[0].Performer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformerTrack[0].Track)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformerTrack[0].PerformerTrackName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformerTrack[0].CostPerSecond)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PerformerTrack) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Performer.PerformerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Track.TrackId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformerTrackName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostPerSecond)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PerformerTrackId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PerformerTrackId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PerformerTrackId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

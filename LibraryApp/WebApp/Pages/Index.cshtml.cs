@@ -55,6 +55,7 @@ namespace WebApp.Pages
                     new CheckboxAbstraction() {Title = "Books", IsChecked = false},
                     new CheckboxAbstraction() {Title = "Authors", IsChecked = false},
                     new CheckboxAbstraction() {Title = "Publishers", IsChecked = false},
+                    new CheckboxAbstraction() {Title = "Languages", IsChecked = false},
                 };
             }
             else
@@ -72,9 +73,10 @@ namespace WebApp.Pages
                 var searchSelectiveQuery = _context.Books.Where(
                         b =>
                             SearchButtons[1].IsChecked && b.Title.ToLower().Contains(searchStringLowered) ||
+                            SearchButtons[4].IsChecked && b.Language.LanguageName.ToLower().Contains(searchStringLowered) ||
                             SearchButtons[2].IsChecked && b.BookAuthors.Any(a => a.Author.FirstName.ToLower().Contains(searchStringLowered)) ||
                             SearchButtons[2].IsChecked && b.BookAuthors.Any(a => a.Author.LastName.ToLower().Contains(searchStringLowered)) ||
-                            SearchButtons[3].IsChecked && b.Publisher.PublisherName.Contains(searchStringLowered))
+                            SearchButtons[3].IsChecked && b.Publisher.PublisherName.ToLower().Contains(searchStringLowered))
                     .AsQueryable();
                 var usedQuery = SearchButtons[0].IsChecked ? searchEveryWhereQuery : searchSelectiveQuery;
                 BookIndexDtos = usedQuery
@@ -93,6 +95,7 @@ namespace WebApp.Pages
                     new CheckboxAbstraction() {Title = "Books", IsChecked = false},
                     new CheckboxAbstraction() {Title = "Authors", IsChecked = false},
                     new CheckboxAbstraction() {Title = "Publishers", IsChecked = false},
+                    new CheckboxAbstraction() {Title = "Languages", IsChecked = false},
                 };
             }
 

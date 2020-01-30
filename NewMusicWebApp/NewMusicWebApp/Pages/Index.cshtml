@@ -8,3 +8,38 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Djs[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Djs[0].LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var dj in Model.Djs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => dj.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => dj.LastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@dj.DjId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@dj.DjId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@dj.DjId">Delete</a> |
+                <a asp-page="/Tracks/Index" asp-route-djid="@dj.DjId">See Tracks</a> |
+                <a asp-page="./Delete" asp-route-id="@dj.DjId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

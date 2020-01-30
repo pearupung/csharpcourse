@@ -1,0 +1,50 @@
+@page
+@model NewMusicWebApp.Pages.PerformerTracks.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PerformerTrack</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PerformerTrack.PerformerTrackId" />
+            <div class="form-group">
+                <label asp-for="PerformerTrack.PerformerId" class="control-label"></label>
+                <select asp-for="PerformerTrack.PerformerId" class="form-control" asp-items="ViewBag.PerformerId"></select>
+                <span asp-validation-for="PerformerTrack.PerformerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerformerTrack.TrackId" class="control-label"></label>
+                <select asp-for="PerformerTrack.TrackId" class="form-control" asp-items="ViewBag.TrackId"></select>
+                <span asp-validation-for="PerformerTrack.TrackId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerformerTrack.PerformerTrackName" class="control-label"></label>
+                <input asp-for="PerformerTrack.PerformerTrackName" class="form-control" />
+                <span asp-validation-for="PerformerTrack.PerformerTrackName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerformerTrack.CostPerSecond" class="control-label"></label>
+                <input asp-for="PerformerTrack.CostPerSecond" class="form-control" />
+                <span asp-validation-for="PerformerTrack.CostPerSecond" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

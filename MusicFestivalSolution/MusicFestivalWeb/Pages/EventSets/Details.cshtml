@@ -76,3 +76,55 @@
     <a asp-page="./Edit" asp-route-id="@Model.EventSet.EventSetId">Edit</a> |
     <a asp-page="/OrganisedEvents/Details" asp-route-id="@Model.EventSet.EventId">Back to event</a>
 </div>
+
+<h1>Tracks</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<p>
+    <form method="get">
+        <input asp-for="SearchString"/>
+    </form>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AllTracks[0].TrackName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllTracks[0].LengthInSeconds)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.AllTracks) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LengthInSeconds)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TrackId" 
+                   asp-route-eventid="@Model.EventId"
+                   asp-route-festivalid="@Model.FestivalId">Delete</a>
+                <form method="post" asp-page-handler="AddTrack">
+                    <input hidden asp-for="EventSet.EventSetId" value="@Model.EventSet.EventSetId"/>
+                    <button name="submitbutton" value="@item.TrackId" type="submit">Add to set</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\GameEngine\GameEngine.csproj" />
     </ItemGroup>
 

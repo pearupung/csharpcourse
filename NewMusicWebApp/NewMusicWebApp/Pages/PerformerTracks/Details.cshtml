@@ -1,0 +1,43 @@
+@page
+@model NewMusicWebApp.Pages.PerformerTracks.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PerformerTrack</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PerformerTrack.Performer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PerformerTrack.Performer.PerformerId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PerformerTrack.Track)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PerformerTrack.Track.TrackId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PerformerTrack.PerformerTrackName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PerformerTrack.PerformerTrackName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PerformerTrack.CostPerSecond)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PerformerTrack.CostPerSecond)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PerformerTrack.PerformerTrackId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

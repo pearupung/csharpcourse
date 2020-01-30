@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="student2018_peapun_MusicAppDb@alpha.akaver.com" uuid="263ebdff-fde1-4c99-a703-f66869bdc648">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://alpha.akaver.com:3306/student2018_peapun_MusicAppDb</jdbc-url>
+    </data-source>
+  </component>
+</project>
